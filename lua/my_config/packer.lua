@@ -1,7 +1,7 @@
 -- My Note: Tool for installing plugins
 
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+vim.cmd.packadd('packer.nvim')
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
+    use('nvim-treesitter/nvim-treesitter-context')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
     use('vim-airline/vim-airline')
@@ -94,16 +95,20 @@ return require('packer').startup(function(use)
                     --     after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
                     -- }
 
-                    use {
-                        'nvim-tree/nvim-tree.lua',
-                        requires = {
-                            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-                        },
-                        tag = 'nightly' -- optional, updated every week. (see issue #1193)
-                    }
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
 
-                    use 'nvim-tree/nvim-web-devicons'
-                    use 'preservim/nerdcommenter'
-                    use "lukas-reineke/indent-blankline.nvim"
+    use 'nvim-tree/nvim-web-devicons'
+    use 'preservim/nerdcommenter'
+    use "lukas-reineke/indent-blankline.nvim"
+
+    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end}
 end)
 
