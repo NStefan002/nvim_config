@@ -41,12 +41,12 @@ require("nvim-tree").setup({
         },
         use_system_clipboard = true,
     },
-    ui = {
-        confirm = {
-            remove = true,
-            trash = true,
-        },
-    },
+    -- ui = {
+    --     confirm = {
+    --         remove = true,
+    --         trash = true,
+    --     },
+    -- },
     filters = {
         dotfiles = true,
     },
