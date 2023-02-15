@@ -4,19 +4,21 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
     'tsserver',
-    -- 'sumneko_lua',
+    'lua_ls',
     'rust_analyzer',
+    'clangd',
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+-- Fix Undefined global 'vim' (and preferably do not install more than 1
+-- language server per filetype)
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
+                globals = { 'vim' },
+            },
+        },
+    },
 })
 
 local luasnip = require('luasnip')
@@ -53,19 +55,20 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings
 })
 
--- lsp.set_preferences({
---     suggest_lsp_servers = false,
---     sign_icons = {
---         error = 'E',
---         warn = 'W',
---         hint = 'H',
---         info = 'I'
---     }
--- })
+lsp.set_preferences({
+    suggest_lsp_servers = false,
+    sign_icons = {
+        error = '',
+        warn = '',
+        hint = '',
+        info = ''
+    }
+})
 
 lsp.on_attach(function(client, bufnr)
     local opts = {buffer = bufnr, remap = false}
 
+    -- very useful
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -81,31 +84,18 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = 'minimal',
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
 })
 
--- When a language server gets attached to a buffer you gain access to some keybindings and commands. All of these are bound to built-in functions, so you can get more details using the :help command.
---
--- K: Displays hover information about the symbol under the cursor in a floating window. See :help vim.lsp.buf.hover().
---
--- gd: Jumps to the definition of the symbol under the cursor. See :help vim.lsp.buf.definition().
---
--- gD: Jumps to the declaration of the symbol under the cursor. Some servers don't implement this feature. See :help vim.lsp.buf.declaration().
---
--- gi: Lists all the implementations for the symbol under the cursor in the quickfix window. See :help vim.lsp.buf.implementation().
---
--- go: Jumps to the definition of the type of the symbol under the cursor. See :help vim.lsp.buf.type_definition().
---
--- gr: Lists all the references to the symbol under the cursor in the quickfix window. See :help vim.lsp.buf.references().
---
--- <Ctrl-k>: Displays signature information about the symbol under the cursor in a floating window. See :help vim.lsp.buf.signature_help(). If a mapping already exists for this key this function is not bound.
---
--- <F2>: Renames all references to the symbol under the cursor. See :help vim.lsp.buf.rename().
---
--- <F4>: Selects a code action available at the current cursor position. See :help vim.lsp.buf.code_action().
---
--- gl: Show diagnostics in a floating window. See :help vim.diagnostic.open_float().
---
--- [d: Move to the previous diagnostic in the current buffer. See :help vim.diagnostic.goto_prev().
---
--- ]d: Move to the next diagnostic. See :help vim.diagnostic.goto_next().

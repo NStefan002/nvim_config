@@ -8,14 +8,19 @@ vim.keymap.set({ "n", "v" }, "<leader>pc", vim.cmd.NvimTreeCollapse)
 vim.keymap.set("i", "jj", "<Esc>")
 
 -- vertical split
-vim.keymap.set("n", "<C-\\>", [[:vsplit ]])
+vim.keymap.set("n", "<C-Bslash>", [[:vsplit ]])
+
+-- tabs
+vim.keymap.set("n", "<leader>tn", [[:tabnew ]])
+vim.keymap.set("n", "<C-l>", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "<C-h>", "<cmd>tabprev<CR>")
 
 -- Terminal
 vim.keymap.set("n", "<leader>`", "<cmd>:ToggleTerm size=50 direction=vertical<CR>")
 -- vim.keymap.set({"n", "i"}, "<C-`>", "<cmd>:ToggleTerm size=50 direction=vertical<CR>")
 -- vim.keymap.set("n", "<leader>`", vim.cmd.ToggleTerm)
 
---
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 

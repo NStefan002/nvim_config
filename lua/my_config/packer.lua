@@ -110,5 +110,14 @@ return require('packer').startup(function(use)
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end}
+
+    -- live server (like VSCode extension)
+    use({
+        "aurum77/live-server.nvim",
+        run = function()
+            require"live_server.util".install()
+        end,
+        cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
+    })
 end)
 
