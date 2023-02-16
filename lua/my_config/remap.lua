@@ -16,8 +16,8 @@ vim.keymap.set("n", "<C-l>", "<cmd>tabnext<CR>")
 vim.keymap.set("n", "<C-h>", "<cmd>tabprev<CR>")
 
 -- resizing windows
-vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize +3<CR>")
-vim.keymap.set("n", "<C-Down>", "<cmd>horizontal resize -3<CR>")
+vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")
+vim.keymap.set("n", "<C-Down>", "<cmd>horizontal resize +3<CR>")
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize +3<CR>")
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -3<CR>")
 
