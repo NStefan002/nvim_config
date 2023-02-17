@@ -119,5 +119,7 @@ return require('packer').startup(function(use)
         end,
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
+
+    use 'preservim/tagbar'
 end)
 
