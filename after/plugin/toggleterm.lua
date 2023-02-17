@@ -26,4 +26,7 @@ function _G.set_terminal_keymaps()
     vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", [[<C-\><C-n><C-W>l]], opts) -- ctrl + l in normal mode because of zsh default ctrl + l = 'clear' and moving to terminal left/right is less used in this setup
 end
 
+-- having multiple terminals open is possible only in vertical and horizontal mode
+-- opening terminal with index i can be done with i<C-Bslash> (i is integer number)
+
 vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"
