@@ -10,10 +10,10 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                           , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('nvim-treesitter/playground')
     use('nvim-treesitter/nvim-treesitter-context')
     use('mbbill/undotree')
@@ -27,21 +27,21 @@ return require('packer').startup(function(use)
         branch = 'v1.x',
         requires = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+            { 'neovim/nvim-lspconfig' }, -- Required
+            { 'williamboman/mason.nvim' }, -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},         -- Required
-            {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            {'hrsh7th/cmp-buffer'},       -- Optional
-            {'hrsh7th/cmp-path'},         -- Optional
-            {'saadparwaiz1/cmp_luasnip'}, -- Optional
-            {'hrsh7th/cmp-nvim-lua'},     -- Optional
+            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'hrsh7th/cmp-buffer' }, -- Optional
+            { 'hrsh7th/cmp-path' }, -- Optional
+            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+            { 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},             -- Required
-            {'rafamadriz/friendly-snippets'}, -- Optional
+            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     }
 
@@ -61,39 +61,39 @@ return require('packer').startup(function(use)
         requires = "nvim-lua/plenary.nvim",
         config = function()
             require("todo-comments").setup {
-            --     -- your configuration comes here
-            --     -- or leave it empty to use the default settings
-            --     -- refer to the configuration section below
+                --     -- your configuration comes here
+                --     -- or leave it empty to use the default settings
+                --     -- refer to the configuration section below
             }
         end
     }
     -- use {
-        --     'abecodes/tabout.nvim',
-        --     config = function()
-            --         require('tabout').setup {
-                --             tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
-                --             backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-                --             act_as_tab = true, -- shift content if tab out is not possible
-                --             act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-                --             default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-                --             default_shift_tab = '<C-d>', -- reverse shift default action,
-                --             enable_backwards = true, -- well ...
-                --             completion = true, -- if the tabkey is used in a completion pum
-                --             tabouts = {
-                    --                 {open = "'", close = "'"},
-                    --                 {open = '"', close = '"'},
-                    --                 {open = '`', close = '`'},
-                    --                 {open = '(', close = ')'},
-                    --                 {open = '[', close = ']'},
-                    --                 {open = '{', close = '}'}
-                    --             },
-                    --             ignore_beginning = true, [> if the cursor is at the beginning of a filled element it will rather tab out than shift the content <]
-                    --             exclude = {} -- tabout will ignore these filetypes
-                    --         }
-                    --     end,
-                    --     wants = {'nvim-treesitter'}, -- or require if not used so far
-                    --     after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
-                    -- }
+    --     'abecodes/tabout.nvim',
+    --     config = function()
+    --         require('tabout').setup {
+    --             tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+    --             backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+    --             act_as_tab = true, -- shift content if tab out is not possible
+    --             act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+    --             default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+    --             default_shift_tab = '<C-d>', -- reverse shift default action,
+    --             enable_backwards = true, -- well ...
+    --             completion = true, -- if the tabkey is used in a completion pum
+    --             tabouts = {
+    --                 {open = "'", close = "'"},
+    --                 {open = '"', close = '"'},
+    --                 {open = '`', close = '`'},
+    --                 {open = '(', close = ')'},
+    --                 {open = '[', close = ']'},
+    --                 {open = '{', close = '}'}
+    --             },
+    --             ignore_beginning = true, [> if the cursor is at the beginning of a filled element it will rather tab out than shift the content <]
+    --             exclude = {} -- tabout will ignore these filetypes
+    --         }
+    --     end,
+    --     wants = {'nvim-treesitter'}, -- or require if not used so far
+    --     after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+    -- }
 
     use {
         'nvim-tree/nvim-tree.lua',
@@ -107,19 +107,24 @@ return require('packer').startup(function(use)
     use 'preservim/nerdcommenter'
     use "lukas-reineke/indent-blankline.nvim"
 
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
-    end}
+    end }
 
     -- live server (like VSCode extension)
     use({
         "aurum77/live-server.nvim",
         run = function()
-            require"live_server.util".install()
+            require "live_server.util".install()
         end,
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
 
     use 'preservim/tagbar'
-end)
 
+    -- good-looking diagnostics list
+    use {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+    }
+end)
