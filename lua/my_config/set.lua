@@ -1,3 +1,5 @@
+vim.opt.termguicolors = true
+
 -- line block cursor
 vim.opt.guicursor = ""
 
@@ -11,15 +13,19 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+-- nesting code properly
 vim.opt.smartindent = true
-vim.opt.smartcase = true
+-- highlight matching parenthesis
+vim.opt.showmatch = true
 
+-- highlight current line
 vim.opt.cursorline = false
 
 -- how to split window
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- backup files
 vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -30,15 +36,27 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-vim.opt.termguicolors = true
-
-vim.opt.scrolloff = 8 -- minimal number of lines to keep above/below cursor (if possible)
+-- minimal number of lines to keep above/below cursor (if possible)
+vim.opt.scrolloff = 8
+-- displaying errors, warnings etc.
 vim.opt.signcolumn = "yes"
+-- no idea what is this
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
 
 -- vim.opt.colorcolumn = "80"
+
+-- Enable background buffers
+vim.opt.hidden = false
+-- Remember N lines in history
+vim.opt.history = 50
+-- Faster scrolling
+vim.opt.lazyredraw = true
+-- Max column for syntax highlight
+vim.opt.synmaxcol = 200
+-- ms to wait for trigger an event
+vim.opt.updatetime = 50
 
 -- colorscheme on start
 vim.cmd.colorscheme("gotham256")

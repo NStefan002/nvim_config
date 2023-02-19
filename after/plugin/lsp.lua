@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
 local lsp = require('lsp-zero')
 
 lsp.preset("recommended")

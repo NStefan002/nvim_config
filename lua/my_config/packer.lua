@@ -95,6 +95,7 @@ return require('packer').startup(function(use)
     --     after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
     -- }
 
+    -- file tree
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -103,15 +104,17 @@ return require('packer').startup(function(use)
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
 
+    -- nice icons
     use 'nvim-tree/nvim-web-devicons'
+    -- commenting out code
     use 'preservim/nerdcommenter'
+    -- marking identation
     use "lukas-reineke/indent-blankline.nvim"
 
-    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
-    end }
+    -- terminal windows
+    use { "akinsho/toggleterm.nvim", tag = '*' }
 
-    -- live server (like VSCode extension)
+    -- live server (like VSC extension)
     use({
         "aurum77/live-server.nvim",
         run = function()
@@ -127,4 +130,9 @@ return require('packer').startup(function(use)
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
     }
+
+    -- debugger support
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use 'theHamsta/nvim-dap-virtual-text'
 end)
