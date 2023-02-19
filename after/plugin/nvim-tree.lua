@@ -53,7 +53,6 @@ require("nvim-tree").setup({
     auto_reload_on_write = true,
     hijack_unnamed_buffer_when_opening = false,
     hijack_cursor = true, -- keeps the cursor on the first letter of the filename
-
     update_focused_file = {
         enable = true,
     },
@@ -86,5 +85,5 @@ require("nvim-tree").setup({
 })
 
 -- mappings
-vim.keymap.set({ "n", "v" }, "<C-b>", vim.cmd.NvimTreeToggle) -- like VSC
-vim.keymap.set("n", "C", "<cmd>NvimTreeCollapse<CR>")
+vim.keymap.set({ "n", "v" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "Toggle NvimTree" }) -- like VSC
+vim.keymap.set("n", "C", "<cmd>NvimTreeCollapse<CR>", { desc = "[C]ollapse NvimTree" })

@@ -1,15 +1,23 @@
 -- DAP = "debugging adapter protocol"
 -- install dap via Mason
 
-vim.keymap.set("n", "<F6>", "<cmd>lua require'dap'.continue()<CR>")
-vim.keymap.set("n", "<F7>", "<cmd>lua require'dap'.step_over()<CR>")
-vim.keymap.set("n", "<F8>", "<cmd>lua require'dap'.step_into()<CR>")
-vim.keymap.set("n", "<F9>", "<cmd>lua require'dap'.step_out()<CR>")
-vim.keymap.set("n", "<leader>b", "<cmd>lua require'dap'.toggle_breakpoint()<CR>")
-vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
--- vim.keymap.set("n", "<leader>ro", ":lua require'dap'.repl.open()<CR>")
--- vim.keymap.set("n", "<leader>td", ":lua require'dap-go'.debug_test()<CR>")
+
+local nmap = function(keys, func, desc)
+    if desc then
+        desc = 'DAP: ' .. desc
+    end
+
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+end
+
+nmap("<F6>", "<cmd>lua require'dap'.continue()<CR>", "Continue")
+nmap("<F7>", "<cmd>lua require'dap'.step_over()<CR>", "Step Over")
+nmap("<F8>", "<cmd>lua require'dap'.step_into()<CR>", "Step Into")
+nmap("<F9>", "<cmd>lua require'dap'.step_out()<CR>", "Step Out")
+nmap("<leader>b", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle [B]reakpoint")
+-- nmap("<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+-- nmap("<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
+-- nmap("<leader>ro", ":lua require'dap'.repl.open()<CR>")
 
 require("nvim-dap-virtual-text").setup()
 require("dapui").setup()

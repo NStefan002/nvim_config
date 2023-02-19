@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<C-M>", "<cmd>TroubleToggle<CR>") -- like in VSC
+vim.keymap.set("n", "<C-M>", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble" }) -- like in VSC
 
 require("trouble").setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right
