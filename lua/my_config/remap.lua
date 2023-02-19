@@ -43,7 +43,9 @@ vim.keymap.set("n", "<leader>d", "dd")
 -- delete != cut
 vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]])
 
--- vim.keymap.set("n", "Q", "<nop>")
+-- disable certain keymaps
+vim.keymap.set("n", "<space>", "<nop>")
+vim.keymap.set("n", "<backspace>", "<nop>")
 
 -- -- jumping to next/prev error in file list (:help cnext/lnext)
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -51,11 +53,16 @@ vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]])
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- change all ocurences of the word that's under the cursor
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Packer (install and/or update plugins with :PackerSync)
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/my_config/packer.lua<CR>");
+
+-- save and source current file
+vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })
 
 -- overview of all mappings
 vim.keymap.set("n", "<leader>key", "<cmd>Telescope keymaps<CR>")
