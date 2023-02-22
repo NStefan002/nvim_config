@@ -50,10 +50,9 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
-    use {
-        "mg979/vim-visual-multi",
-        event = "BufReadPre"
-    }
+    -- multi-cursor mode (like in VSC)
+    use { "mg979/vim-visual-multi", branch = 'master' }
+    -- event = "BufReadPre"
 
     -- todo highlither
     use {
@@ -123,6 +122,7 @@ return require('packer').startup(function(use)
         cmd = { "LiveServer", "LiveServerStart", "LiveServerStop" },
     })
 
+    -- navigation bar for tags
     use 'preservim/tagbar'
 
     -- good-looking diagnostics list

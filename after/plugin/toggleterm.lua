@@ -17,14 +17,14 @@ require("toggleterm").setup {
 
 function _G.set_terminal_keymaps()
     local opts = { noremap = true }
-    vim.api.nvim_buf_set_keymap(0, "t", "jj", [[<C-\><C-n>]], opts, { desc = "Enter Normal Mode" })
-    vim.api.nvim_buf_set_keymap(0, "n", "<C-h>", [[<C-\><C-n><C-W>h]], opts, { desc = "Enter Normal Mode" })
-    vim.api.nvim_buf_set_keymap(0, "n", "<C-j>", [[<C-\><C-n><C-W>j]], opts, { desc = "Enter Normal Mode" })
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts, { desc = "Enter Normal Mode" })
-    vim.api.nvim_buf_set_keymap(0, "n", "<C-k>", [[<C-\><C-n><C-W>k]], opts, { desc = "Enter Normal Mode" })
-    vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts, { desc = "Enter Normal Mode" })
+    vim.api.nvim_buf_set_keymap(0, "t", "jj", [[<C-\><C-n>]], opts) -- { desc = "Enter Normal Mode" }
+    vim.api.nvim_buf_set_keymap(0, "n", "<C-h>", [[<C-\><C-n><C-W>h]], opts) -- { desc = "Enter Normal Mode" }
+    vim.api.nvim_buf_set_keymap(0, "n", "<C-j>", [[<C-\><C-n><C-W>j]], opts) -- { desc = "Enter Normal Mode" }
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts) -- { desc = "Enter Normal Mode" }
+    vim.api.nvim_buf_set_keymap(0, "n", "<C-k>", [[<C-\><C-n><C-W>k]], opts) -- { desc = "Enter Normal Mode" }
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts) -- { desc = "Enter Normal Mode" }
     -- ctrl + l in normal mode because of zsh default ctrl + l = 'clear' and moving to terminal left/right is less used in this setup
-    vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", [[<C-\><C-n><C-W>l]], opts, { desc = "Enter Normal Mode" })
+    vim.api.nvim_buf_set_keymap(0, "n", "<C-l>", [[<C-\><C-n><C-W>l]], opts) -- { desc = "Enter Normal Mode" }
 end
 
 -- having multiple terminals open is possible only in vertical and horizontal mode
