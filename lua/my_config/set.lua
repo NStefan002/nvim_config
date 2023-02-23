@@ -1,3 +1,4 @@
+-- prettier colors
 vim.opt.termguicolors = true
 
 -- line block cursor
@@ -7,6 +8,9 @@ vim.opt.guicursor = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- don't show mode (because lualine already shows it)
+vim.opt.showmode = false
+
 -- tab
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -15,6 +19,7 @@ vim.opt.expandtab = true
 
 -- nesting code properly
 vim.opt.smartindent = true
+
 -- highlight matching parenthesis
 vim.opt.showmatch = true
 
