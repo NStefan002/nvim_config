@@ -13,15 +13,27 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    -- Syntax highlithing and many more features
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('nvim-treesitter/playground')
     use('nvim-treesitter/nvim-treesitter-context')
+
+    -- undo history
     use('mbbill/undotree')
+
+    -- Git help
     use('tpope/vim-fugitive')
-    use('vim-airline/vim-airline')
-    use('vim-airline/vim-airline-themes')
+
+    -- Status bar
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
+    -- color schemes
     use('https://github.com/rafi/awesome-vim-colorschemes')
 
+    -- Language Server Protocol
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -45,6 +57,7 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- auto close '"', ''', '{', '(', etc.
     use "windwp/nvim-autopairs"
 
     -- multi-cursor mode (like in VSC)
@@ -60,7 +73,6 @@ return require('packer').startup(function(use)
     --     'abecodes/tabout.nvim',
     --     config = function()
     -- }
-
 
 
     -- file tree

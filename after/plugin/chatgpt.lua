@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader>gpt", "<cmd>ChatGPT<CR>", { desc = "start ChatGPT session" })
+
 require("chatgpt").setup({
     {
         welcome_message = "", -- set to "" if you don't like the fancy godot robot
