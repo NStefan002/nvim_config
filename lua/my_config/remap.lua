@@ -59,7 +59,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Packer (install and/or update plugins with :PackerSync)
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/my_config/packer.lua<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>vsplit ~/.config/nvim/lua/my_config/packer.lua<CR>");
 
 -- save and source current file
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })

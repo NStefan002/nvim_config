@@ -1,4 +1,4 @@
--- My Note: Tool for installing plugins
+--My Note: Tool for installing plugins
 
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
