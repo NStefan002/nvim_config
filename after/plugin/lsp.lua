@@ -9,6 +9,9 @@ lsp.ensure_installed({
     'clangd',
 })
 
+-- Documentation for NeoVim config in Lua
+require("neodev").setup()
+
 -- Fix Undefined global 'vim' (and preferably do not install more than 1
 -- language server per filetype)
 lsp.configure('lua_ls', {
@@ -16,6 +19,9 @@ lsp.configure('lua_ls', {
         Lua = {
             diagnostics = {
                 globals = { 'vim' },
+            },
+            completion = {
+                callSnippet = "Replace"
             },
         },
     },
