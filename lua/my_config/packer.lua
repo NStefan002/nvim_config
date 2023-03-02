@@ -127,4 +127,7 @@ return require('packer').startup(function(use)
 
     -- documentation for writing NeoVim config in Lua (setup called in after/plugin/lsp.lua file)
     use "folke/neodev.nvim"
+
+    -- color preview
+    use 'NvChad/nvim-colorizer.lua'
 end)
