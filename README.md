@@ -4,7 +4,7 @@ This is my personal configuration for [Neovim](https://neovim.io/), a modern ver
 ## Installation
 ***Note: This repository is created according to my personal needs and likings. If you're not interested in using my configuration, please skip Intallation and Usage sections.***
 
-To use this configuration, you'll need to have NeoVim installed on your system. You can install it by following the instructions on the [official NeoVim website](https://neovim.io/) or on the [NeoVim GitHub repository](https://github.com/neovim/neovim).
+To use this configuration, you'll need to have NeoVim installed on your system. You can install it by following the instructions on the [official NeoVim website](https://neovim.io/) or on the [NeoVim GitHub repository](https://github.com/neovim/neovim). Personally, I use [bob](https://github.com/MordechaiHadad/bob) (NeoVim version manager) for easy installing and switching between NeoVim [versions](https://github.com/neovim/neovim/releases/).
 Once Neovim is installed, you can clone this repository and copy the files into your `~/.config/nvim/` directory:
 ```
 git clone https://github.com/NStefan002/nvim_config.git
