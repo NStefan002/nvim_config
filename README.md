@@ -4,7 +4,7 @@ This is my personal configuration for [Neovim](https://neovim.io/), a modern ver
 ## Installation
 ***Note: This repository is created according to my personal needs and likings. If you're not interested in using my configuration, please skip Intallation and Usage sections.***
 
-To use this configuration, you'll need to have NeoVim installed on your system. You can install it by following the instructions on the [official NeoVim website](https://neovim.io/) or on the [NeoVim GitHub repository](https://github.com/neovim/neovim). Personally, I use [bob](https://github.com/MordechaiHadad/bob) (NeoVim version manager) for easy installing and switching between NeoVim [versions](https://github.com/neovim/neovim/releases/).
+To use this configuration, you'll need to have Neovim installed on your system. You can install it by following the instructions on the [official Neovim website](https://neovim.io/) or on the [Neovim GitHub repository](https://github.com/neovim/neovim). Personally, I use [bob](https://github.com/MordechaiHadad/bob) (Neovim version manager) for easy installing and switching between Neovim [versions](https://github.com/neovim/neovim/releases/).
 Once Neovim is installed, you can clone this repository and copy the files into your `~/.config/nvim/` directory:
 ```
 git clone https://github.com/NStefan002/nvim_config.git
@@ -16,11 +16,11 @@ Once you've copied the configuration files, you can launch Neovim and start usin
 - Almost all of the used plugins are configured in `nvim/after/` directory. If you want, customize their settings according to your needs.
 - You may want to customize the keybindings to better suit your workflow. You can do this by editing the `nvim/lua/my_config/remap.lua` file and adding your own mappings.
 - You may need to install some additional packages and dependencies, some of them being `git`, `build-essential`, `npm`, `rustc` and `cargo`, etc.
-- When you start NeoVim (type `nvim` in your terminal), go to `nvim/lua/my_config/packer.lua` file (use vim command `:e ~/.config/nvim/lua/my_config/packer.lua` or my shortcut `<space>vpp`), source packer.lua file (use vim command `:source %` or my shortcut `<space><space>s`) and run `:PackerSync` to install and update all of the plugins.
+- When you start Neovim (type `nvim` in your terminal), go to `nvim/lua/my_config/packer.lua` file (use vim command `:e ~/.config/nvim/lua/my_config/packer.lua` or my shortcut `<space>vpp`), source packer.lua file (use vim command `:source %` or my shortcut `<space><space>s`) and run `:PackerSync` to install and update all of the plugins.
 
 ## Credits
 - Plugins GitHub repositories (names of the repositories can be found in `nvim/lua/my_config/packer.lua` file
-- [Neovide](https://github.com/neovide/neovide) (an amazing NeoVim GUI)
+- [Neovide](https://github.com/neovide/neovide) (an amazing Neovim GUI)
 - I borrowed some code from [ThePrimeagen's init.lua repository](https://github.com/ThePrimeagen/init.lua)
 
 ## Sources
