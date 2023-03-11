@@ -115,16 +115,6 @@ return require('packer').startup(function(use)
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use 'theHamsta/nvim-dap-virtual-text'
 
-    -- ChatGPT
-    use({
-        "jackMort/ChatGPT.nvim",
-        requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
-    })
-
     -- documentation for writing Neovim config in Lua (setup called in after/plugin/lsp.lua file)
     use "folke/neodev.nvim"
 
