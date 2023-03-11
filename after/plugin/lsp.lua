@@ -9,7 +9,7 @@ lsp.ensure_installed({
     'clangd',
 })
 
--- Documentation for NeoVim config in Lua
+-- Documentation for Neovim config in Lua
 require("neodev").setup()
 
 -- Fix Undefined global 'vim' (and preferably do not install more than 1
@@ -36,7 +36,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete({}),
-    ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ["<Tab>"] = cmp.mapping(function(fallback)
         if luasnip.expand_or_locally_jumpable() then
@@ -46,8 +46,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if luasnip.jumpable( -1) then
-            luasnip.jump( -1)
+        if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
         else
             fallback()
         end
