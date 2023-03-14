@@ -29,4 +29,9 @@ require 'nvim-treesitter.configs'.setup {
             node_decremental = '<C-x>',
         },
     },
+
+    -- autoclose and autorename html tag
+    autotag = {
+        enable = true,
+    },
 }
