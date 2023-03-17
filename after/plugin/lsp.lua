@@ -27,6 +27,11 @@ lsp.configure('lua_ls', {
     },
 })
 
+-- My snippets and vscode snippets
+-- vim.o.runtimepath = vim.o.runtimepath..'/home/nstefan002/.config/nvim/my_snippets/'
+require("luasnip.loaders.from_vscode").lazy_load({paths = "~/.config/nvim/my_snippets"})
+
+
 local luasnip = require('luasnip')
 luasnip.config.setup {}
 local cmp = require('cmp')
