@@ -28,7 +28,7 @@ lsp.configure('lua_ls', {
 })
 
 -- My snippets and vscode snippets
--- vim.o.runtimepath = vim.o.runtimepath..'/home/nstefan002/.config/nvim/my_snippets/'
+-- vim.o.runtimepath = vim.o.runtimepath..'/home/nstefan002/.config/nvim/my_snippets/' NOTE: lsp-zero calls this line by default
 require("luasnip.loaders.from_vscode").lazy_load({paths = "~/.config/nvim/my_snippets"})
 
 
@@ -104,6 +104,7 @@ local nmap = function(keys, func, desc)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 end
 
+-- very useful
 nmap("<leader>f", vim.lsp.buf.format, "[F]ormat File")
 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
