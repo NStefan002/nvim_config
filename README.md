@@ -29,5 +29,6 @@ Here are the sources I used to learn about Neovim, Lua, and plugins:
 - [Tj Devries GitHub page](https://github.com/tjdevries)
 - [ThePrimeagen YouTube channel](https://www.youtube.com/@ThePrimeagen)
 - Source code of some of the plugins
+- [Neovim documentation](https://neovim.io/doc/)
 
 If you run into any issues or have suggestions for improvements, please don't hesitate to open an issue or submit a pull request on this repository. I'm always happy to hear feedback and improve this configuration.
