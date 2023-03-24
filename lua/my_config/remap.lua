@@ -33,21 +33,17 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- copying and pasting to/from system clipboard
-vim.keymap.set("v", "<C-y>", [["+y]])
-vim.keymap.set("n", "<C-p>", [["+p]])
-
--- possibly set previous commands to this, and remove C-y/C-p
-vim.keymap.set("n", "<leader>y", "yy")
-vim.keymap.set("n", "<leader>d", "dd")
+vim.keymap.set("v", "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>p", [["+p]])
 
 -- delete != cut
-vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- disable certain keymaps
 vim.keymap.set("n", "<space>", "<nop>")
 vim.keymap.set("n", "<backspace>", "<nop>")
 
--- -- jumping to next/prev error in file list (:help cnext/lnext)
+-- :help cnext/lnext
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
