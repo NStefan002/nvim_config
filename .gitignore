@@ -1,2 +1,5 @@
+plugin
 plugin/packer_compiled.lua
+my_snippets
 my_snippets/*
+*.json
