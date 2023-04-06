@@ -42,6 +42,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- disable certain keymaps
 vim.keymap.set("n", "<space>", "<nop>")
 vim.keymap.set("n", "<backspace>", "<nop>")
+vim.keymap.set("n", "L", "<nop>")
+vim.keymap.set("n", "H", "<nop>")
 
 -- :help cnext/lnext
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")

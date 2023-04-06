@@ -78,14 +78,23 @@ return require('packer').startup(function(use)
     -- file tree
     use {
         'nvim-tree/nvim-tree.lua',
-        requires = { 'nvim-tree/nvim-web-devicons' }, -- optional, for file icons
-        tag = 'nightly'                               -- optional, updated every week. (see issue #1193)
+        requires = { 'nvim-tree/nvim-web-devicons' }, -- optional
+    }
+    -- nvim-tree extension
+    use {
+        'antosha417/nvim-lsp-file-operations',
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "kyazdani42/nvim-tree.lua" },
+        }
     }
 
     -- nice icons
     use 'nvim-tree/nvim-web-devicons'
+
     -- commenting out code
     use 'preservim/nerdcommenter'
+
     -- marking identation
     use "lukas-reineke/indent-blankline.nvim"
 
