@@ -1,6 +1,8 @@
 require("my_config.remap")
+require("my_config.lazy")
 require("my_config.set")
 require("my_config.neovide")
+
 
 -- taken from ThePrimeagen/init.lua
 local augroup = vim.api.nvim_create_augroup
@@ -24,9 +26,8 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = ThePrimeagenGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
-
