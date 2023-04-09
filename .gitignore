@@ -1,3 +1,4 @@
 my_snippets
 my_snippets/*
 *.json
+!lazy-lock.json
