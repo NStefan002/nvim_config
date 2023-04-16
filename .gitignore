@@ -1,4 +1,4 @@
-my_snippets
-my_snippets/*
 *.json
+!my_snippets/*
+!my_snippets/snippets/*
 !lazy-lock.json

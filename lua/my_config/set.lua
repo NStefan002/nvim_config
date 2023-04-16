@@ -68,7 +68,4 @@ vim.opt.synmaxcol = 200
 -- ms to wait for trigger an event
 vim.opt.updatetime = 50
 
--- colorscheme on start
-vim.cmd.colorscheme("gotham256")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- colorscheme on start configured in nvim/lua/custom/plugins/colors.lua
