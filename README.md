@@ -13,14 +13,13 @@ cp -r nvim_config ~/.config/nvim
 ## Usage
 Once you've copied the configuration files, you can launch Neovim and start using it. Here are a few things to keep in mind:
 
-- Almost all of the used plugins are configured in `nvim/after/` directory. If you want, customize their settings according to your needs.
+- Almost all of the used plugins are configured in `nvim/lua/custom/plugins/` directory. If you want, customize their settings according to your needs.
 - You may want to customize the keybindings to better suit your workflow. You can do this by editing the `nvim/lua/my_config/remap.lua` file and adding your own mappings.
 - You may need to install some additional packages and dependencies, some of them being `git`, `build-essential`, `npm`, `rustc` and `cargo`, etc.
-- ~~When you start Neovim (type `nvim` in your terminal), go to `nvim/lua/my_config/packer.lua` file (use vim command `:e ~/.config/nvim/lua/my_config/packer.lua` or my shortcut `<space>vpp`), source packer.lua file (use vim command `:source %` or my shortcut `<space><space>s`) and run `:PackerSync` to install and update all of the plugins.~~
 - I recently switched to [Lazy](https://github.com/folke/lazy.nvim), so now plugins are automaticly installed when you open Neovim (open Lazy with ```:Lazy```), see [migrating from Packer to Lazy](https://github.com/folke/lazy.nvim#-migration-guide)
 
 ## Credits
-- Plugins GitHub repositories (names of the repositories can be found in `nvim/lua/my_config/lazy.lua` file
+- Plugins GitHub repositories (see most popular plugins [here](https://github.com/rockerBOO/awesome-neovim))
 - [Neovide](https://github.com/neovide/neovide) (an amazing Neovim GUI)
 - I borrowed some code from [ThePrimeagen's init.lua repository](https://github.com/ThePrimeagen/init.lua)
 
