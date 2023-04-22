@@ -4,7 +4,7 @@ return {
         'preservim/nerdcommenter',
         config = function()
             -- Create default mappings
-            vim.g.NERDCreateDefaultMappings = 1
+            vim.g.NERDCreateDefaultMappings = 0
 
             -- Add spaces after comment delimiters by default
             vim.g.NERDSpaceDelims = 1
@@ -18,9 +18,6 @@ return {
             -- Set a language to use its alternate delimiters by default
             vim.g.NERDAltDelims_java = 1
 
-            -- Add your own custom formats or override the defaults
-            -- vim.g.NERDCustomDelimiters = { ['c'] = { ['left'] = '/*', ['right'] = '*/' } }
-
             -- Allow commenting and inverting empty lines (useful when commenting a region)
             vim.g.NERDCommentEmptyLines = 1
 
@@ -29,6 +26,17 @@ return {
 
             -- Enable NERDCommenterToggle to check all selected lines is commented or not
             vim.g.NERDToggleCheckAllLines = 1
+
+            local nmap = function(lhs, rhs, desc)
+                if desc then
+                    desc = "NerdCommenter: " .. desc
+                end
+                vim.keymap.set({ "n", "v" }, lhs, rhs, { silent = true, desc = desc })
+            end
+
+            -- mappings
+            nmap("<leader>cc", "<Plug>NERDCommenterComment", "Comment")
+            nmap("<leader>cu", "<Plug>NERDCommenterUncomment", "Uncomment")
         end
     }
 }

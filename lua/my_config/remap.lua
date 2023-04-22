@@ -30,11 +30,11 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- e.g. copying highlighted text over other text so the first text stays in buffer
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("x", "<C-p>", [["_dP]])
 
 -- copying and pasting to/from system clipboard
-vim.keymap.set("v", "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>p", [["+p]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
 
 -- delete != cut
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
@@ -45,19 +45,10 @@ vim.keymap.set("n", "<backspace>", "<nop>")
 vim.keymap.set("n", "L", "<nop>")
 vim.keymap.set("n", "H", "<nop>")
 
--- :help cnext/lnext
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
 -- change all ocurences of the word that's under the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- Packer (install and/or update plugins with :PackerSync)
-vim.keymap.set("n", "<leader>vpp", "<cmd>vsplit ~/.config/nvim/lua/my_config/packer.lua<CR>");
 
 -- save and source current file
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })

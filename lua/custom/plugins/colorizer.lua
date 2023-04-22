@@ -2,10 +2,11 @@ return {
     -- color preview
     {
         'NvChad/nvim-colorizer.lua',
-        lazy = true,
+        lazy = false,
         config = function()
             require 'colorizer'.setup {
                 filetypes = {
+                    'lua',
                     'css',
                     'javascript',
                     html = { mode = 'foreground', }

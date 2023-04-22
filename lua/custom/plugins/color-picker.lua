@@ -4,9 +4,10 @@ return {
         "ziontee113/color-picker.nvim",
         lazy = true,
         config = function()
-            vim.keymap.set("n", "<C-c>", "<cmd>PickColor<CR>", { noremap = true, silent = true, desc = "PickColor" })
+            vim.keymap.set("n", "<C-c>", "<cmd>PickColor<CR>",
+                { noremap = true, silent = true, desc = "color-picker: PickColor" })
             vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<CR>",
-                { noremap = true, silent = true, desc = "PickColorInsert" })
+                { noremap = true, silent = true, desc = "color-picker: PickColorInsert" })
 
             require("color-picker").setup({
                 ["icons"] = { "ﱢ", "" },
