@@ -10,6 +10,10 @@ vim.keymap.set("n", "<leader>tn", [[:tabnew ]])
 vim.keymap.set("n", "<C-l>", "<cmd>tabnext<CR>")
 vim.keymap.set("n", "<C-h>", "<cmd>tabprev<CR>")
 
+-- buffers
+vim.keymap.set("n", "<C-}>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<C-{>", "<cmd>bprev<CR>")
+
 -- resizing windows
 vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")
 vim.keymap.set("n", "<C-Down>", "<cmd>horizontal resize +3<CR>")
@@ -52,6 +56,3 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- save and source current file
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })
-
--- overview of all mappings
-vim.keymap.set("n", "<leader>key", "<cmd>Telescope keymaps<CR>")

@@ -16,6 +16,10 @@ return {
             vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
             vim.keymap.set("n", "<leader>sr", builtin.oldfiles, { desc = "[S]earch [R]ecently opened files" })
             vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+            vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch [B]uffers" })
+
+            -- overview of all mappings
+            vim.keymap.set("n", "<leader>key", "<cmd>Telescope keymaps<CR>")
         end
     },
 }
