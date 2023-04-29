@@ -2,7 +2,6 @@ return {
     -- color preview
     {
         'NvChad/nvim-colorizer.lua',
-        lazy = false,
         config = function()
             require 'colorizer'.setup {
                 filetypes = {
