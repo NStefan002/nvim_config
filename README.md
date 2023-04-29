@@ -1,3 +1,7 @@
+## NOTE
+You're reading my old packer configuration. This was my first Neovim configuration, so I made a separate branch so I could use it whenever I wanted. As a bonus, I can see how much my configuration has advanced since the first usable version.
+
+
 # My Neovim Configuration
 This is my personal configuration for [Neovim](https://neovim.io/), a modern version of the Vim text editor that provides improved performance and a maximized extensibility.
 
