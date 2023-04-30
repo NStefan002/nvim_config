@@ -13,7 +13,7 @@ return {
                     desc = 'DAP: ' .. desc
                 end
 
-                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+                vim.keymap.set('n', keys, func, { desc = desc })
             end
 
             nmap("<F6>", "<cmd>lua require'dap'.continue()<CR>", "Continue")
@@ -43,7 +43,7 @@ return {
                 id = 'cppdbg',
                 type = 'executable',
                 command =
-                '/home/nstefan002/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7'
+                '~/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7'
             }
             dap.configurations.cpp = {
                 {

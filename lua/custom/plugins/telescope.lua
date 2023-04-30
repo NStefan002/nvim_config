@@ -6,20 +6,30 @@ return {
         -- or                          , branch = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
+            local nmap = function(keys, func, desc)
+                if desc then
+                    desc = 'Telescope: ' .. desc
+                end
+
+                vim.keymap.set('n', keys, func, { desc = desc })
+            end
             -- !!! Very useful !!! https://github.com/nvim-telescope/telescope.nvim#pickers
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-            vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Search [G]it [F]iles" })
-            vim.keymap.set("n", "<leader>gs", function()
-                builtin.grep_string({ search = vim.fn.input("Grep --> ") });
-            end, { desc = "[G]rep [S]tring" })
-            vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-            vim.keymap.set("n", "<leader>sr", builtin.oldfiles, { desc = "[S]earch [R]ecently opened files" })
-            vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-            vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch [B]uffers" })
+            nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
+            nmap("<leader>gf", builtin.git_files, "Search [G]it [F]iles")
+            nmap("<leader>gs", function()
+                builtin.grep_string({ search = vim.fn.input("Grep --> ") })
+            end, "[G]rep [S]tring")
+            nmap("<leader>lg", builtin.live_grep, "[L]ive [G]rep")
+            nmap("<leader>sh", builtin.help_tags, "[S]earch [H]elp")
+            nmap("<leader>sr", builtin.oldfiles, "[S]earch [R]ecently opened files")
+            nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
+            nmap("<leader>sb", builtin.buffers, "[S]earch [B]uffers")
+            nmap("<leader>st", builtin.treesitter, "[S]earch [T]reesitter")
+            nmap("<leader>ff", builtin.current_buffer_fuzzy_find, "Current Buffer [Fuzzy] [F]inder")
 
             -- overview of all mappings
-            vim.keymap.set("n", "<leader>key", "<cmd>Telescope keymaps<CR>")
+            nmap("<leader>key", "builtin.keymaps", "[Key]maps")
         end
     },
 }
