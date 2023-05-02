@@ -8,7 +8,7 @@ To use this configuration, you'll need to have Neovim installed on your system. 
 Once Neovim is installed, you can clone this repository and copy the files into your `~/.config/nvim/` directory:
 ```
 git clone https://github.com/NStefan002/nvim_config.git
-cp -r nvim_config ~/.config/nvim
+mv nvim_config ~/.config/nvim
 ```
 ## Usage
 Once you've copied the configuration files, you can launch Neovim and start using it. Here are a few things to keep in mind:
