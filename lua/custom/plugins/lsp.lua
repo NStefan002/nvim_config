@@ -17,12 +17,16 @@ return {
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },         -- Required
+            {
+                'hrsh7th/nvim-cmp',
+                event = { 'InsertEnter', 'CmdlineEnter' },
+            },                              -- Required
             { 'hrsh7th/cmp-nvim-lsp' },     -- Required
             { 'hrsh7th/cmp-buffer' },       -- Optional
             { 'hrsh7th/cmp-path' },         -- Optional
             { 'saadparwaiz1/cmp_luasnip' }, -- Optional
             { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+            { 'hrsh7th/cmp-cmdline' },      -- Optional
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },             -- Required
@@ -89,6 +93,7 @@ return {
             })
 
             local cmp = require('cmp')
+
             cmp.setup({
                 preselect = 'item',
                 completion = {
@@ -97,7 +102,20 @@ return {
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
-                }
+                },
+                experimental = {
+                    ghost_text = false,
+                },
+            })
+
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "cmdline" },
+                },
+                window = {
+                    completion = cmp.config.window.bordered(),
+                },
             })
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             local cmp_mappings = lsp.defaults.cmp_mappings({

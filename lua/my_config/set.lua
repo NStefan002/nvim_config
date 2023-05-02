@@ -1,8 +1,14 @@
 -- prettier colors
 vim.opt.termguicolors = true
 
--- line block cursor
-vim.opt.guicursor = ""
+-- cursor
+-- vim.opt.guicursor = "" -- block cursor
+local block_cursor = "n-v-c-r-o:block"
+local vertical_cursor = "i-ci:ver30"
+local horizontal_cursor = "cr:hor25"
+local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+local cursor = block_cursor .. ',' .. vertical_cursor .. ',' .. horizontal_cursor .. ',' .. blink
+vim.opt.guicursor = cursor
 
 -- line numbering
 vim.opt.number = true

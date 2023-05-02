@@ -26,10 +26,10 @@ return {
             nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
             nmap("<leader>sb", builtin.buffers, "[S]earch [B]uffers")
             nmap("<leader>st", builtin.treesitter, "[S]earch [T]reesitter")
-            nmap("<leader>ff", builtin.current_buffer_fuzzy_find, "Current Buffer [Fuzzy] [F]inder")
+            nmap("ff", "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current Buffer [Fuzzy] [F]inder")
 
             -- overview of all mappings
-            nmap("<leader>key", "builtin.keymaps", "[Key]maps")
+            nmap("<leader>key", "<cmd>Telescope keymaps<CR>", "[Key]maps")
         end
     },
 }
