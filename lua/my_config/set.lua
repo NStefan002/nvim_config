@@ -2,13 +2,17 @@
 vim.opt.termguicolors = true
 
 -- cursor
--- vim.opt.guicursor = "" -- block cursor
-local block_cursor = "n-v-c-r-o:block"
-local vertical_cursor = "i-ci:ver30"
-local horizontal_cursor = "cr:hor25"
-local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
-local cursor = block_cursor .. ',' .. vertical_cursor .. ',' .. horizontal_cursor .. ',' .. blink
-vim.opt.guicursor = cursor
+if vim.g.neovide then
+    -- blinking cursor and line cursor looks bad in neovide
+    vim.opt.guicursor = "" -- block cursor
+else
+    local block_cursor = "n-v-c-r-o:block"
+    local vertical_cursor = "i-ci:ver30"
+    local horizontal_cursor = "cr:hor25"
+    local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
+    local cursor = block_cursor .. ',' .. vertical_cursor .. ',' .. horizontal_cursor .. ',' .. blink
+    vim.opt.guicursor = cursor
+end
 
 -- line numbering
 vim.opt.number = true

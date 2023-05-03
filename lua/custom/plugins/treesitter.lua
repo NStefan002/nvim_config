@@ -40,8 +40,11 @@ return {
                     enable = true,
                 },
             }
+
+            vim.treesitter.language.register('html', 'ejs')
+            vim.treesitter.language.register('javascript', 'ejs')
         end
     },
-    { 'nvim-treesitter/playground' },
     { 'nvim-treesitter/nvim-treesitter-context' },
+    -- { 'nikvdp/ejs-syntax' },
 }

@@ -12,6 +12,10 @@
       {
         "language": "cpp",
         "path": "./snippets/cpp.json"
+      },
+      {
+        "language": "ejs",
+        "path": "./snippets/ejs.json"
       }
     ]
   }

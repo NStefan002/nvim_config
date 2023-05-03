@@ -68,6 +68,10 @@ return {
             local luasnip = require('luasnip')
             luasnip.config.setup {}
 
+            -- Neovim by default does not recognize .ejs files (test with :echo &filetype)
+            vim.filetype.add({ extension = { ejs = 'ejs' } })
+            luasnip.filetype_set('ejs', { 'html', 'javascript', 'ejs' })
+
             -- My snippets and vscode snippets
             -- vim.o.runtimepath = vim.o.runtimepath..'~/.config/nvim/my_snippets/' NOTE: lsp-zero calls this line by default
             -- custom snippets are mostly taken from friendly-snippets and configured according to my needs

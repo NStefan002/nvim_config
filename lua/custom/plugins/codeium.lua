@@ -21,6 +21,7 @@ return {
 
             vim.keymap.set('n', '<leader>dcd', '<cmd>CodeiumDisable<CR>', {silent = false, desc = "Codeium: Disable"})
             vim.keymap.set('n', '<leader>ecd', '<cmd>CodeiumEnable<CR>', {silent = true, desc = "Codeium: Enable"})
+            vim.cmd('CodeiumDisable')
         end
     }
 }

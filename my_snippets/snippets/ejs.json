@@ -1,0 +1,17 @@
+{
+    "tags1": {
+        "prefix": "t1",
+        "body": [
+            "<% $0 %>"
+        ],
+        "description": "tag"
+    },
+
+    "tags2": {
+        "prefix": "t2",
+        "body": [
+            "<%= $0 %>"
+        ],
+        "description": "tag"
+    }
+}
