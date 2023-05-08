@@ -4,8 +4,25 @@ return {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
         -- or                          , branch = '0.1.1',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            "debugloop/telescope-undo.nvim",
+        },
         config = function()
+            require("telescope").setup({
+                extensions = {
+                    undo = {
+                        side_by_side = true,
+                        layout_strategy = "vertical",
+                        layout_config = {
+                            preview_height = 0.8,
+                        },
+                    },
+                },
+            })
+
+            require('telescope').load_extension('undo')
+
             local nmap = function(keys, func, desc)
                 if desc then
                     desc = 'Telescope: ' .. desc
@@ -30,6 +47,7 @@ return {
 
             -- overview of all mappings
             nmap("<leader>key", "<cmd>Telescope keymaps<CR>", "[Key]maps")
+            nmap("<leader>tu", "<cmd>Telescope undo<CR>", "[T]elescope [U]ndo")
         end
     },
 }

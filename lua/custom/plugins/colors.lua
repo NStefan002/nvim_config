@@ -17,6 +17,7 @@ return {
 
             local schemes_candidates = {
                 "gruvbox",
+                "ayu",
                 "gotham256",
                 "hybrid_reverse",
                 "onedark",

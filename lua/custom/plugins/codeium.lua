@@ -3,7 +3,7 @@ return {
     { 'Exafunction/codeium.vim',
         config = function()
             -- disable default bindings
-            vim.g.codeium_disable_bindings = true
+            vim.g.codeium_disable_bindings = 1
 
             local imap = function (lhs, rhs, desc)
                 if desc then
@@ -21,6 +21,7 @@ return {
 
             vim.keymap.set('n', '<leader>dcd', '<cmd>CodeiumDisable<CR>', {silent = false, desc = "Codeium: Disable"})
             vim.keymap.set('n', '<leader>ecd', '<cmd>CodeiumEnable<CR>', {silent = true, desc = "Codeium: Enable"})
+            vim.keymap.set('n', '<leader>mcd', '<cmd>CodeiumManual<CR>', {silent = true, desc = "Codeium: Manual"})
             vim.cmd('CodeiumDisable')
         end
     }

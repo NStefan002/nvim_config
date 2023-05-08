@@ -37,7 +37,7 @@ return {
                 nmap('<CR>', api.node.open.edit, opts('Open'))
                 nmap('<Tab>', api.node.open.preview, opts('Open Preview'))
                 nmap('>', api.node.navigate.sibling.next, opts('Next Sibling'))
-nmap('<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
+                nmap('<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
                 nmap('.', api.node.run.cmd, opts('Run Command'))
                 nmap('-', api.tree.change_root_to_parent, opts('Up'))
                 nmap('a', api.fs.create, opts('Create'))
@@ -46,9 +46,9 @@ nmap('<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
                 nmap('c', api.fs.copy.node, opts('Copy'))
                 nmap('C', api.tree.toggle_git_clean_filter, opts('Toggle Git Clean'))
                 nmap('[c', api.node.navigate.git.prev, opts('Prev Git'))
-nmap(']c', api.node.navigate.git.next, opts('Next Git'))
+                nmap(']c', api.node.navigate.git.next, opts('Next Git'))
                 nmap('d', api.fs.remove, opts('Delete'))
-nmap('D', api.fs.trash, opts('Trash'))
+                nmap('D', api.fs.trash, opts('Trash'))
                 nmap('E', api.tree.expand_all, opts('Expand All'))
                 nmap('e', api.fs.rename_basename, opts('Rename: Basename'))
                 nmap(']e', api.node.navigate.diagnostics.next, opts('Next Diagnostic'))
@@ -72,7 +72,7 @@ nmap('D', api.fs.trash, opts('Trash'))
                 nmap('s', api.node.run.system, opts('Run System'))
                 nmap('S', api.tree.search_node, opts('Search'))
                 nmap('U', api.tree.toggle_custom_filter, opts('Toggle Hidden'))
-nmap('W', api.tree.collapse_all, opts('Collapse'))
+                nmap('W', api.tree.collapse_all, opts('Collapse'))
                 nmap('x', api.fs.cut, opts('Cut'))
                 nmap('y', api.fs.copy.filename, opts('Copy Name'))
                 nmap('Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
@@ -92,8 +92,12 @@ nmap('W', api.tree.collapse_all, opts('Collapse'))
                 require("nvim-tree.api").tree.open()
             end
 
+            local nvim_tree_augroup = vim.api.nvim_create_augroup("NvimTreeOnStartup", { clear = true })
             -- call func open_nvim_tree_for_directories on startup
-            vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree_for_directories })
+            vim.api.nvim_create_autocmd({ "VimEnter" }, {
+                group = nvim_tree_augroup,
+                callback = open_nvim_tree_for_directories,
+            })
 
             -- setup with some options
             require("nvim-tree").setup({
@@ -104,8 +108,8 @@ nmap('W', api.tree.collapse_all, opts('Collapse'))
                 },
                 renderer = {
                     add_trailing = true, -- add '/' at the end of directory name
-                    group_empty = true, -- compact folders that only contain a single folder into one node in the file tree
-                    full_name = false, -- disable showing very long names in floating window
+                    group_empty = true,  -- compact folders that only contain a single folder into one node in the file tree
+                    full_name = false,   -- disable showing very long names in floating window
                     highlight_git = true,
                     highlight_opened_files = "name",
                     symlink_destination = true,
@@ -163,14 +167,13 @@ nmap('W', api.tree.collapse_all, opts('Collapse'))
                     show_on_dirs = true,
                     show_on_open_dirs = false,
                 },
-filesystem_watchers = { -- improves performance
-    enable = true,
+                filesystem_watchers = { -- improves performance
+                    enable = true,
                 },
             })
 
             -- mappings
-            vim.keymap.set({ "n", "v" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "nvim-tree: Toggle" }) -- like VSC
-            vim.keymap.set("n", "C", "<cmd>NvimTreeCollapse<CR>", { desc = "nvim-tree: [C]ollapse" })
+            vim.keymap.set({ "n", "i" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "nvim-tree: Toggle" }) -- like VSC
 
             -- extension
             require("lsp-file-operations").setup()

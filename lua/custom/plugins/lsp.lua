@@ -64,6 +64,9 @@ return {
 
             lspconfig.clangd.setup({})
             lspconfig.tsserver.setup({})
+            lspconfig.html.setup({
+                filetypes = { 'html', 'ejs' }
+            })
 
             local luasnip = require('luasnip')
             luasnip.config.setup {}
