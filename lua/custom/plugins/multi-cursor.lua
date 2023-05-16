@@ -1,3 +1,3 @@
 return {
-    { "mg979/vim-visual-multi", branch = 'master', lazy = false }
+    { "mg979/vim-visual-multi", branch = 'master', event = { 'VeryLazy' } }
 }
