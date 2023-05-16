@@ -2,6 +2,7 @@ return {
     -- commenting out code
     {
         'preservim/nerdcommenter',
+        event = { 'BufEnter' },
         config = function()
             -- Create default mappings
             vim.g.NERDCreateDefaultMappings = 0
@@ -41,7 +42,7 @@ return {
             local commenterFixGrp = vim.api.nvim_create_augroup("CommenterFixGrp", { clear = true })
             vim.api.nvim_create_autocmd("BufEnter", {
                 group = commenterFixGrp,
-                pattern = "*";
+                pattern = "*",
                 callback = function()
                     vim.opt.formatoptions:remove { 'c', 'r', 'o' }
                 end,

@@ -2,6 +2,7 @@ return {
     -- Status bar
     {
         'nvim-lualine/lualine.nvim',
+        event = { 'BufEnter' },
         dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
         config = function()
             require('lualine').setup {

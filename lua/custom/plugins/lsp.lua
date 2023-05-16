@@ -3,7 +3,8 @@ return {
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
-        event = { 'InsertEnter', 'CmdlineEnter' },
+        lazy = false,
+        -- event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
@@ -48,10 +49,10 @@ return {
             require("neodev").setup()
 
             -- language servers
+            local lspconfig = require("lspconfig")
 
             -- Fix Undefined global 'vim' (and preferably do not install more than 1
             -- language server per filetype)
-            local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
