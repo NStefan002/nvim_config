@@ -1,10 +1,9 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-local aucmdsStarterPack = augroup("aucmdsStarterPack", { clear = true })
+local aucmdsStarterPack = augroup('aucmdsStarterPack', { clear = true })
 
--- highlight yanked text
-autocmd('TextYankPost', {
+autocmd("TextYankPost", {
     group = aucmdsStarterPack,
     pattern = '*',
     callback = function()
@@ -13,28 +12,43 @@ autocmd('TextYankPost', {
             timeout = 40,
         })
     end,
+    desc = "highlight yanked text"
 })
 
--- remove trailing spaces
 autocmd("BufWritePre", {
     group = aucmdsStarterPack,
     pattern = "*",
     command = [[%s/\s\+$//e]],
+    desc = "remove trailing spaces"
 })
 
--- exit certain files with just 'q'
 autocmd("FileType", {
     group = aucmdsStarterPack,
     pattern = {
-        "help",
-        "vim", -- for opening commands history on accident with q:
-        "man",
-        "checkhealth",
-        "notify",
-        "lspinfo"
+        'help',
+        'vim', -- for opening commands history on accident with q:
+        'man',
+        'checkhealth',
+        'notify',
+        'lspinfo',
+        'fugitive'
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
-        vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
-    end
+        vim.keymap.set('n', 'q', '<cmd>close<CR>', { buffer = event.buf, silent = true })
+    end,
+    desc = "exit certain files with just 'q'"
 })
+
+-- autocmd({ "BufRead", "BufNewFile" }, {
+--     group = aucmdsStarterPack,
+--     pattern = {
+--         '*.txt',
+--         '*.md'
+--     },
+--     callback = function()
+--         vim.opt.spell = true
+--         vim.opt.spelllang = 'en'
+--     end,
+--     desc = "enable spellcheck for certain files"
+-- })

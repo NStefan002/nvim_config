@@ -3,16 +3,11 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
+        lazy = false,
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            -- disable netrw
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-            vim.g.loaded_netrwSettings = 1
-            vim.g.loaded_netrwFileHandlers = 1
-
             -- mappings
             local function on_attach(bufnr)
                 local api = require('nvim-tree.api')
@@ -145,8 +140,8 @@ return {
                     enable = true,
                 },
                 diagnostics = {
-                    enable = true,
-                    show_on_dirs = true,
+                    enable = false,
+                    show_on_dirs = false,
                     show_on_open_dirs = false,
                     severity = {
                         min = vim.diagnostic.severity.WARNING,

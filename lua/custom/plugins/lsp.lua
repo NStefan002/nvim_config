@@ -3,7 +3,7 @@ return {
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
-        -- lazy = true,
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
@@ -17,10 +17,7 @@ return {
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            {
-                'hrsh7th/nvim-cmp',
-                event = { 'InsertEnter', 'CmdlineEnter' },
-            },                              -- Required
+            { 'hrsh7th/nvim-cmp', },        -- Required
             { 'hrsh7th/cmp-nvim-lsp' },     -- Required
             { 'hrsh7th/cmp-buffer' },       -- Optional
             { 'hrsh7th/cmp-path' },         -- Optional
@@ -31,6 +28,9 @@ return {
             -- Snippets
             { 'L3MON4D3/LuaSnip' },             -- Required
             { 'rafamadriz/friendly-snippets' }, -- Optional
+
+            -- additional lsp info
+            { "folke/neodev.nvim" } -- Optional
         },
         config = function()
             local lsp = require('lsp-zero')
@@ -113,6 +113,13 @@ return {
                 experimental = {
                     ghost_text = false,
                 },
+                sources = {
+                    { name = 'luasnip' },
+                    { name = 'nvim_lua' },
+                    { name = 'nvim_lsp' },
+                    { name = 'path' },
+                    { name = 'buffer',  keyword_length = 4 },
+                }
             })
 
             cmp.setup.cmdline(":", {

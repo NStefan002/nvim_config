@@ -3,6 +3,9 @@ return {
     {
         "ziontee113/color-picker.nvim",
         lazy = true,
+        keys = {
+            { "<C-c>", "<cmd>PickColor<CR>", noremap = true, silent = true, desc = "color-picker: PickColor" },
+        },
         config = function()
             vim.keymap.set("n", "<C-c>", "<cmd>PickColor<CR>",
                 { noremap = true, silent = true, desc = "color-picker: PickColor" })

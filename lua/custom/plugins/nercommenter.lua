@@ -37,6 +37,16 @@ return {
             -- mappings
             nmap("<leader>cc", "<Plug>NERDCommenterComment", "Comment")
             nmap("<leader>cu", "<Plug>NERDCommenterUncomment", "Uncomment")
+
+            local commenterFixGrp = vim.api.nvim_create_augroup("CommenterFixGrp", { clear = true })
+            vim.api.nvim_create_autocmd("BufEnter", {
+                group = commenterFixGrp,
+                pattern = "*";
+                callback = function()
+                    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+                end,
+                desc = "fix auto-commenting new line when entering insert mode e.g. with 'o'"
+            })
         end
     }
 }

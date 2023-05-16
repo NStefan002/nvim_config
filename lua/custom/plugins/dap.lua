@@ -3,6 +3,9 @@ return {
     {
         'mfussenegger/nvim-dap',
         lazy = true,
+        keys = {
+            { "<leader>b", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", desc = "DAP: Toggle [B]reakpoint" }
+        },
         config = function()
             -- DAP = "debugging adapter protocol"
             -- install dap via Mason
@@ -75,7 +78,7 @@ return {
         end
     },
 
-    { "rcarriga/nvim-dap-ui",           dependencies = { "mfussenegger/nvim-dap" } },
-    { 'theHamsta/nvim-dap-virtual-text' },
+    { "rcarriga/nvim-dap-ui",            lazy = true, dependencies = { "mfussenegger/nvim-dap" } },
+    { 'theHamsta/nvim-dap-virtual-text', lazy = true },
 
 }

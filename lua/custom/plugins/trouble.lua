@@ -3,6 +3,9 @@ return {
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            { "<C-M>", "<cmd>TroubleToggle<CR>", desc = "Open Trouble" }
+        },
         config = function()
             vim.keymap.set("n", "<C-M>", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble" }) -- like in VSC
 

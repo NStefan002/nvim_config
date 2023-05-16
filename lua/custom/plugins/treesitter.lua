@@ -2,6 +2,7 @@ return {
     -- Syntax highlithing and many more features
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
             require 'nvim-treesitter.configs'.setup {
