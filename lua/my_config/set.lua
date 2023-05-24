@@ -78,4 +78,7 @@ vim.opt.synmaxcol = 200
 -- ms to wait for trigger an event
 vim.opt.updatetime = 50
 
+-- disable startup message when opening empty buffer
+vim.opt.shm:append({ I = true })
+
 -- colorscheme on start configured in nvim/lua/custom/plugins/colors.lua

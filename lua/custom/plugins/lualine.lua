@@ -45,12 +45,6 @@ return {
                 inactive_winbar = {},
                 extensions = {}
             }
-
-            -- if the current buffer is a 'No Name' buffer, display the startup page
-            -- (lualine for some reason breaks startup page)
-            if vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()) == '' then
-                vim.cmd('intro')
-            end
         end
     },
 }

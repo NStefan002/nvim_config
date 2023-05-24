@@ -3,6 +3,13 @@ return {
     {
         'akinsho/toggleterm.nvim',
         version = "*",
+        lazy = false,
+        cond = function ()
+            if vim.g.neovide then
+                return true
+            end
+            return false
+        end,
         config = function()
             require("toggleterm").setup {
 

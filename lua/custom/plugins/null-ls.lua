@@ -1,6 +1,6 @@
 return {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = { 'cpp' },
+    ft = { 'c', 'cpp' },
     dependencies = {
         { "nvim-lua/plenary.nvim" },
     },
