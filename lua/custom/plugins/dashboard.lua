@@ -27,7 +27,7 @@ return {
                         key = 'f',
                     },
                     {
-                        icon = '󰅳',
+                        icon = '󰅳 ',
                         icon_hl = '@variable',
                         desc = 'String',
                         group = 'Label',

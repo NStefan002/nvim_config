@@ -123,15 +123,24 @@ return {
                 }
             })
 
-            cmp.setup.cmdline(":", {
+            cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "cmdline" },
+                    { name = "path" }
                 },
                 window = {
                     completion = cmp.config.window.bordered(),
                 },
             })
+
+            cmp.setup.cmdline({ '/', '?' }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" }
+                }
+            })
+
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             local cmp_mappings = lsp.defaults.cmp_mappings({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),

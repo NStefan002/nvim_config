@@ -5,7 +5,7 @@ return {
         config = function()
             require("indent_blankline").setup({
                 -- fix issue with dashboard
-                filetype_exclude = { 'dashboard' }
+                filetype_exclude = { 'help', 'man', 'dashboard', 'notify', 'checkhealth', 'lspinfo' }
             })
         end
     },
