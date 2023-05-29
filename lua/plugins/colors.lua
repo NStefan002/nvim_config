@@ -11,8 +11,6 @@ return {
                 vim.cmd.colorscheme("hybrid_reverse")
             else
                 vim.cmd.colorscheme("gotham256")
-                -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-                -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             end
 
             local schemes_candidates = {
@@ -37,8 +35,6 @@ return {
                 local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
                 print(random_scheme)
                 vim.cmd.colorscheme(random_scheme)
-                vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-                vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
             end
 
             vim.keymap.set("n", "<leader>col", select_random_colorscheme)
@@ -66,5 +62,5 @@ return {
                 vim.cmd('TransparentEnable')
             end
         end
-    }
+    },
 }

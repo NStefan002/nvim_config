@@ -1,6 +1,6 @@
 return {
     "yuki-yano/highlight-undo.nvim",
-    event = { "BufEnter" },
+    event = { "VeryLazy" },
     dependencies = { "vim-denops/denops.vim" },
     config = function()
         require('highlight-undo').setup({
