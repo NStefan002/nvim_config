@@ -173,28 +173,30 @@ return {
                 mapping = cmp_mappings
             })
 
-            lsp.set_preferences({
-                suggest_lsp_servers = false,
-                sign_icons = {
-                    error = '',
-                    warn = '',
-                    hint = '',
-                    info = ''
-                }
-            })
+            lsp.set_sign_icons {
+                error = '',
+                warn = '',
+                hint = '',
+                info = ''
+            }
 
             lsp.on_attach(function(client, bufnr)
                 -- function for shorter code
-                local nmap = function(keys, func, desc)
+                local nmap = function(keys, func, desc, additionalMode)
                     if desc then
                         desc = 'LSP: ' .. desc
                     end
-
-                    vim.keymap.set('n', keys, func, { buffer = bufnr, remap = false, desc = desc })
+                    local mode
+                    if additionalMode then
+                        mode = { 'n', additionalMode }
+                    else
+                        mode = 'n'
+                    end
+                    vim.keymap.set(mode, keys, func, { buffer = bufnr, remap = false, desc = desc })
                 end
 
                 -- very useful
-                nmap("<leader>f", vim.lsp.buf.format, "[F]ormat File")
+                nmap("<leader>f", vim.lsp.buf.format, "[F]ormat File", 'v')
                 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
                 nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
                 nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -203,7 +205,7 @@ return {
                 nmap("]d", vim.diagnostic.goto_prev, "Previous Diagnostic")
                 nmap("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
-                nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
+                nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", 'v')
                 nmap("<C-k>", vim.lsp.buf.signature_help, "Help")
                 nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[G]oto [D]efinition")
                 nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')

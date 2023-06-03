@@ -15,6 +15,4 @@ if vim.g.neovide then
     vim.g.neovide_cursor_vfx_particle_lifetime = 1.1
     vim.g.neovide_cursor_vfx_particle_density = 99.0
     vim.g.neovide_cursor_vfx_particle_speed = 7.0
-    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none"} )
-    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none"} )
 end
