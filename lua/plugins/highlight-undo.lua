@@ -1,6 +1,12 @@
 return {
     "yuki-yano/highlight-undo.nvim",
-    event = { "VeryLazy" },
+    lazy = false,
+    cond = function()
+        if vim.g.neovide then
+            return false
+        end
+        return true
+    end,
     dependencies = { "vim-denops/denops.vim" },
     config = function()
         require('highlight-undo').setup({

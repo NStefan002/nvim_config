@@ -4,7 +4,7 @@ return {
         'akinsho/toggleterm.nvim',
         version = "*",
         lazy = false,
-        cond = function ()
+        cond = function()
             if vim.g.neovide then
                 return true
             end
@@ -17,7 +17,7 @@ return {
                 size = 49,
                 hide_numbers = true,
                 shade_terminals = true,
-                shading_factor = 2,
+                shading_factor = -100,
                 start_in_insert = true,
                 insert_mappings = true,
                 persist_size = true,
@@ -31,7 +31,7 @@ return {
 
             function _G.set_terminal_keymaps()
                 local opts = { noremap = true }
-                vim.api.nvim_buf_set_keymap(0, "t", "jj", [[<C-\><C-n>]], opts) -- { desc = "Enter Normal Mode" }
+                vim.api.nvim_buf_set_keymap(0, "t", "jj", [[<C-\><C-n>]], opts)          -- { desc = "Enter Normal Mode" }
                 vim.api.nvim_buf_set_keymap(0, "n", "<C-h>", [[<C-\><C-n><C-W>h]], opts) -- { desc = "Enter Normal Mode" }
                 vim.api.nvim_buf_set_keymap(0, "n", "<C-j>", [[<C-\><C-n><C-W>j]], opts) -- { desc = "Enter Normal Mode" }
                 vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts) -- { desc = "Enter Normal Mode" }

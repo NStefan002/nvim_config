@@ -31,7 +31,7 @@ autocmd("FileType", {
         'checkhealth',
         'notify',
         'lspinfo',
-        'fugitive'
+        'fugitive',
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -52,7 +52,7 @@ autocmd("BufWritePre", {
         '*.rs'
     },
     callback = function()
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format()
     end,
     desc = "autoformat certain files on save"
 })

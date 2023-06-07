@@ -38,11 +38,18 @@ return {
 
             lsp.preset("recommended")
 
-            lsp.ensure_installed({
-                'tsserver',
-                'lua_ls',
-                'rust_analyzer',
-                'clangd',
+            local mason_lspconfig = require("mason-lspconfig")
+            mason_lspconfig.setup({
+                ensure_installed = {
+                    'lua_ls',
+                    'clangd',
+                    'rust_analyzer',
+                    'tsserver',
+                    'cssls',
+                    'html',
+                    'jsonls',
+                    'bashls',
+                }
             })
 
             -- Documentation for Neovim config in Lua
@@ -59,15 +66,63 @@ return {
                         diagnostics = {
                             globals = { 'vim' },
                         },
+                        hint = {
+                            enable = true,
+                            arrayIndex = "Disable",
+                            paramName = "All",
+                            paramType = true
+                        }
                     },
                 },
             })
-
-            lspconfig.clangd.setup({})
-            lspconfig.tsserver.setup({})
+            lspconfig.clangd.setup({
+                -- see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+                capabilities = {
+                    offsetEncoding = { "utf-16" },
+                    clangdInlayHintsProvider = true
+                },
+                setting = {
+                    InlayHints = {
+                        Enabled = true,
+                    },
+                }
+            })
+            lspconfig.rust_analyzer.setup({})
+            lspconfig.tsserver.setup({
+                settings = {
+                    typescript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = 'all',
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = false,
+                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        }
+                    },
+                    javascript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = 'all',
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = false,
+                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        }
+                    }
+                }
+            })
             lspconfig.html.setup({
                 filetypes = { 'html', 'ejs' }
             })
+            lspconfig.cssls.setup({})
+            lspconfig.jsonls.setup({})
+            lspconfig.bashls.setup({})
+
 
             local luasnip = require('luasnip')
             luasnip.config.setup {}
@@ -100,9 +155,63 @@ return {
                 group = luasnip_fix_augroup
             })
 
+
             local cmp = require('cmp')
 
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+            -- local cmp_mappings = lsp.defaults.cmp_mappings({
+            --     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+            --     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            --     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+            --     ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            --     ['<C-Space>'] = cmp.mapping.complete({}),
+            --     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            --     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            --     ["<Tab>"] = cmp.mapping(function(fallback)
+            --         if luasnip.expand_or_locally_jumpable() then
+            --             luasnip.expand_or_jump()
+            --         else
+            --             fallback()
+            --         end
+            --     end, { "i", "s" }),
+            --     ["<S-Tab>"] = cmp.mapping(function(fallback)
+            --         if luasnip.jumpable(-1) then
+            --             luasnip.jump(-1)
+            --         else
+            --             fallback()
+            --         end
+            --     end, { "i", "s" }),
+            --     -- ['<Tab>'] = vim.NIL,
+            --     -- ['<S-Tab>'] = vim.NIL,
+            -- })
+
             cmp.setup({
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ['<C-Space>'] = cmp.mapping.complete({}),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if luasnip.expand_or_locally_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                    -- ['<Tab>'] = vim.NIL,
+                    -- ['<S-Tab>'] = vim.NIL,
+                }),
                 preselect = 'item',
                 completion = {
                     completeopt = 'menu,menuone,noinsert',
@@ -116,8 +225,8 @@ return {
                 },
                 sources = {
                     { name = 'luasnip' },
-                    { name = 'nvim_lua' },
                     { name = 'nvim_lsp' },
+                    { name = 'nvim_lua' },
                     { name = 'path' },
                     { name = 'buffer',  keyword_length = 4 },
                 }
@@ -134,44 +243,12 @@ return {
                 },
             })
 
-            cmp.setup.cmdline({ '/', '?' }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" }
-                }
-            })
-
-            local cmp_select = { behavior = cmp.SelectBehavior.Select }
-            local cmp_mappings = lsp.defaults.cmp_mappings({
-                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<C-Space>'] = cmp.mapping.complete({}),
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                ["<Tab>"] = cmp.mapping(function(fallback)
-                    if luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    if luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                -- ['<Tab>'] = vim.NIL,
-                -- ['<S-Tab>'] = vim.NIL,
-            })
-
-
-            lsp.setup_nvim_cmp({
-                mapping = cmp_mappings
-            })
+            -- cmp.setup.cmdline({ '/', '?' }, {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            -- sources = {
+            --     { name = "buffer" }
+            -- }
+            -- })
 
             lsp.set_sign_icons {
                 error = '',
@@ -196,7 +273,14 @@ return {
                 end
 
                 -- very useful
-                nmap("<leader>f", vim.lsp.buf.format, "[F]ormat File", 'v')
+                nmap("<leader>f", function()
+                    vim.lsp.buf.format({
+                        async = true,
+                        filter = function(cl)
+                            return cl.name ~= "clangd"
+                        end
+                    })
+                end, "[F]ormat File", 'v')
                 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
                 nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
                 nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -233,5 +317,39 @@ return {
                 },
             })
         end
+    },
+    -- inlay hints
+    {
+        "lvimuser/lsp-inlayhints.nvim",
+        branch = "anticonceal",
+        -- lazy = false,
+        event = "BufReadPre",
+        opts = {
+            inlay_hints = {
+                parameter_hints = {
+                    show = true,
+                },
+                type_hints = {
+                    show = true,
+                },
+            }
+        },
+        config = function(_, opts)
+            require("lsp-inlayhints").setup(opts)
+
+            vim.keymap.set("n", "<leader>in", "<cmd>lua require('lsp-inlayhints').toggle()<CR>",
+                { desc = "Lsp-[In]layhints Toggle" })
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
+                callback = function(args)
+                    if not (args.data and args.data.client_id) then
+                        return
+                    end
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    require("lsp-inlayhints").on_attach(client, args.buf)
+                end,
+            })
+        end,
     },
 }

@@ -6,5 +6,12 @@ return {
         keys = {
             { "gst", vim.cmd.Git, desc = "Fugitive: Open [G]it [St]atus" }
         },
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        event = { "BufReadPre" },
+        config = function()
+            require('gitsigns').setup()
+        end
     }
 }
