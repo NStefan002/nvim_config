@@ -43,6 +43,9 @@ return {
     {
         "xiyaowong/transparent.nvim",
         lazy = false,
+        cond = function()
+            return not vim.g.neovide
+        end,
         config = function()
             require("transparent").setup({
                 groups = { -- table: default groups
@@ -56,11 +59,7 @@ return {
 
             })
 
-            if vim.g.neovide then
-                vim.cmd('TransparentDisable')
-            else
-                vim.cmd('TransparentEnable')
-            end
+            vim.cmd('TransparentEnable')
         end
     },
 }

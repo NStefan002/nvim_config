@@ -5,10 +5,7 @@ return {
         version = "*",
         lazy = false,
         cond = function()
-            if vim.g.neovide then
-                return true
-            end
-            return false
+            return vim.g.neovide
         end,
         config = function()
             require("toggleterm").setup {

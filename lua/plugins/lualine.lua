@@ -27,7 +27,7 @@ return {
                 sections = {
                     lualine_a = { 'mode' },
                     lualine_b = { 'branch', 'diff', 'diagnostics' },
-                    lualine_c = { 'filename', 'filesize', 'buffers' },
+                    lualine_c = { 'filename', 'filesize' },
                     lualine_x = { 'encoding', 'fileformat', 'filetype' },
                     lualine_y = { 'progress' },
                     lualine_z = { 'location' }
@@ -43,7 +43,18 @@ return {
                 tabline = {},
                 winbar = {},
                 inactive_winbar = {},
-                extensions = {}
+                extensions = {},
+
+                disabled_filetypes = {
+                    "dashboard",
+                    "lspinfo",
+                    "mason",
+                    "checkhealth",
+                    "help",
+                    "man",
+                    "toggleterm",
+                    "lazy",
+                },
             }
         end
     },

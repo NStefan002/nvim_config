@@ -1,16 +1,17 @@
 return {
-    "yuki-yano/highlight-undo.nvim",
-    lazy = false,
-    cond = function()
-        if vim.g.neovide then
-            return false
+    {
+        'tzachar/highlight-undo.nvim',
+        -- lazy = false,
+        event = "VeryLazy",
+        config = function()
+            require('highlight-undo').setup({
+                hlgroup = 'HighlightUndo',
+                duration = 300,
+                keymaps = {
+                    { 'n', 'u',     'undo', {} },
+                    { 'n', '<C-r>', 'redo', {} },
+                }
+            })
         end
-        return true
-    end,
-    dependencies = { "vim-denops/denops.vim" },
-    config = function()
-        require('highlight-undo').setup({
-            duration = 150
-        })
-    end,
+    },
 }

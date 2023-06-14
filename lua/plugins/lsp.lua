@@ -84,8 +84,20 @@ return {
                 setting = {
                     InlayHints = {
                         Enabled = true,
+                        ParameterNames = true,
+                        DeducedTypes = true,
                     },
-                }
+                },
+                cmd = {
+                    "clangd",
+                    -- "--all-scopes-completion",
+                    -- "--cross-file-rename",
+                    "--log=info",
+                    -- "--completion-style=detailed",
+                    -- "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+                    -- "--offset-encoding=utf-16",
+                    "--header-insertion=never",
+                },
             })
             lspconfig.rust_analyzer.setup({})
             lspconfig.tsserver.setup({
