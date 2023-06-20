@@ -40,6 +40,8 @@ return {
             vim.keymap.set("n", "<leader>col", select_random_colorscheme)
         end
     },
+    { 'Mofiqul/vscode.nvim', },
+    { 'cpea2506/one_monokai.nvim', },
     {
         "xiyaowong/transparent.nvim",
         lazy = false,

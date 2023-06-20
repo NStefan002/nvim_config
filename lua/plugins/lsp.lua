@@ -71,12 +71,15 @@ return {
                             arrayIndex = "Disable",
                             paramName = "All",
                             paramType = true
+                        },
+                        telemetry = {
+                            enable = false
                         }
                     },
                 },
             })
             lspconfig.clangd.setup({
-                -- see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+                -- NOTE: see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
                 capabilities = {
                     offsetEncoding = { "utf-16" },
                     clangdInlayHintsProvider = true
@@ -90,6 +93,8 @@ return {
                 },
                 cmd = {
                     "clangd",
+
+                    "--suggest-missing-includes",
                     -- "--all-scopes-completion",
                     -- "--cross-file-rename",
                     "--log=info",
@@ -171,31 +176,6 @@ return {
             local cmp = require('cmp')
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
-            -- local cmp_mappings = lsp.defaults.cmp_mappings({
-            --     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-            --     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            --     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-            --     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-            --     ['<C-Space>'] = cmp.mapping.complete({}),
-            --     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            --     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            --     ["<Tab>"] = cmp.mapping(function(fallback)
-            --         if luasnip.expand_or_locally_jumpable() then
-            --             luasnip.expand_or_jump()
-            --         else
-            --             fallback()
-            --         end
-            --     end, { "i", "s" }),
-            --     ["<S-Tab>"] = cmp.mapping(function(fallback)
-            --         if luasnip.jumpable(-1) then
-            --             luasnip.jump(-1)
-            --         else
-            --             fallback()
-            --         end
-            --     end, { "i", "s" }),
-            --     -- ['<Tab>'] = vim.NIL,
-            --     -- ['<S-Tab>'] = vim.NIL,
-            -- })
 
             cmp.setup({
                 mapping = cmp.mapping.preset.insert({
@@ -270,6 +250,14 @@ return {
             }
 
             lsp.on_attach(function(client, bufnr)
+                -- BUG: lua_ls messes up comment highlights
+                if client.name == "lua_ls" then
+                    vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
+                end
+                if client.server_capabilities.inlayHintProvider then
+                    print('bultin inlay hints will be in nightly soon')
+                    -- vim.lsp.buf.inlay_hint(bufnr, true)
+                end
                 -- function for shorter code
                 local nmap = function(keys, func, desc, additionalMode)
                     if desc then

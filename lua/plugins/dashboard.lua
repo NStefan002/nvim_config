@@ -27,7 +27,22 @@ return {
                     enable = false,
                 },
                 shortcut = {
-                    { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+                    {
+                        icon = '󰊳  ',
+                        icon_hl = '@property',
+                        desc = 'Update',
+                        group = '@property',
+                        action = 'Lazy update',
+                        key = 'u'
+                    },
+                    {
+                        icon = '󰿶 ',
+                        icon_hl = '@property',
+                        desc = 'Checkhealth',
+                        group = '@property',
+                        action = 'checkhealth',
+                        key = 'c'
+                    },
                     {
                         icon = '󱑃 ',
                         icon_hl = '@property',
@@ -40,7 +55,7 @@ return {
                         icon = ' ',
                         icon_hl = '@variable',
                         desc = 'Files',
-                        group = 'Label',
+                        group = '@property',
                         action = 'Telescope find_files',
                         key = 'f',
                     },
@@ -48,7 +63,7 @@ return {
                         icon = '󰅳 ',
                         icon_hl = '@variable',
                         desc = 'String',
-                        group = 'Label',
+                        group = '@property',
                         action = 'Telescope live_grep',
                         key = 's',
                     },
