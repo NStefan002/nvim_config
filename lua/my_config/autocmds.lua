@@ -30,7 +30,6 @@ autocmd("FileType", {
         'man',
         'checkhealth',
         'notify',
-        'lspinfo',
         'fugitive',
     },
     callback = function(event)
@@ -47,7 +46,6 @@ autocmd("BufWritePre", {
         '*.js',
         '*.ts',
         '*.html',
-        '*.css',
         '*.py',
         '*.rs'
     },

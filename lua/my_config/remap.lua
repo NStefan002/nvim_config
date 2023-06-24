@@ -7,12 +7,12 @@ vim.keymap.set("n", "<C-s>", [[:vsplit ]])
 
 -- tabs
 vim.keymap.set("n", "<leader>tn", [[:tabnew ]])
-vim.keymap.set("n", "<C-l>", "<cmd>tabnext<CR>")
-vim.keymap.set("n", "<C-h>", "<cmd>tabprev<CR>")
+vim.keymap.set("n", "<C-}>", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "<C-{>", "<cmd>tabprev<CR>")
 
 -- buffers
-vim.keymap.set("n", "<C-}>", "<cmd>bnext<CR>")
-vim.keymap.set("n", "<C-{>", "<cmd>bprev<CR>")
+vim.keymap.set("n", "<C-l>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<C-h>", "<cmd>bprev<CR>")
 
 -- resizing windows
 vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")

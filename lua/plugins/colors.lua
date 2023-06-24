@@ -14,12 +14,12 @@ return {
             end
 
             local schemes_candidates = {
+                "random",
                 "gruvbox",
                 "ayu",
                 "gotham256",
                 "hybrid_reverse",
                 "onedark",
-                "deep-space",
                 "carbonized-dark",
                 "deus",
                 "flattened_dark",
@@ -29,19 +29,39 @@ return {
                 "yellow-moon",
                 "PaperColor",
                 "habamax",
+                "one_monokai",
+                "dark_flat"
             }
 
-            local select_random_colorscheme = function()
-                local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
-                print(random_scheme)
-                vim.cmd.colorscheme(random_scheme)
-            end
-
-            vim.keymap.set("n", "<leader>col", select_random_colorscheme)
+            -- local select_random_colorscheme = function()
+            --     local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
+            --     print(random_scheme)
+            --     vim.cmd.colorscheme(random_scheme)
+            -- end
+            --
+            -- vim.keymap.set("n", "<leader>col", select_random_colorscheme)
+            vim.keymap.set("n", "<leader>col", function()
+                vim.ui.select(schemes_candidates, {
+                    promt = "Select colorscheme",
+                    telescope = require("telescope.themes").get_cursor()
+                }, function(selected)
+                    if not selected then
+                        return
+                    end
+                    if selected == "random" then
+                        local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
+                        vim.cmd.colorscheme(random_scheme)
+                        print(random_scheme)
+                    else
+                        vim.cmd.colorscheme(selected)
+                        print(selected)
+                    end
+                end)
+            end)
         end
     },
-    { 'Mofiqul/vscode.nvim', },
     { 'cpea2506/one_monokai.nvim', },
+    { "sekke276/dark_flat.nvim" },
     {
         "xiyaowong/transparent.nvim",
         lazy = false,

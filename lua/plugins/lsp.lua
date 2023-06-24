@@ -93,7 +93,6 @@ return {
                 },
                 cmd = {
                     "clangd",
-
                     "--suggest-missing-includes",
                     -- "--all-scopes-completion",
                     -- "--cross-file-rename",
@@ -255,8 +254,16 @@ return {
                     vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
                 end
                 if client.server_capabilities.inlayHintProvider then
-                    print('bultin inlay hints will be in nightly soon')
-                    -- vim.lsp.buf.inlay_hint(bufnr, true)
+                    if vim.lsp.buf.inlay_hint == nil then
+                        print('builtin inlay hints will be in nightly soon')
+                    else
+                        print('builtin inlay hints activated')
+                        vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
+                        vim.lsp.buf.inlay_hint(bufnr, true)
+                        vim.keymap.set("n", "<leader>in", function()
+                            vim.lsp.buf.inlay_hint(bufnr, nil) -- toggle
+                        end, { desc = "Lsp-[In]layhints Toggle" })
+                    end
                 end
                 -- function for shorter code
                 local nmap = function(keys, func, desc, additionalMode)
@@ -322,8 +329,12 @@ return {
     {
         "lvimuser/lsp-inlayhints.nvim",
         branch = "anticonceal",
-        -- lazy = false,
-        event = "BufReadPre",
+        -- NOTE: uncomment this when builtin lsp_inlayhints get added to nightly
+        lazy = false,
+        cond = function()
+            return vim.lsp.buf.inlay_hint == nil
+        end,
+        -- event = "BufReadPre",
         opts = {
             inlay_hints = {
                 parameter_hints = {
