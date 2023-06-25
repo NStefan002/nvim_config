@@ -16,7 +16,7 @@ return {
                     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
 
-                -- for shorter
+                -- for shorter code
                 local nmap = function(lhs, rhs, opt)
                     vim.keymap.set('n', lhs, rhs, opt);
                 end
@@ -73,6 +73,8 @@ return {
                 nmap('Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
                 nmap('<2-LeftMouse>', api.node.open.edit, opts('Open'))
                 nmap('<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+
+                vim.keymap.set({ "n", "i" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "nvim-tree: Toggle" }) -- like VSC
             end
 
             local function open_nvim_tree_for_directories(data)
@@ -166,9 +168,6 @@ return {
                     enable = true,
                 },
             })
-
-            -- mappings
-            vim.keymap.set({ "n", "i" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "nvim-tree: Toggle" }) -- like VSC
 
             -- extension
             require("lsp-file-operations").setup()

@@ -15,9 +15,12 @@ return {
 
             local schemes_candidates = {
                 "random",
+                "dark_flat",
+                "gotham256",
+                "molokai",
+                "one_monokai",
                 "gruvbox",
                 "ayu",
-                "gotham256",
                 "hybrid_reverse",
                 "onedark",
                 "carbonized-dark",
@@ -25,12 +28,10 @@ return {
                 "flattened_dark",
                 "focuspoint",
                 "lucid",
-                "molokai",
                 "yellow-moon",
                 "PaperColor",
                 "habamax",
-                "one_monokai",
-                "dark_flat"
+                "light"
             }
 
             -- local select_random_colorscheme = function()
@@ -43,15 +44,19 @@ return {
             vim.keymap.set("n", "<leader>col", function()
                 vim.ui.select(schemes_candidates, {
                     promt = "Select colorscheme",
-                    telescope = require("telescope.themes").get_cursor()
+                    telescope = require("telescope.themes").get_dropdown()
                 }, function(selected)
                     if not selected then
                         return
                     end
                     if selected == "random" then
-                        local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
+                        local random_scheme = schemes_candidates
+                            [math.random(1, #schemes_candidates - 1)] -- do not select light theme
                         vim.cmd.colorscheme(random_scheme)
                         print(random_scheme)
+                    elseif selected == "light" then
+                        vim.cmd.colorscheme("balance")
+                        vim.cmd("TransparentDisable")
                     else
                         vim.cmd.colorscheme(selected)
                         print(selected)
@@ -61,7 +66,8 @@ return {
         end
     },
     { 'cpea2506/one_monokai.nvim', },
-    { "sekke276/dark_flat.nvim" },
+    { 'sekke276/dark_flat.nvim' },
+    { 'MetriC-DT/balance-theme.nvim' },
     {
         "xiyaowong/transparent.nvim",
         lazy = false,

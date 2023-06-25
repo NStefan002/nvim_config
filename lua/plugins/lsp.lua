@@ -224,7 +224,20 @@ return {
             })
 
             cmp.setup.cmdline(':', {
-                mapping = cmp.mapping.preset.cmdline(),
+                mapping = cmp.mapping.preset.cmdline({
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            local entry = cmp.get_selected_entry()
+                            if not entry then
+                                cmp.select_next_item({ cmp_select })
+                            else
+                                cmp.confirm()
+                            end
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s", "c" }),
+                }),
                 sources = {
                     { name = "cmdline" },
                     { name = "path" }
@@ -253,17 +266,28 @@ return {
                 if client.name == "lua_ls" then
                     vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
                 end
-                if client.server_capabilities.inlayHintProvider then
-                    if vim.lsp.buf.inlay_hint == nil then
-                        print('builtin inlay hints will be in nightly soon')
-                    else
-                        print('builtin inlay hints activated')
-                        vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
-                        vim.lsp.buf.inlay_hint(bufnr, true)
-                        vim.keymap.set("n", "<leader>in", function()
-                            vim.lsp.buf.inlay_hint(bufnr, nil) -- toggle
-                        end, { desc = "Lsp-[In]layhints Toggle" })
-                    end
+                if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
+                    vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
+                    vim.keymap.set("n", "<leader>in", function()
+                        vim.lsp.buf.inlay_hint(bufnr, nil) -- toggle
+                    end, { desc = "Lsp-[In]layhints Toggle" })
+                    local inlay_hint_grp = vim.api.nvim_create_augroup("InlayHintsInInsert", { clear = true })
+                    vim.api.nvim_create_autocmd("InsertLeave", {
+                        group = inlay_hint_grp,
+                        pattern = "*",
+                        callback = function()
+                            vim.lsp.buf.inlay_hint(bufnr, false)
+                        end,
+                        desc = "Hide inlay hints"
+                    })
+                    vim.api.nvim_create_autocmd("InsertEnter", {
+                        group = inlay_hint_grp,
+                        pattern = "*",
+                        callback = function()
+                            vim.lsp.buf.inlay_hint(bufnr, true)
+                        end,
+                        desc = "Show inlay hints"
+                    })
                 end
                 -- function for shorter code
                 local nmap = function(keys, func, desc, additionalMode)

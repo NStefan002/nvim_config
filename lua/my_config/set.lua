@@ -41,8 +41,11 @@ vim.opt.cursorline = false
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- backup files
+-- wrapping lines
 vim.opt.wrap = true
+vim.opt.showbreak = "==>  "
+
+-- backup files
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -64,8 +67,6 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 -- no idea what is this
 vim.opt.isfname:append("@-@")
-
--- vim.opt.colorcolumn = "80"
 
 -- Enable background buffers
 vim.opt.hidden = false
