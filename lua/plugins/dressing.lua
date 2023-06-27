@@ -1,5 +1,5 @@
 return {
     'stevearc/dressing.nvim',
-    event = { "BufEnter" },
+    event = "VeryLazy",
     opts = {}
 }
