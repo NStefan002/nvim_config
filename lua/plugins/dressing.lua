@@ -1,5 +1,10 @@
 return {
     'stevearc/dressing.nvim',
     event = "VeryLazy",
-    opts = {}
+    opts = {
+        input = {
+            relative = "editor",
+            title_pos = "center",
+        },
+    }
 }

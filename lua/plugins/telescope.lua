@@ -35,6 +35,27 @@ return {
                         },
                     },
                 },
+                defaults = {
+                    layout_config = {
+                        horizontal = {
+                            prompt_position = "top",
+                        },
+                    }
+                },
+                pickers = {
+                    find_files = {
+                        layout_strategy = 'horizontal',
+                        layout_config = {
+                            width = 0.95,
+                        }
+                    },
+                    live_grep = {
+                        layout_strategy = 'horizontal',
+                        layout_config = {
+                            width = 0.95,
+                        }
+                    },
+                }
             })
 
             require('telescope').load_extension('undo')
@@ -57,11 +78,9 @@ return {
             nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
             nmap("<leader>sb", builtin.buffers, "[S]earch [B]uffers")
             nmap("<leader>st", builtin.treesitter, "[S]earch [T]reesitter")
-            nmap("<leader>cf", "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current Buffer [Fuzzy] [F]inder")
-
-            nmap("<leader>key", "<cmd>Telescope keymaps<CR>", "[Key]maps")
+            nmap("<leader>key", builtin.keymaps, "[Key]maps")
             nmap("<leader>tu", "<cmd>Telescope undo<CR>", "[T]elescope [U]ndo")
-            nmap("<leader>h", "<cmd>Telescope notify<CR>", "Notification [H]istory")
+            nmap("<leader>nh", "<cmd>Telescope notify<CR>", "[N]otification [H]istory")
 
             -- search for word under the cursor or visual selection
             vim.keymap.set({ 'n', 'v' }, "<leader>gs", builtin.grep_string, { desc = "Telescope: [G]rep [S]tring" })

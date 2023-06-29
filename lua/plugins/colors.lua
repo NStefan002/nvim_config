@@ -88,6 +88,8 @@ return {
             })
 
             vim.cmd('TransparentEnable')
+            -- FIX: temporary solution for float titles
+            vim.api.nvim_set_hl(0, "FloatTitle", { link = "Error" })
         end
     },
 }
