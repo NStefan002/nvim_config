@@ -55,6 +55,16 @@ autocmd("BufWritePre", {
     desc = "autoformat certain files on save"
 })
 
+autocmd("ColorScheme", {
+    group = aucmdsStarterPack,
+    pattern = "*",
+    callback = function()
+        vim.api.nvim_set_hl(0, 'Search', { link = 'IncSearch' })
+        vim.api.nvim_set_hl(0, 'CurSearch', { undercurl = true, italic = true, fg = "lime" })
+    end,
+    desc = "Update hlgroups for / and ?"
+})
+
 -- autocmd({ "BufRead", "BufNewFile" }, {
 --     group = aucmdsStarterPack,
 --     pattern = {

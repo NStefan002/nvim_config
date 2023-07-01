@@ -266,17 +266,17 @@ return {
                 if client.name == "lua_ls" then
                     vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
                 end
-                if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
+                if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
                     vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
                     vim.keymap.set("n", "<leader>in", function()
-                        vim.lsp.buf.inlay_hint(bufnr, nil) -- toggle
-                    end, { desc = "Lsp-[In]layhints Toggle" })
+                        vim.lsp.inlay_hint(bufnr, nil) -- toggle
+                    end, { desc = "Lsp-[In]layhints Toggle", buffer = bufnr })
                     local inlay_hint_grp = vim.api.nvim_create_augroup("InlayHintsInInsert", { clear = true })
                     vim.api.nvim_create_autocmd("InsertLeave", {
                         group = inlay_hint_grp,
                         pattern = "*",
                         callback = function()
-                            vim.lsp.buf.inlay_hint(bufnr, false)
+                            vim.lsp.inlay_hint(bufnr, false)
                         end,
                         desc = "Hide inlay hints"
                     })
@@ -284,7 +284,7 @@ return {
                         group = inlay_hint_grp,
                         pattern = "*",
                         callback = function()
-                            vim.lsp.buf.inlay_hint(bufnr, true)
+                            vim.lsp.inlay_hint(bufnr, true)
                         end,
                         desc = "Show inlay hints"
                     })
@@ -356,7 +356,7 @@ return {
         -- NOTE: uncomment this when builtin lsp_inlayhints get added to nightly
         lazy = false,
         cond = function()
-            return vim.lsp.buf.inlay_hint == nil
+            return vim.lsp.inlay_hint == nil
         end,
         -- event = "BufReadPre",
         opts = {

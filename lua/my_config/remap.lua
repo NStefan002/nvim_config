@@ -56,3 +56,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- save and source current file
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>hl", function()
+    vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()
+end, { desc = "Toggle [hl]search", silent = true })

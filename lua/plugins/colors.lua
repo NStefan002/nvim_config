@@ -1,4 +1,6 @@
 return {
+    -- TODO: find more Neovim-specific colorschemes (because of some hlgroups e.g. the one for inlay hints)
+    -- then remove the hlgroups linking in lsp.lua file
     -- color schemes
     {
         'rafi/awesome-vim-colorschemes',
@@ -8,7 +10,7 @@ return {
             -- colorschemes on startup
             if vim.g.neovide then
                 -- colorscheme for neovide
-                vim.cmd.colorscheme("hybrid_reverse")
+                vim.cmd.colorscheme("one_monokai")
             else
                 vim.cmd.colorscheme("gotham256")
             end
@@ -67,7 +69,7 @@ return {
     },
     { 'cpea2506/one_monokai.nvim', },
     { 'sekke276/dark_flat.nvim' },
-    { 'MetriC-DT/balance-theme.nvim' },
+    { 'MetriC-DT/balance-theme.nvim' }, -- light colorscheme for presentation purposes
     {
         "xiyaowong/transparent.nvim",
         lazy = false,
@@ -84,11 +86,11 @@ return {
                 },
                 extra_groups = { 'NormalFloat', 'NvimTreeNormal' }, -- table: additional groups that should be cleared
                 exclude_groups = {},                                -- table: groups you don't want to clear
-
             })
 
             vim.cmd('TransparentEnable')
-            -- FIX: temporary solution for float titles
+            -- FIX: temporary solution for float titles (solution is to use Neovim-specific colorschemes)
+            -- NOTE: this has nothing to do with transparent.nvim, rather it's a non-Neovim colorschemes issue
             vim.api.nvim_set_hl(0, "FloatTitle", { link = "Error" })
         end
     },
