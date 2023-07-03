@@ -18,9 +18,11 @@ return {
             local schemes_candidates = {
                 "random",
                 "dark_flat",
-                "gotham256",
-                "molokai",
+                "solarized",
                 "one_monokai",
+                "molokai",
+                "everblush",
+                "gotham256",
                 "gruvbox",
                 "ayu",
                 "hybrid_reverse",
@@ -36,13 +38,6 @@ return {
                 "light"
             }
 
-            -- local select_random_colorscheme = function()
-            --     local random_scheme = schemes_candidates[math.random(1, #schemes_candidates)]
-            --     print(random_scheme)
-            --     vim.cmd.colorscheme(random_scheme)
-            -- end
-            --
-            -- vim.keymap.set("n", "<leader>col", select_random_colorscheme)
             vim.keymap.set("n", "<leader>col", function()
                 vim.ui.select(schemes_candidates, {
                     promt = "Select colorscheme",
@@ -52,8 +47,8 @@ return {
                         return
                     end
                     if selected == "random" then
-                        local random_scheme = schemes_candidates
-                            [math.random(1, #schemes_candidates - 1)] -- do not select light theme
+                        -- do not select light theme
+                        local random_scheme = schemes_candidates[math.random(2, #schemes_candidates - 1)]
                         vim.cmd.colorscheme(random_scheme)
                         print(random_scheme)
                     elseif selected == "light" then
@@ -67,8 +62,19 @@ return {
             end)
         end
     },
-    { 'cpea2506/one_monokai.nvim', },
+    { 'cpea2506/one_monokai.nvim' },
     { 'sekke276/dark_flat.nvim' },
+    { 'maxmx03/solarized.nvim',   opts = { theme = 'neo' } },
+    {
+        'Everblush/nvim',
+        name = 'everblush',
+        opts = {
+            transparent_background = true,
+            nvim_tree = {
+                contrast = false,
+            },
+        }
+    },
     { 'MetriC-DT/balance-theme.nvim' }, -- light colorscheme for presentation purposes
     {
         "xiyaowong/transparent.nvim",
@@ -89,9 +95,6 @@ return {
             })
 
             vim.cmd('TransparentEnable')
-            -- FIX: temporary solution for float titles (solution is to use Neovim-specific colorschemes)
-            -- NOTE: this has nothing to do with transparent.nvim, rather it's a non-Neovim colorschemes issue
-            vim.api.nvim_set_hl(0, "FloatTitle", { link = "Error" })
         end
     },
 }

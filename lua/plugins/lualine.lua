@@ -12,7 +12,17 @@ return {
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                     disabled_filetypes = {
-                        statusline = {},
+                        statusline = {
+                            "NvimTree",
+                            "dashboard",
+                            "lspinfo",
+                            "mason",
+                            "checkhealth",
+                            "help",
+                            "man",
+                            "toggleterm",
+                            "lazy",
+                        },
                         winbar = {},
                     },
                     ignore_focus = {},
@@ -35,8 +45,8 @@ return {
                 inactive_sections = {
                     lualine_a = {},
                     lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'location' },
+                    lualine_c = {},
+                    lualine_x = {},
                     lualine_y = {},
                     lualine_z = {}
                 },
@@ -44,17 +54,6 @@ return {
                 winbar = {},
                 inactive_winbar = {},
                 extensions = {},
-
-                disabled_filetypes = {
-                    "dashboard",
-                    "lspinfo",
-                    "mason",
-                    "checkhealth",
-                    "help",
-                    "man",
-                    "toggleterm",
-                    "lazy",
-                },
             }
         end
     },

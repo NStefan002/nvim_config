@@ -63,8 +63,26 @@ vim.opt.showtabline = 1
 
 -- minimal number of lines to keep above/below cursor (if possible)
 vim.opt.scrolloff = 8
+
 -- displaying errors, warnings etc.
 vim.opt.signcolumn = "yes"
+
+-- folds
+vim.opt.foldcolumn = "1"
+vim.opt.foldenable = true
+vim.opt.foldmethod = "manual"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.fillchars:append({ fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' })
+
+function _G.Custom_fold()
+    local line = vim.fn.getline(vim.v.foldstart)
+    local line_count = vim.v.foldend - vim.v.foldstart + 1
+    return " ⚡ " .. line .. ": " .. line_count .. " lines"
+end
+
+vim.wo.foldtext = "v:lua.Custom_fold()"
+
 -- no idea what is this
 vim.opt.isfname:append("@-@")
 

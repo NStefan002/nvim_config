@@ -267,7 +267,6 @@ return {
                     vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
                 end
                 if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
-                    vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
                     vim.keymap.set("n", "<leader>in", function()
                         vim.lsp.inlay_hint(bufnr, nil) -- toggle
                     end, { desc = "Lsp-[In]layhints Toggle", buffer = bufnr })
@@ -348,43 +347,5 @@ return {
                 },
             })
         end
-    },
-    -- inlay hints
-    {
-        "lvimuser/lsp-inlayhints.nvim",
-        branch = "anticonceal",
-        -- NOTE: uncomment this when builtin lsp_inlayhints get added to nightly
-        lazy = false,
-        cond = function()
-            return vim.lsp.inlay_hint == nil
-        end,
-        -- event = "BufReadPre",
-        opts = {
-            inlay_hints = {
-                parameter_hints = {
-                    show = true,
-                },
-                type_hints = {
-                    show = true,
-                },
-            }
-        },
-        config = function(_, opts)
-            require("lsp-inlayhints").setup(opts)
-
-            vim.keymap.set("n", "<leader>in", "<cmd>lua require('lsp-inlayhints').toggle()<CR>",
-                { desc = "Lsp-[In]layhints Toggle" })
-
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
-                callback = function(args)
-                    if not (args.data and args.data.client_id) then
-                        return
-                    end
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    require("lsp-inlayhints").on_attach(client, args.buf)
-                end,
-            })
-        end,
     },
 }
