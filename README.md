@@ -1,34 +1,52 @@
-# My Neovim Configuration
-This is my personal configuration for [Neovim](https://neovim.io/), a modern version of the Vim text editor that provides improved performance and a maximized extensibility.
+## Version manager:
+[bob](https://github.com/MordechaiHadad/bob)
 
-## Installation
-***Note: This repository is created according to my personal needs and likings. If you're not interested in using my configuration, please skip Intallation and Usage sections.***
+## Plugins:
+* [autopairs](https://github.com/windwp/nvim-autopairs)
+* [barbecue](https://github.com/utilyre/barbecue.nvim)
+* [bufferline](https://github.com/akinsho/bufferline.nvim)
+* [codeium](https://codeium.com/) and its Neovim [plugin](https://github.com/Exafunction/codeium.vim)
+* [color-picker](https://github.com/ziontee113/color-picker.nvim)
+* [colorizer](https://github.com/NvChad/nvim-colorizer.lua)
+* [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+* [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
+* [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
+* [dashboard](https://github.com/nvimdev/dashboard-nvim)
+* [dressing](https://github.com/stevearc/dressing.nvim)
+* [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
+* [neogit](https://github.com/NeogitOrg/neogit)
+* [highlight-undo](https://github.com/tzachar/highlight-undo.nvim)
+* [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+* [live-server](https://github.com/aurum77/live-server.nvim)
+* [lsp-zero](https://github.com/VonHeikemen/lsp-zero.nvim) and the plugins it syncs:
+  - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+  - [mason](https://github.com/williamboman/mason.nvim)
+  - [mason-lspconfig](https://github.com/williamboman/mason-lspconfig.nvim)
+  - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+  - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
+  - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+  - [cmp-path](https://github.com/hrsh7th/cmp-path)
+  - [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
+  - [cmp-luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
+  - [cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)
+  - [luasnip](https://github.com/L3MON4D3/LuaSnip)
+  - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+  - [neodev](https://github.com/folke/neodev.nvim)
+* [lualine](https://github.com/nvim-lualine/lualine.nvim)
+* [matchup](https://github.com/andymass/vim-matchup)
+* [visual-multi](https://github.com/mg979/vim-visual-multi)
+* [nerdcommenter](https://github.com/preservim/nerdcommenter)
+* [notify](https://github.com/rcarriga/nvim-notify)
+* [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim), but unfortunately not for [long](https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1621)
+* [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
+* [tagbar](https://github.com/preservim/tagbar)
+* [telescope](https://github.com/nvim-telescope/telescope.nvim)
+* [todo-comments](https://github.com/folke/todo-comments.nvim)
+* [toggleterm](https://github.com/akinsho/toggleterm.nvim)
+* [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+* [treesj](https://github.com/Wansmer/treesj)
+* [trouble](https://github.com/folke/trouble.nvim)
+* [undo-tree](https://github.com/mbbill/undotree)
 
-To use this configuration, you'll need to have Neovim installed on your system. You can install it by following the instructions on the [official Neovim website](https://neovim.io/) or on the [Neovim GitHub repository](https://github.com/neovim/neovim). Personally, I use [bob](https://github.com/MordechaiHadad/bob) (Neovim version manager) for easy installing and switching between Neovim [versions](https://github.com/neovim/neovim/releases/).
-Once Neovim is installed, you can clone this repository and copy the files into your `~/.config/nvim/` directory:
-```
-git clone https://github.com/NStefan002/nvim_config.git
-mv nvim_config ~/.config/nvim
-```
-## Usage
-Once you've copied the configuration files, you can launch Neovim and start using it. Here are a few things to keep in mind:
-
-- Almost all of the used plugins are configured in `nvim/lua/custom/plugins/` directory. If you want, customize their settings according to your needs.
-- You may want to customize the keybindings to better suit your workflow. You can do this by editing the `nvim/lua/my_config/remap.lua` file and adding your own mappings.
-- You may need to install some additional packages and dependencies, some of them being `git`, `build-essential`, `npm`, `rustc` and `cargo`, etc.
-- I recently switched to [Lazy](https://github.com/folke/lazy.nvim), so now plugins are automaticly installed when you open Neovim (open Lazy with ```:Lazy```), see [migrating from Packer to Lazy](https://github.com/folke/lazy.nvim#-migration-guide)
-
-## Credits
-- Plugins GitHub repositories (see most popular plugins [here](https://github.com/rockerBOO/awesome-neovim))
-- [Neovide](https://github.com/neovide/neovide) (an amazing Neovim GUI)
-- I borrowed some code from [ThePrimeagen's init.lua repository](https://github.com/ThePrimeagen/init.lua)
-
-## Sources
-Here are the sources I used to learn about Neovim, Lua, and plugins:
-- [TJ DeVries YouTube channel](https://www.youtube.com/@teej_dv)
-- [Tj Devries GitHub page](https://github.com/tjdevries)
-- [ThePrimeagen YouTube channel](https://www.youtube.com/@ThePrimeagen)
-- Source code of some of the plugins
-- [Neovim documentation](https://neovim.io/doc/)
-
-If you run into any issues or have suggestions for improvements, please don't hesitate to open an issue or submit a pull request on this repository. I'm always happy to hear feedback and improve this configuration.
+## GUI
+[neovide](https://neovide.dev/)
