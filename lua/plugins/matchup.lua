@@ -2,7 +2,7 @@ return {
     'andymass/vim-matchup',
     event = { "BufReadPost" },
     init = function()
-        vim.o.matchpairs = "(:),{:},[:],<:>"
+        vim.o.matchpairs = "(:),{:},[:]"
     end,
     config = function()
         vim.g.matchup_matchparen_enabled = 1
