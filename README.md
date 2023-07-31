@@ -14,7 +14,6 @@
 * [dashboard](https://github.com/nvimdev/dashboard-nvim)
 * [dressing](https://github.com/stevearc/dressing.nvim)
 * [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
-* [neogit](https://github.com/NeogitOrg/neogit)
 * [highlight-undo](https://github.com/tzachar/highlight-undo.nvim)
 * [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
 * [live-server](https://github.com/aurum77/live-server.nvim)
