@@ -78,7 +78,7 @@ return {
             },
         }
 
-        -- remove when dashboard is active
+        -- remove '~' when dashboard is active
         vim.api.nvim_create_autocmd("VimEnter", {
             group = vim.api.nvim_create_augroup("DashboardNoTilde", {}),
             pattern = "*",
