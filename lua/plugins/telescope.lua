@@ -8,7 +8,7 @@ return {
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
         },
-        event = { "BufEnter" },
+        event = "BufEnter",
         -- keys = {
         --     { "<leader>lg",  "<cmd>Telescope live_grep<CR>",                 desc = "[L]ive [G]rep" },
         --     { "<leader>sf",  "<cmd>Telescope find_files<CR>",                desc = "[S]earch [F]iles" },
@@ -86,16 +86,4 @@ return {
             vim.keymap.set({ 'n', 'v' }, "<leader>gs", builtin.grep_string, { desc = "Telescope: [G]rep [S]tring" })
         end
     },
-    {
-        "adoyle-h/lsp-toggle.nvim",
-        keys = {
-            { "<leader>tl", "<cmd>Telescope ToggleLSP<CR>", desc = "Telescope: [T]oggle [L]sp" },
-        },
-        config = function()
-            require('lsp-toggle').setup {
-                create_cmds = true, -- Whether to create user commands
-                telescope = true,   -- Whether to load telescope extensions
-            }
-        end
-    }
 }

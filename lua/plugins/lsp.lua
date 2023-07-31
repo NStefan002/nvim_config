@@ -306,9 +306,9 @@ return {
                 nmap("<leader>f", function()
                     vim.lsp.buf.format({
                         async = true,
-                        filter = function(cl)
-                            return cl.name ~= "clangd"
-                        end
+                        -- filter = function(cl)
+                        --     return cl.name ~= "clangd"
+                        -- end
                     })
                 end, "[F]ormat File", 'v')
                 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
