@@ -36,16 +36,27 @@
 * [visual-multi](https://github.com/mg979/vim-visual-multi)
 * [nerdcommenter](https://github.com/preservim/nerdcommenter)
 * [notify](https://github.com/rcarriga/nvim-notify)
-* [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim), but unfortunately not for [long](https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1621)
 * [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
 * [tagbar](https://github.com/preservim/tagbar)
-* [telescope](https://github.com/nvim-telescope/telescope.nvim)
+* [telescope](https://github.com/nvim-telescope/telescope.nvim) and its [extensions](https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions) :
+  - [undo](https://github.com/debugloop/telescope-undo.nvim)
+  - [notify](https://github.com/rcarriga/nvim-notify#viewing-history)
 * [todo-comments](https://github.com/folke/todo-comments.nvim)
 * [toggleterm](https://github.com/akinsho/toggleterm.nvim)
 * [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 * [treesj](https://github.com/Wansmer/treesj)
 * [trouble](https://github.com/folke/trouble.nvim)
 * [undo-tree](https://github.com/mbbill/undotree)
+* [transparent](https://github.com/xiyaowong/transparent.nvim)
+* color schemes:
+  - [starry](https://github.com/ray-x/starry.nvim) collection of colorschemes
+  - [one_monokai](https://github.com/cpea2506/one_monokai.nvim)
+  - [dark_flat](https://github.com/sekke276/dark_flat.nvim)
+  - [solarized](https://github.com/maxmx03/solarized.nvim)
+  - [everblush](https://github.com/Everblush/nvim)
+  - [darcula-dark](https://github.com/xiantang/darcula-dark.nvim)
+  - [balance-theme](https://github.com/MetriC-DT/balance-theme.nvim)
+  - used to use [awesome-vim-colorschemes](https://github.com/rafi/awesome-vim-colorschemes) collection of colorschemes
 
 ## GUI
 [neovide](https://neovide.dev/)
