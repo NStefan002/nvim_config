@@ -62,12 +62,6 @@ autocmd("ColorScheme", {
         local hl = vim.api.nvim_set_hl
         hl(0, 'Search', { link = 'IncSearch' })
         hl(0, 'CurSearch', { undercurl = true, italic = true, fg = "lime" })
-
-        -- FIX: temporary solution for float titles (solution is to use Neovim-specific colorschemes)
-        -- NOTE: this has nothing to do with transparent.nvim, rather it's a non-Neovim colorschemes issue
-        hl(0, "LspInlayHint", { link = "Comment" })
-        hl(0, "FloatTitle", { link = "Error" })
-
         hl(0, "FoldColumn", {})
     end,
     desc = "Update hlgroups for / and ?, fix some highlights"

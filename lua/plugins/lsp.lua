@@ -262,10 +262,6 @@ return {
             }
 
             lsp.on_attach(function(client, bufnr)
-                -- BUG: lua_ls messes up comment highlights
-                if client.name == "lua_ls" then
-                    vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
-                end
                 if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
                     vim.keymap.set("n", "<leader>in", function()
                         vim.lsp.inlay_hint(bufnr, nil) -- toggle

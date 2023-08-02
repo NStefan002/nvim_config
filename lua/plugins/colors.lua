@@ -1,41 +1,25 @@
 return {
-    -- TODO: find more Neovim-specific colorschemes (because of some hlgroups e.g. the one for inlay hints)
-    -- then remove the hlgroups linking in lsp.lua file
     -- color schemes
     {
-        'rafi/awesome-vim-colorschemes',
+        'ray-x/starry.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            -- colorschemes on startup
-            if vim.g.neovide then
-                -- colorscheme for neovide
-                vim.cmd.colorscheme("one_monokai")
-            else
-                vim.cmd.colorscheme("gotham256")
-            end
-
             local schemes_candidates = {
                 "random",
                 "dark_flat",
                 "solarized",
+                "everblush",
                 "one_monokai",
                 "molokai",
-                "everblush",
-                "gotham256",
-                "gruvbox",
-                "ayu",
-                "hybrid_reverse",
-                "onedark",
-                "carbonized-dark",
-                "deus",
-                "flattened_dark",
-                "focuspoint",
-                "lucid",
-                "yellow-moon",
-                "PaperColor",
-                "habamax",
-                "light"
+                "darcula-dark",
+                "moonlight",
+                "darksolar",
+                "dracula",
+                "dracula_blood",
+                "darker",
+                "emerald",
+                "light",
             }
 
             vim.keymap.set("n", "<leader>col", function()
@@ -60,6 +44,7 @@ return {
                     end
                 end)
             end)
+            vim.cmd.colorscheme("moonlight")
         end
     },
     { 'cpea2506/one_monokai.nvim' },
@@ -74,6 +59,10 @@ return {
                 contrast = false,
             },
         }
+    },
+    {
+        "xiantang/darcula-dark.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", }
     },
     { 'MetriC-DT/balance-theme.nvim' }, -- light colorscheme for presentation purposes
     {
