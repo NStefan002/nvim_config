@@ -11,7 +11,6 @@ return {
                 "solarized",
                 "everblush",
                 "one_monokai",
-                "molokai",
                 "darcula-dark",
                 "moonlight",
                 "darksolar",
@@ -19,6 +18,7 @@ return {
                 "dracula_blood",
                 "darker",
                 "emerald",
+                "kanagawa",
                 "light",
             }
 
@@ -44,12 +44,13 @@ return {
                     end
                 end)
             end)
-            vim.cmd.colorscheme("moonlight")
+            vim.cmd.colorscheme("dracula")
         end
     },
     { 'cpea2506/one_monokai.nvim' },
     { 'sekke276/dark_flat.nvim' },
     { 'maxmx03/solarized.nvim',   opts = { theme = 'neo' } },
+    { 'rebelot/kanagawa.nvim' },
     {
         'Everblush/nvim',
         name = 'everblush',
