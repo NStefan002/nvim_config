@@ -19,8 +19,8 @@ return {
             end
 
             imap('<C-a>', function() return vim.fn['codeium#Accept']() end, "Accept")
-            imap('<c-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, "Cycle Forwards")
-            imap('<c-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, "Cycle Backwards")
+            imap('<c-\'>', function() return vim.fn['codeium#CycleCompletions'](1) end, "Cycle Forwards")
+            imap('<c-;>', function() return vim.fn['codeium#CycleCompletions'](-1) end, "Cycle Backwards")
             imap('<c-x>', function() return vim.fn['codeium#Clear']() end, "Clear")
             imap('<c-g>', function() return vim.fn['codeium#Complete']() end, "Trigger Suggestions")
 
