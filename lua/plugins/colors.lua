@@ -8,6 +8,7 @@ return {
             local schemes_candidates = {
                 "random",
                 "dark_flat",
+                "onedark",
                 "solarized",
                 "everblush",
                 "one_monokai",
@@ -51,6 +52,7 @@ return {
     { 'sekke276/dark_flat.nvim' },
     { 'maxmx03/solarized.nvim',   opts = { theme = 'neo' } },
     { 'rebelot/kanagawa.nvim' },
+    { 'navarasu/onedark.nvim',    opts = { style = 'deep', transparent = true } },
     {
         'Everblush/nvim',
         name = 'everblush',

@@ -43,6 +43,7 @@ vim.opt.splitright = true
 
 -- wrapping lines
 vim.opt.wrap = true
+vim.opt.smoothscroll = true
 vim.opt.showbreak = "==>  "
 
 -- backup files

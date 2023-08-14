@@ -13,6 +13,7 @@
 * [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 * [dashboard](https://github.com/nvimdev/dashboard-nvim)
 * [dressing](https://github.com/stevearc/dressing.nvim)
+* [fidget](https://github.com/j-hui/fidget.nvim)
 * [gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 * [highlight-undo](https://github.com/tzachar/highlight-undo.nvim)
 * [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
@@ -36,6 +37,7 @@
 * [visual-multi](https://github.com/mg979/vim-visual-multi)
 * [nerdcommenter](https://github.com/preservim/nerdcommenter)
 * [notify](https://github.com/rcarriga/nvim-notify)
+* [markdown-preview](https://github.com/iamcco/markdown-preview.nvim)
 * [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
 * [tagbar](https://github.com/preservim/tagbar)
 * [telescope](https://github.com/nvim-telescope/telescope.nvim) and its [extensions](https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions) :
@@ -50,6 +52,7 @@
 * [transparent](https://github.com/xiyaowong/transparent.nvim)
 * color schemes:
   - [starry](https://github.com/ray-x/starry.nvim) collection of colorschemes
+  - [onedark](https://github.com/navarasu/onedark.nvim)
   - [one_monokai](https://github.com/cpea2506/one_monokai.nvim)
   - [dark_flat](https://github.com/sekke276/dark_flat.nvim)
   - [solarized](https://github.com/maxmx03/solarized.nvim)
