@@ -55,6 +55,7 @@
   - [onedark](https://github.com/navarasu/onedark.nvim)
   - [one_monokai](https://github.com/cpea2506/one_monokai.nvim)
   - [dark_flat](https://github.com/sekke276/dark_flat.nvim)
+  - [kanagawa](https://github.com/rebelot/kanagawa.nvim)
   - [solarized](https://github.com/maxmx03/solarized.nvim)
   - [everblush](https://github.com/Everblush/nvim)
   - [darcula-dark](https://github.com/xiantang/darcula-dark.nvim)
