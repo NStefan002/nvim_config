@@ -43,7 +43,9 @@ vim.opt.splitright = true
 
 -- wrapping lines
 vim.opt.wrap = true
-vim.opt.smoothscroll = true
+--[[ NOTE: uncomment when smoothscroll becomes complete
+(currently works only for <C-e>, <C-y> and mouse scroll) ]]
+--[[ vim.opt.smoothscroll = true ]]
 vim.opt.showbreak = "==>  "
 
 -- backup files

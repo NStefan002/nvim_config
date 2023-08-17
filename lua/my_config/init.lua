@@ -7,3 +7,7 @@ require("my_config.neovide")
 function R(name)
     require("plenary.reload").reload_module(name)
 end
+
+function P(name)
+    print(vim.inspect(name))
+end
