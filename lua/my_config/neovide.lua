@@ -1,10 +1,25 @@
 if vim.g.neovide then
-    vim.g.neovide_scale_factor = 1.0
+    vim.opt.guicursor = "" -- block cursor
     vim.g.neovide_transparency = 1
     vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_fullscreen = true
+    vim.g.neovide_fullscreen = false
     vim.g.neovide_confirm_quit = false
     vim.g.neovide_profiler = false
+    vim.g.neovide_scale_factor = 1.0
+    local change_scale_factor = function(delta)
+        vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+    end
+    vim.keymap.set("n", "<C-=>", function()
+        change_scale_factor(1.25)
+    end)
+    vim.keymap.set("n", "<C-->", function()
+        change_scale_factor(1 / 1.25)
+    end)
+
+    local toggle_fullscreen = function()
+        vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+    end
+    vim.keymap.set("n", "<C-`>", toggle_fullscreen)
 
     vim.g.neovide_cursor_animation_length = 0.11
     vim.g.neovide_cursor_trail_size = 0.8
