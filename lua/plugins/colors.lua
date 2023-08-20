@@ -53,6 +53,7 @@ return {
     { 'maxmx03/solarized.nvim',   opts = { theme = 'neo' } },
     { 'rebelot/kanagawa.nvim' },
     { 'navarasu/onedark.nvim',    opts = { style = 'deep', transparent = true } },
+    { "dotsilas/darcubox-nvim", },
     {
         'Everblush/nvim',
         name = 'everblush',
