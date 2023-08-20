@@ -8,6 +8,7 @@ return {
             local schemes_candidates = {
                 "random",
                 "dark_flat",
+                "darcubox",
                 "onedark",
                 "solarized",
                 "everblush",
