@@ -35,7 +35,7 @@
 * [lualine](https://github.com/nvim-lualine/lualine.nvim)
 * [matchup](https://github.com/andymass/vim-matchup)
 * [visual-multi](https://github.com/mg979/vim-visual-multi)
-* [nerdcommenter](https://github.com/preservim/nerdcommenter)
+* [comment](https://github.com/numToStr/Comment.nvim)
 * [notify](https://github.com/rcarriga/nvim-notify)
 * [markdown-preview](https://github.com/iamcco/markdown-preview.nvim)
 * [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)

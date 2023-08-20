@@ -314,7 +314,7 @@ return {
                 nmap("<leader>of", vim.diagnostic.open_float, "[O]pen [F]loating window")
                 nmap("[d", vim.diagnostic.goto_next, "Next Diagnostic")
                 nmap("]d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-                nmap("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+                nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
                 nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", 'v')
                 nmap("<C-k>", vim.lsp.buf.signature_help, "Help")
