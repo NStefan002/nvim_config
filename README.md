@@ -53,6 +53,7 @@
 * color schemes:
   - [starry](https://github.com/ray-x/starry.nvim) collection of colorschemes
   - [onedark](https://github.com/navarasu/onedark.nvim)
+  - [darcubox](https://github.com/dotsilas/darcubox-nvim)
   - [one_monokai](https://github.com/cpea2506/one_monokai.nvim)
   - [dark_flat](https://github.com/sekke276/dark_flat.nvim)
   - [kanagawa](https://github.com/rebelot/kanagawa.nvim)
