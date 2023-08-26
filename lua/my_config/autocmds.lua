@@ -67,6 +67,15 @@ autocmd("ColorScheme", {
     desc = "Update hlgroups for / and ?, fix some highlights"
 })
 
+autocmd("BufEnter", {
+    group = augroup("CommentFixGrp", { clear = true }),
+    pattern = "*",
+    callback = function()
+        vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+    end,
+    desc = "Fix auto-commenting new line when entering insert mode e.g. with 'o'"
+})
+
 -- autocmd({ "BufRead", "BufNewFile" }, {
 --     group = aucmdsStarterPack,
 --     pattern = {
