@@ -1,8 +1,8 @@
 return {
     -- Fuzzy finder
     {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.1",
         -- or                          , branch = '0.1.1',
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -40,33 +40,33 @@ return {
                         horizontal = {
                             prompt_position = "top",
                         },
-                    }
+                    },
                 },
                 pickers = {
                     find_files = {
-                        layout_strategy = 'horizontal',
+                        layout_strategy = "horizontal",
                         layout_config = {
                             width = 0.95,
-                        }
+                        },
                     },
                     live_grep = {
-                        layout_strategy = 'horizontal',
+                        layout_strategy = "horizontal",
                         layout_config = {
                             width = 0.95,
-                        }
+                        },
                     },
-                }
+                },
             })
 
-            require('telescope').load_extension('undo')
-            require('telescope').load_extension('notify')
+            require("telescope").load_extension("undo")
+            require("telescope").load_extension("notify")
 
             local nmap = function(keys, func, desc)
                 if desc then
-                    desc = 'Telescope: ' .. desc
+                    desc = "Telescope: " .. desc
                 end
 
-                vim.keymap.set('n', keys, func, { desc = desc })
+                vim.keymap.set("n", keys, func, { desc = desc })
             end
             -- !!! Very useful !!! https://github.com/nvim-telescope/telescope.nvim#pickers
             local builtin = require("telescope.builtin")
@@ -83,7 +83,12 @@ return {
             nmap("<leader>nh", "<cmd>Telescope notify<CR>", "[N]otification [H]istory")
 
             -- search for word under the cursor or visual selection
-            vim.keymap.set({ 'n', 'v' }, "<leader>gs", builtin.grep_string, { desc = "Telescope: [G]rep [S]tring" })
-        end
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>gs",
+                builtin.grep_string,
+                { desc = "Telescope: [G]rep [S]tring" }
+            )
+        end,
     },
 }

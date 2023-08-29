@@ -1,12 +1,12 @@
 return {
-    'rcarriga/nvim-notify',
+    "rcarriga/nvim-notify",
     event = "VeryLazy",
     config = function()
-        local notify = require('notify')
+        local notify = require("notify")
         notify.setup({
-            background_colour = '#000000',
-            render = 'default',
-            stages = 'slide',
+            background_colour = "#000000",
+            render = "default",
+            stages = "slide",
             timeout = 7000,
         })
         -- use notify as a default way of showing notifications
@@ -19,12 +19,12 @@ return {
             for i = 1, #_ do
                 table.insert(print_safe_args, tostring(_[i]))
             end
-            notify(table.concat(print_safe_args, ' '), "info")
+            notify(table.concat(print_safe_args, " "), "info")
         end
 
-        vim.keymap.set('n', '<leader>no',
-            function() require("notify").dismiss({ silent = true }) end,
-            { desc = "Notify: Close All [No]tifications" })
+        vim.keymap.set("n", "<leader>no", function()
+            require("notify").dismiss({ silent = true })
+        end, { desc = "Notify: Close All [No]tifications" })
 
         -- NOTE: find a way to use this in the future
         -- local function notify_output(command, opts)
@@ -54,5 +54,5 @@ return {
         -- end
         --
         -- notify_output({ "echo", "hello world" })
-    end
+    end,
 }

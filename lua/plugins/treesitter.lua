@@ -5,12 +5,23 @@ return {
         lazy = false,
         build = ":TSUpdate",
         dependencies = {
-            { 'nvim-treesitter/nvim-treesitter-context' },
+            { "nvim-treesitter/nvim-treesitter-context" },
         },
         config = function()
-            require 'nvim-treesitter.configs'.setup {
+            require("nvim-treesitter.configs").setup({
                 -- A list of parser names, or "all" (the four listed parsers should always be installed)
-                ensure_installed = { "cpp", "javascript", "python", "html", "css", "java", "json", "c", "lua", "vim" },
+                ensure_installed = {
+                    "cpp",
+                    "javascript",
+                    "python",
+                    "html",
+                    "css",
+                    "java",
+                    "json",
+                    "c",
+                    "lua",
+                    "vim",
+                },
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
                 sync_install = false,
@@ -28,14 +39,14 @@ return {
                     -- Instead of true it can also be a list of languages
                     additional_vim_regex_highlighting = false,
                 },
-                indent = { enable = true, disable = { 'python' } },
+                indent = { enable = true, disable = { "python" } },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = '<space>a',
-                        node_incremental = '<space>a',
-                        scope_incremental = '<space>x',
-                        node_decremental = '<C-x>',
+                        init_selection = "<space>a",
+                        node_incremental = "<space>a",
+                        scope_incremental = "<space>x",
+                        node_decremental = "<C-x>",
                     },
                 },
 
@@ -43,10 +54,10 @@ return {
                 autotag = {
                     enable = true,
                 },
-            }
+            })
 
-            vim.treesitter.language.register('html', 'ejs')
-            vim.treesitter.language.register('javascript', 'ejs')
-        end
+            vim.treesitter.language.register("html", "ejs")
+            vim.treesitter.language.register("javascript", "ejs")
+        end,
     },
 }

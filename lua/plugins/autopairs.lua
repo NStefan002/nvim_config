@@ -1,9 +1,9 @@
 return {
     -- auto close '"', ''', '{', '(', etc.
     "windwp/nvim-autopairs",
-    event = 'InsertEnter',
+    event = "InsertEnter",
     opts = {
         check_ts = true,
         disable_filetype = { "TelescopePrompt" },
-    }
+    },
 }

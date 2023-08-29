@@ -4,7 +4,7 @@ return {
         "utilyre/barbecue.nvim",
         name = "barbecue",
         version = "*",
-        event = { 'BufEnter' },
+        event = { "BufEnter" },
         dependencies = {
             "SmiteshP/nvim-navic",
             "nvim-tree/nvim-web-devicons", -- optional dependency
@@ -22,10 +22,16 @@ return {
                 show_dirname = true,
                 show_basename = true,
                 show_modified = false,
-                modified = function(bufnr) return vim.bo[bufnr].modified end,
+                modified = function(bufnr)
+                    return vim.bo[bufnr].modified
+                end,
                 show_navic = true,
-                lead_custom_section = function() return " " end,
-                custom_section = function() return " " end,
+                lead_custom_section = function()
+                    return " "
+                end,
+                custom_section = function()
+                    return " "
+                end,
                 theme = "auto",
                 context_follow_icon_color = false,
                 symbols = {
@@ -81,6 +87,6 @@ return {
 
             -- show barbecue globally
             require("barbecue.ui").toggle(true)
-        end
-    }
+        end,
+    },
 }

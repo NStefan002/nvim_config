@@ -3,13 +3,27 @@ return {
     {
         "ziontee113/color-picker.nvim",
         keys = {
-            { "<C-c>", "<cmd>PickColor<CR>", noremap = true, silent = true, desc = "color-picker: PickColor" },
+            {
+                "<C-c>",
+                "<cmd>PickColor<CR>",
+                noremap = true,
+                silent = true,
+                desc = "color-picker: PickColor",
+            },
         },
         config = function()
-            vim.keymap.set("n", "<C-c>", "<cmd>PickColor<CR>",
-                { noremap = true, silent = true, desc = "color-picker: PickColor" })
-            vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<CR>",
-                { noremap = true, silent = true, desc = "color-picker: PickColorInsert" })
+            vim.keymap.set(
+                "n",
+                "<C-c>",
+                "<cmd>PickColor<CR>",
+                { noremap = true, silent = true, desc = "color-picker: PickColor" }
+            )
+            vim.keymap.set(
+                "i",
+                "<C-c>",
+                "<cmd>PickColorInsert<CR>",
+                { noremap = true, silent = true, desc = "color-picker: PickColorInsert" }
+            )
 
             require("color-picker").setup({
                 ["icons"] = { "󰝤", "󰃉" },
@@ -20,6 +34,6 @@ return {
             })
 
             vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
-        end
-    }
+        end,
+    },
 }

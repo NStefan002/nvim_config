@@ -1,5 +1,5 @@
 return {
-    'stevearc/conform.nvim',
+    "stevearc/conform.nvim",
     lazy = false,
     config = function()
         local conform = require("conform")
@@ -16,7 +16,7 @@ return {
         vim.keymap.set({ "n", "v" }, "<leader>f", function()
             conform.format({
                 async = true,
-                lsp_fallback = true
+                lsp_fallback = true,
             })
         end, { desc = "[F]ormat File" })
         -- foramt on save
@@ -33,7 +33,7 @@ return {
                     async = true,
                     lsp_fallback = false,
                 })
-            end
+            end,
         })
-    end
+    end,
 }

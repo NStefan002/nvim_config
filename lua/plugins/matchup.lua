@@ -1,5 +1,5 @@
 return {
-    'andymass/vim-matchup',
+    "andymass/vim-matchup",
     event = { "BufReadPost" },
     init = function()
         vim.o.matchpairs = "(:),{:},[:]"
@@ -16,11 +16,11 @@ return {
             pattern = {
                 "*.html",
                 "*.css",
-                "*.ejs"
+                "*.ejs",
             },
             callback = function()
                 vim.b.matchup_matchparen_hi_surround_always = 1
-            end
+            end,
         })
 
         vim.api.nvim_create_autocmd({ "ColorScheme", "BufReadPre" }, {
@@ -33,9 +33,9 @@ return {
                 vim.api.nvim_set_hl(0, "MatchWordCur", {
                     bg = "none",
                     italic = true,
-                    underline = true
+                    underline = true,
                 })
-            end
+            end,
         })
     end,
 }

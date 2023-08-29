@@ -1,10 +1,10 @@
 return {
     -- similar to github copilot
     {
-        'Exafunction/codeium.vim',
+        "Exafunction/codeium.vim",
         lazy = true,
         keys = {
-            { "<leader>ecd", "<cmd>CodeiumEnable<CR>", desc = "Codeium: Enable" }
+            { "<leader>ecd", "<cmd>CodeiumEnable<CR>", desc = "Codeium: Enable" },
         },
         config = function()
             -- disable default bindings
@@ -12,22 +12,47 @@ return {
 
             local imap = function(lhs, rhs, desc)
                 if desc then
-                    desc = 'Codeium: ' .. desc
+                    desc = "Codeium: " .. desc
                 end
 
-                vim.keymap.set('i', lhs, rhs, { expr = true, desc = desc, silent = true })
+                vim.keymap.set("i", lhs, rhs, { expr = true, desc = desc, silent = true })
             end
 
-            imap('<C-a>', function() return vim.fn['codeium#Accept']() end, "Accept")
-            imap('<c-\'>', function() return vim.fn['codeium#CycleCompletions'](1) end, "Cycle Forwards")
-            imap('<c-;>', function() return vim.fn['codeium#CycleCompletions'](-1) end, "Cycle Backwards")
-            imap('<c-x>', function() return vim.fn['codeium#Clear']() end, "Clear")
-            imap('<c-g>', function() return vim.fn['codeium#Complete']() end, "Trigger Suggestions")
+            imap("<C-a>", function()
+                return vim.fn["codeium#Accept"]()
+            end, "Accept")
+            imap("<c-'>", function()
+                return vim.fn["codeium#CycleCompletions"](1)
+            end, "Cycle Forwards")
+            imap("<c-;>", function()
+                return vim.fn["codeium#CycleCompletions"](-1)
+            end, "Cycle Backwards")
+            imap("<c-x>", function()
+                return vim.fn["codeium#Clear"]()
+            end, "Clear")
+            imap("<c-g>", function()
+                return vim.fn["codeium#Complete"]()
+            end, "Trigger Suggestions")
 
-            vim.keymap.set('n', '<leader>dcd', '<cmd>CodeiumDisable<CR>', { silent = false, desc = "Codeium: Disable" })
-            vim.keymap.set('n', '<leader>ecd', '<cmd>CodeiumEnable<CR>', { silent = true, desc = "Codeium: Enable" })
-            vim.keymap.set('n', '<leader>mcd', '<cmd>CodeiumManual<CR>', { silent = true, desc = "Codeium: Manual" })
-            vim.cmd('CodeiumDisable')
-        end
-    }
+            vim.keymap.set(
+                "n",
+                "<leader>dcd",
+                "<cmd>CodeiumDisable<CR>",
+                { silent = false, desc = "Codeium: Disable" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>ecd",
+                "<cmd>CodeiumEnable<CR>",
+                { silent = true, desc = "Codeium: Enable" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>mcd",
+                "<cmd>CodeiumManual<CR>",
+                { silent = true, desc = "Codeium: Manual" }
+            )
+            vim.cmd("CodeiumDisable")
+        end,
+    },
 }

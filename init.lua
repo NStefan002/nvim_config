@@ -34,6 +34,6 @@ require("lazy").setup("plugins", {
         },
     },
     install = {
-        missing = false
-    }
+        missing = false,
+    },
 })

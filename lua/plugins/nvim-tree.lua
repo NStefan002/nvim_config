@@ -10,69 +10,75 @@ return {
         config = function()
             -- mappings
             local function on_attach(bufnr)
-                local api = require('nvim-tree.api')
+                local api = require("nvim-tree.api")
 
                 local function opts(desc)
-                    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                    return {
+                        desc = "nvim-tree: " .. desc,
+                        buffer = bufnr,
+                        noremap = true,
+                        silent = true,
+                        nowait = true,
+                    }
                 end
 
                 -- for shorter code
                 local nmap = function(lhs, rhs, opt)
-                    vim.keymap.set('n', lhs, rhs, opt);
+                    vim.keymap.set("n", lhs, rhs, opt)
                 end
 
-                nmap('<C-]>', api.tree.change_root_to_node, opts('CD'))
-                nmap('<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
-                nmap('<C-k>', api.node.show_info_popup, opts('Info'))
-                nmap('<C-r>', api.fs.rename_sub, opts('Rename: Omit Filename'))
-                nmap('<C-t>', api.node.open.tab, opts('Open: New Tab'))
-                nmap('<C-v>', api.node.open.vertical, opts('Open: Vertical Split'))
-                nmap('<C-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
-                nmap('<BS>', api.node.navigate.parent_close, opts('Close Directory'))
-                nmap('<CR>', api.node.open.edit, opts('Open'))
-                nmap('<Tab>', api.node.open.preview, opts('Open Preview'))
-                nmap('>', api.node.navigate.sibling.next, opts('Next Sibling'))
-                nmap('<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
-                nmap('.', api.node.run.cmd, opts('Run Command'))
-                nmap('-', api.tree.change_root_to_parent, opts('Up'))
-                nmap('a', api.fs.create, opts('Create'))
-                nmap('bmv', api.marks.bulk.move, opts('Move Bookmarked'))
-                nmap('B', api.tree.toggle_no_buffer_filter, opts('Toggle No Buffer'))
-                nmap('c', api.fs.copy.node, opts('Copy'))
-                nmap('C', api.tree.toggle_git_clean_filter, opts('Toggle Git Clean'))
-                nmap('[c', api.node.navigate.git.prev, opts('Prev Git'))
-                nmap(']c', api.node.navigate.git.next, opts('Next Git'))
-                nmap('d', api.fs.remove, opts('Delete'))
-                nmap('D', api.fs.trash, opts('Trash'))
-                nmap('E', api.tree.expand_all, opts('Expand All'))
-                nmap('e', api.fs.rename_basename, opts('Rename: Basename'))
-                nmap(']e', api.node.navigate.diagnostics.next, opts('Next Diagnostic'))
-                nmap('[e', api.node.navigate.diagnostics.prev, opts('Prev Diagnostic'))
-                nmap('F', api.live_filter.clear, opts('Clean Filter'))
-                nmap('f', api.live_filter.start, opts('Filter'))
-                nmap('g?', api.tree.toggle_help, opts('Help'))
-                nmap('gy', api.fs.copy.absolute_path, opts('Copy Absolute Path'))
-                nmap('H', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
-                nmap('I', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignore'))
-                nmap('J', api.node.navigate.sibling.last, opts('Last Sibling'))
-                nmap('K', api.node.navigate.sibling.first, opts('First Sibling'))
-                nmap('m', api.marks.toggle, opts('Toggle Bookmark'))
-                nmap('o', api.node.open.edit, opts('Open'))
-                nmap('O', api.node.open.no_window_picker, opts('Open: No Window Picker'))
-                nmap('p', api.fs.paste, opts('Paste'))
-                nmap('P', api.node.navigate.parent, opts('Parent Directory'))
-                nmap('q', api.tree.close, opts('Close'))
-                nmap('r', api.fs.rename, opts('Rename'))
-                nmap('R', api.tree.reload, opts('Refresh'))
-                nmap('s', api.node.run.system, opts('Run System'))
-                nmap('S', api.tree.search_node, opts('Search'))
-                nmap('U', api.tree.toggle_custom_filter, opts('Toggle Hidden'))
-                nmap('W', api.tree.collapse_all, opts('Collapse'))
-                nmap('x', api.fs.cut, opts('Cut'))
-                nmap('y', api.fs.copy.filename, opts('Copy Name'))
-                nmap('Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
-                nmap('<2-LeftMouse>', api.node.open.edit, opts('Open'))
-                nmap('<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+                nmap("<C-]>", api.tree.change_root_to_node, opts("CD"))
+                nmap("<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
+                nmap("<C-k>", api.node.show_info_popup, opts("Info"))
+                nmap("<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
+                nmap("<C-t>", api.node.open.tab, opts("Open: New Tab"))
+                nmap("<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
+                nmap("<C-x>", api.node.open.horizontal, opts("Open: Horizontal Split"))
+                nmap("<BS>", api.node.navigate.parent_close, opts("Close Directory"))
+                nmap("<CR>", api.node.open.edit, opts("Open"))
+                nmap("<Tab>", api.node.open.preview, opts("Open Preview"))
+                nmap(">", api.node.navigate.sibling.next, opts("Next Sibling"))
+                nmap("<", api.node.navigate.sibling.prev, opts("Previous Sibling"))
+                nmap(".", api.node.run.cmd, opts("Run Command"))
+                nmap("-", api.tree.change_root_to_parent, opts("Up"))
+                nmap("a", api.fs.create, opts("Create"))
+                nmap("bmv", api.marks.bulk.move, opts("Move Bookmarked"))
+                nmap("B", api.tree.toggle_no_buffer_filter, opts("Toggle No Buffer"))
+                nmap("c", api.fs.copy.node, opts("Copy"))
+                nmap("C", api.tree.toggle_git_clean_filter, opts("Toggle Git Clean"))
+                nmap("[c", api.node.navigate.git.prev, opts("Prev Git"))
+                nmap("]c", api.node.navigate.git.next, opts("Next Git"))
+                nmap("d", api.fs.remove, opts("Delete"))
+                nmap("D", api.fs.trash, opts("Trash"))
+                nmap("E", api.tree.expand_all, opts("Expand All"))
+                nmap("e", api.fs.rename_basename, opts("Rename: Basename"))
+                nmap("]e", api.node.navigate.diagnostics.next, opts("Next Diagnostic"))
+                nmap("[e", api.node.navigate.diagnostics.prev, opts("Prev Diagnostic"))
+                nmap("F", api.live_filter.clear, opts("Clean Filter"))
+                nmap("f", api.live_filter.start, opts("Filter"))
+                nmap("g?", api.tree.toggle_help, opts("Help"))
+                nmap("gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
+                nmap("H", api.tree.toggle_hidden_filter, opts("Toggle Dotfiles"))
+                nmap("I", api.tree.toggle_gitignore_filter, opts("Toggle Git Ignore"))
+                nmap("J", api.node.navigate.sibling.last, opts("Last Sibling"))
+                nmap("K", api.node.navigate.sibling.first, opts("First Sibling"))
+                nmap("m", api.marks.toggle, opts("Toggle Bookmark"))
+                nmap("o", api.node.open.edit, opts("Open"))
+                nmap("O", api.node.open.no_window_picker, opts("Open: No Window Picker"))
+                nmap("p", api.fs.paste, opts("Paste"))
+                nmap("P", api.node.navigate.parent, opts("Parent Directory"))
+                nmap("q", api.tree.close, opts("Close"))
+                nmap("r", api.fs.rename, opts("Rename"))
+                nmap("R", api.tree.reload, opts("Refresh"))
+                nmap("s", api.node.run.system, opts("Run System"))
+                nmap("S", api.tree.search_node, opts("Search"))
+                nmap("U", api.tree.toggle_custom_filter, opts("Toggle Hidden"))
+                nmap("W", api.tree.collapse_all, opts("Collapse"))
+                nmap("x", api.fs.cut, opts("Cut"))
+                nmap("y", api.fs.copy.filename, opts("Copy Name"))
+                nmap("Y", api.fs.copy.relative_path, opts("Copy Relative Path"))
+                nmap("<2-LeftMouse>", api.node.open.edit, opts("Open"))
+                nmap("<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
             end
 
             local function open_nvim_tree_for_directories(data)
@@ -87,7 +93,8 @@ return {
                 require("nvim-tree.api").tree.open()
             end
 
-            local nvim_tree_augroup = vim.api.nvim_create_augroup("NvimTreeOnStartup", { clear = true })
+            local nvim_tree_augroup =
+                vim.api.nvim_create_augroup("NvimTreeOnStartup", { clear = true })
             -- call func open_nvim_tree_for_directories on startup
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 group = nvim_tree_augroup,
@@ -103,8 +110,8 @@ return {
                 },
                 renderer = {
                     add_trailing = true, -- add '/' at the end of directory name
-                    group_empty = true,  -- compact folders that only contain a single folder into one node in the file tree
-                    full_name = false,   -- disable showing very long names in floating window
+                    group_empty = true, -- compact folders that only contain a single folder into one node in the file tree
+                    full_name = false, -- disable showing very long names in floating window
                     highlight_git = true,
                     highlight_opened_files = "name",
                     symlink_destination = true,
@@ -149,7 +156,7 @@ return {
                     },
                 },
                 system_open = {
-                    cmd = ""
+                    cmd = "",
                 },
                 git = {
                     enable = true,
@@ -167,19 +174,24 @@ return {
                 },
             })
 
-            vim.keymap.set({ "n", "i" }, "<C-b>", vim.cmd.NvimTreeToggle, { desc = "nvim-tree: Toggle" }) -- like VSC
+            vim.keymap.set(
+                { "n", "i" },
+                "<C-b>",
+                vim.cmd.NvimTreeToggle,
+                { desc = "nvim-tree: Toggle" }
+            ) -- like VSC
 
             -- extension
             require("lsp-file-operations").setup()
-        end
+        end,
     },
 
     -- nvim-tree extension
     {
-        'antosha417/nvim-lsp-file-operations',
+        "antosha417/nvim-lsp-file-operations",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-tree/nvim-tree.lua" },
-        }
-    }
+        },
+    },
 }

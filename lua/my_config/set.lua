@@ -5,7 +5,7 @@ local block_cursor = "n-v-c-r-o:block"
 local vertical_cursor = "i-ci:ver30"
 local horizontal_cursor = "cr:hor25"
 local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
-local cursor = block_cursor .. ',' .. vertical_cursor .. ',' .. horizontal_cursor .. ',' .. blink
+local cursor = block_cursor .. "," .. vertical_cursor .. "," .. horizontal_cursor .. "," .. blink
 vim.opt.guicursor = cursor
 
 -- line numbering
@@ -70,7 +70,7 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "manual"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.fillchars:append({ fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' })
+vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
 
 function _G.Custom_fold()
     local line = vim.fn.getline(vim.v.foldstart)

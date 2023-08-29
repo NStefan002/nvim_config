@@ -1,14 +1,14 @@
 return {
     {
-        'tzachar/highlight-undo.nvim',
+        "tzachar/highlight-undo.nvim",
         event = "VeryLazy",
         opts = {
-            hlgroup = 'HighlightUndo',
+            hlgroup = "HighlightUndo",
             duration = 300,
             keymaps = {
-                { 'n', 'u',     'undo', {} },
-                { 'n', '<C-r>', 'redo', {} },
-            }
-        }
+                { "n", "u", "undo", {} },
+                { "n", "<C-r>", "redo", {} },
+            },
+        },
     },
 }
