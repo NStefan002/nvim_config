@@ -74,7 +74,10 @@ return {
                         },
                         telemetry = {
                             enable = false
-                        }
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                        },
                     },
                 },
             })
@@ -299,21 +302,12 @@ return {
                     vim.keymap.set(mode, keys, func, { buffer = bufnr, remap = false, desc = desc })
                 end
 
-                -- very useful
-                nmap("<leader>f", function()
-                    vim.lsp.buf.format({
-                        async = true,
-                        -- filter = function(cl)
-                        --     return cl.name ~= "clangd"
-                        -- end
-                    })
-                end, "[F]ormat File", 'v')
                 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
                 nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
                 nmap("K", vim.lsp.buf.hover, "Hover Documentation")
                 nmap("<leader>of", vim.diagnostic.open_float, "[O]pen [F]loating window")
-                nmap("[d", vim.diagnostic.goto_next, "Next Diagnostic")
-                nmap("]d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+                nmap("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+                nmap("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
                 nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
                 nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", 'v')

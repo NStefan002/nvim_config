@@ -11,15 +11,15 @@ if vim.g.neovide then
     end
     vim.keymap.set("n", "<C-=>", function()
         change_scale_factor(1.25)
-    end)
+    end, { desc = "Neovide: increase font size" })
     vim.keymap.set("n", "<C-->", function()
         change_scale_factor(1 / 1.25)
-    end)
+    end, { desc = "Neovide: decrease font size" })
 
     local toggle_fullscreen = function()
         vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
     end
-    vim.keymap.set("n", "<C-`>", toggle_fullscreen)
+    vim.keymap.set("n", "<C-`>", toggle_fullscreen, { desc = "Neovide: toggle fullscreen" })
 
     vim.g.neovide_cursor_animation_length = 0.11
     vim.g.neovide_cursor_trail_size = 0.8

@@ -10,6 +10,10 @@ return {
                 "dark_flat",
                 "darcubox",
                 "onedark",
+                "tokyonight-night",
+                "tokyonight-storm",
+                "tokyonight-day",
+                "tokyonight-moon",
                 "solarized",
                 "everblush",
                 "one_monokai",
@@ -27,7 +31,6 @@ return {
             vim.keymap.set("n", "<leader>col", function()
                 vim.ui.select(schemes_candidates, {
                     promt = "Select colorscheme",
-                    telescope = require("telescope.themes").get_dropdown()
                 }, function(selected)
                     if not selected then
                         return
@@ -55,6 +58,7 @@ return {
     { 'rebelot/kanagawa.nvim' },
     { 'navarasu/onedark.nvim',    opts = { style = 'deep', transparent = true } },
     { "dotsilas/darcubox-nvim", },
+    { "folke/tokyonight.nvim", },
     {
         'Everblush/nvim',
         name = 'everblush',

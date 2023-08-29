@@ -40,6 +40,9 @@ vim.keymap.set("x", "<C-p>", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
 
+-- copy entire buffer to system clipboard
+vim.keymap.set("n", "<leader>A", "GVgg\"+y")
+
 -- delete != cut
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
