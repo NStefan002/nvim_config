@@ -1,220 +1,104 @@
 return {
-    -- Language Server Protocol
     {
         "VonHeikemen/lsp-zero.nvim",
-        branch = "v2.x",
-        lazy = false,
-        -- event = { 'BufReadPre', 'BufNewFile', 'CmdlineEnter' },
+        branch = "dev-v3",
+        config = false,
+    },
+
+    {
+        "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonUninstall" },
+        config = true,
+    },
+
+    {
+        "hrsh7th/nvim-cmp",
+        event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" }, -- Required
             {
-                -- optional
-                "williamboman/mason.nvim",
-                build = function()
-                    pcall(vim.cmd, "MasonUpdate")
-                end,
+                "L3MON4D3/LuaSnip",
+                "rafamadriz/friendly-snippets",
+                "onsails/lspkind.nvim",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-path",
+                "saadparwaiz1/cmp_luasnip",
+                "hrsh7th/cmp-nvim-lua",
+                "hrsh7th/cmp-cmdline",
             },
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" }, -- Required
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "hrsh7th/cmp-buffer" }, -- Optional
-            { "hrsh7th/cmp-path" }, -- Optional
-            { "saadparwaiz1/cmp_luasnip" }, -- Optional
-            { "hrsh7th/cmp-nvim-lua" }, -- Optional
-            { "hrsh7th/cmp-cmdline" }, -- Optional
-
-            -- Snippets
-            { "L3MON4D3/LuaSnip" }, -- Required
-            { "rafamadriz/friendly-snippets" }, -- Optional
-
-            -- additional lsp info
-            { "folke/neodev.nvim" }, -- Optional
         },
         config = function()
-            local lsp = require("lsp-zero")
+            require("lsp-zero").extend_cmp()
 
-            lsp.preset("recommended")
+            local cmp = require("cmp")
+            local cmp_action = require("lsp-zero").cmp_action()
+            local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
-            local mason_lspconfig = require("mason-lspconfig")
-            mason_lspconfig.setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "clangd",
-                    "rust_analyzer",
-                    "tsserver",
-                    "cssls",
-                    "html",
-                    "jsonls",
-                    "bashls",
-                },
-            })
-
-            -- Documentation for Neovim config in Lua
-            require("neodev").setup()
-
-            -- language servers
-            local lspconfig = require("lspconfig")
-
-            -- Fix Undefined global 'vim' (and preferably do not install more than 1
-            -- language server per filetype)
-            lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                        hint = {
-                            enable = true,
-                            arrayIndex = "Disable",
-                            paramName = "All",
-                            paramType = true,
-                        },
-                        telemetry = {
-                            enable = false,
-                        },
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                    },
-                },
-            })
-            lspconfig.clangd.setup({
-                -- NOTE: see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-                capabilities = {
-                    offsetEncoding = { "utf-16" },
-                    clangdInlayHintsProvider = true,
-                },
-                setting = {
-                    InlayHints = {
-                        Enabled = true,
-                        ParameterNames = true,
-                        DeducedTypes = true,
-                    },
-                },
-                cmd = {
-                    "clangd",
-                    "--suggest-missing-includes",
-                    "--header-insertion-decorators",
-                    -- "--all-scopes-completion",
-                    -- "--cross-file-rename",
-                    "--log=info",
-                    "--completion-style=detailed",
-                    -- "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
-                    -- "--offset-encoding=utf-16",
-                    "--header-insertion=never",
-                },
-            })
-            lspconfig.rust_analyzer.setup({})
-            lspconfig.tsserver.setup({
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = false,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
-                        },
-                    },
-                    javascript = {
-                        inlayHints = {
-                            includeInlayParameterNameHints = "all",
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = false,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayEnumMemberValueHints = true,
-                        },
-                    },
-                },
-            })
-            lspconfig.html.setup({
-                filetypes = { "html", "ejs" },
-            })
-            lspconfig.cssls.setup({})
-            lspconfig.jsonls.setup({})
-            lspconfig.bashls.setup({})
-
-            local luasnip = require("luasnip")
-            luasnip.config.setup({})
-
-            -- Neovim by default does not recognize .ejs files (test with :echo &filetype)
-            vim.filetype.add({ extension = { ejs = "ejs" } })
-            luasnip.filetype_set("ejs", { "html", "javascript", "ejs" })
-
-            -- My snippets and vscode snippets
-            -- vim.o.runtimepath = vim.o.runtimepath..'~/.config/nvim/my_snippets/' NOTE: lsp-zero calls this line by default
-            -- custom snippets are mostly taken from friendly-snippets and configured according to my needs
-            -- check friendly-snippets at https://github.com/rafamadriz/friendly-snippets
             require("luasnip.loaders.from_vscode").lazy_load({
                 paths = "~/.config/nvim/my_snippets",
             })
-
-            -- load all snippets except once that I have already configured in my_snippets directory
-            require("luasnip.loaders.from_vscode").lazy_load({ exclude = { "c", "cpp" } })
-
-            -- LuaSnip Snippet History Fix (Seems to work really well, I think.)
-            local luasnip_fix_augroup =
-                vim.api.nvim_create_augroup("LuaSnipHistory", { clear = true })
-            vim.api.nvim_create_autocmd("ModeChanged", {
-                pattern = "*",
-                callback = function()
-                    if
-                        (
-                            (vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n")
-                            or vim.v.event.old_mode == "i"
-                        )
-                        and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
-                        and not luasnip.session.jump_active
-                    then
-                        luasnip.unlink_current()
-                    end
-                end,
-                group = luasnip_fix_augroup,
+            require("luasnip.loaders.from_vscode").lazy_load({
+                exclude = { "c", "cpp" },
             })
 
-            local cmp = require("cmp")
-
-            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+            local preferred_sources = cmp.config.sources({
+                { name = "luasnip" },
+                { name = "nvim_lsp" },
+                { name = "nvim_lua" },
+                { name = "path" },
+            })
+            local function tooBig(bufnr)
+                local max_filesize = 10 * 1024 -- 100 KB
+                local check_stats
+                if vim.uv ~= nil then
+                    check_stats = vim.uv.fs_stat
+                else
+                    check_stats = vim.loop.fs_stat
+                end
+                local ok, stats = pcall(check_stats, vim.api.nvim_buf_get_name(bufnr))
+                if ok and stats and stats.size > max_filesize then
+                    return true
+                else
+                    return false
+                end
+            end
+            vim.api.nvim_create_autocmd("BufRead", {
+                group = vim.api.nvim_create_augroup("CmpBufferDisableGrp", { clear = true }),
+                callback = function(ev)
+                    local sources = preferred_sources
+                    if not tooBig(ev.buf) then
+                        sources[#sources + 1] = { name = "buffer", keyword_length = 4 }
+                    end
+                    cmp.setup.buffer({
+                        sources = sources,
+                    })
+                end,
+            })
 
             cmp.setup({
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-                    ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+                mapping = {
+                    ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select_opts),
+                    ["<C-n>"] = cmp.mapping.select_next_item(cmp_select_opts),
                     ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-Space>"] = cmp.mapping.complete({}),
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if luasnip.expand_or_locally_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    -- ['<Tab>'] = vim.NIL,
-                    -- ['<S-Tab>'] = vim.NIL,
-                }),
+                    ["<Tab>"] = cmp_action.luasnip_jump_forward(),
+                    ["<S-Tab>"] = cmp_action.luasnip_jump_backward(),
+                },
                 preselect = "item",
                 completion = {
                     completeopt = "menu,menuone,noinsert",
+                },
+                formatting = {
+                    fields = { "abbr", "kind", "menu" },
+                    format = require("lspkind").cmp_format({
+                        mode = "symbol_text",
+                        maxwidth = 50,
+                        ellipsis_char = "...",
+                    }),
+                    expandable_indicator = true,
                 },
                 window = {
                     completion = cmp.config.window.bordered(),
@@ -223,13 +107,13 @@ return {
                 experimental = {
                     ghost_text = false,
                 },
-                sources = {
+                sources = cmp.config.sources({
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "path" },
                     { name = "buffer", keyword_length = 4 },
-                },
+                }),
             })
 
             cmp.setup.cmdline(":", {
@@ -238,7 +122,7 @@ return {
                         if cmp.visible() then
                             local entry = cmp.get_selected_entry()
                             if not entry then
-                                cmp.select_next_item({ cmp_select })
+                                cmp.select_next_item({ cmp_select_opts })
                             else
                                 cmp.confirm()
                             end
@@ -247,28 +131,30 @@ return {
                         end
                     end, { "i", "s", "c" }),
                 }),
-                sources = {
+                sources = cmp.config.sources({
                     { name = "cmdline" },
                     { name = "path" },
-                },
+                }),
                 window = {
                     completion = cmp.config.window.bordered(),
                 },
             })
+        end,
+    },
 
-            -- cmp.setup.cmdline({ '/', '?' }, {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            -- sources = {
-            --     { name = "buffer" }
-            -- }
-            -- })
+    {
+        "williamboman/mason-lspconfig.nvim",
+        cmd = { "LspInfo", "LspInstall", "LspStart" },
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "neovim/nvim-lspconfig" },
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "folke/neodev.nvim" },
+        },
+        config = function()
+            -- This is where all the LSP shenanigans will live
 
-            lsp.set_sign_icons({
-                error = "",
-                warn = "",
-                hint = "",
-                info = "",
-            })
+            local lsp = require("lsp-zero").preset({})
 
             lsp.on_attach(function(client, bufnr)
                 if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
@@ -330,7 +216,12 @@ return {
                 end, "[W]orkspace [L]ist Folders")
             end)
 
-            lsp.setup()
+            lsp.set_sign_icons({
+                error = "",
+                warn = "",
+                hint = "",
+                info = "",
+            })
 
             vim.diagnostic.config({
                 virtual_text = true,
@@ -346,6 +237,133 @@ return {
                     header = "",
                     prefix = "",
                 },
+            })
+
+            require("neodev").setup()
+            local lspconfig = require("lspconfig")
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "bashls",
+                    "clangd",
+                    "cssls",
+                    "html",
+                    "jsonls",
+                    "lua_ls",
+                    "rust_analyzer",
+                    "tsserver",
+                },
+                handlers = {
+                    lsp.default_setup,
+                    lua_ls = function()
+                        lspconfig.lua_ls.setup({
+                            settings = {
+                                Lua = {
+                                    diagnostics = {
+                                        globals = { "vim" },
+                                    },
+                                    hint = {
+                                        enable = true,
+                                        arrayIndex = "Disable",
+                                        paramName = "All",
+                                        paramType = true,
+                                    },
+                                    telemetry = {
+                                        enable = false,
+                                    },
+                                    workspace = {
+                                        checkThirdParty = false,
+                                    },
+                                },
+                            },
+                        })
+                    end,
+                    clangd = function()
+                        lspconfig.clangd.setup({
+                            capabilities = {
+                                offsetEncoding = { "utf-16" },
+                                clangdInlayHintsProvider = true,
+                            },
+                            setting = {
+                                InlayHints = {
+                                    Enabled = true,
+                                    ParameterNames = true,
+                                    DeducedTypes = true,
+                                },
+                            },
+                            cmd = {
+                                "clangd",
+                                "--suggest-missing-includes",
+                                "--header-insertion-decorators",
+                                -- "--all-scopes-completion",
+                                -- "--cross-file-rename",
+                                "--log=info",
+                                "--completion-style=detailed",
+                                -- "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+                                -- "--offset-encoding=utf-16",
+                                "--header-insertion=never",
+                            },
+                        })
+                    end,
+                    tsserver = function()
+                        lspconfig.tsserver.setup({
+                            settings = {
+                                typescript = {
+                                    inlayHints = {
+                                        includeInlayParameterNameHints = "all",
+                                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                        includeInlayFunctionParameterTypeHints = true,
+                                        includeInlayVariableTypeHints = false,
+                                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                                        includeInlayPropertyDeclarationTypeHints = true,
+                                        includeInlayFunctionLikeReturnTypeHints = true,
+                                        includeInlayEnumMemberValueHints = true,
+                                    },
+                                },
+                                javascript = {
+                                    inlayHints = {
+                                        includeInlayParameterNameHints = "all",
+                                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                                        includeInlayFunctionParameterTypeHints = true,
+                                        includeInlayVariableTypeHints = false,
+                                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                                        includeInlayPropertyDeclarationTypeHints = true,
+                                        includeInlayFunctionLikeReturnTypeHints = true,
+                                        includeInlayEnumMemberValueHints = true,
+                                    },
+                                },
+                            },
+                        })
+                    end,
+                    html = function()
+                        lspconfig.html.setup({
+                            filetypes = { "html", "ejs" },
+                        })
+                    end,
+                },
+            })
+
+            local luasnip = require("luasnip")
+            -- Neovim by default does not recognize .ejs files (test with :echo &filetype)
+            vim.filetype.add({ extension = { ejs = "ejs" } })
+            luasnip.filetype_set("ejs", { "html", "javascript", "ejs" })
+
+            local luasnip_fix_augroup =
+                vim.api.nvim_create_augroup("LuaSnipHistory", { clear = true })
+            vim.api.nvim_create_autocmd("ModeChanged", {
+                pattern = "*",
+                callback = function()
+                    if
+                        (
+                            (vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n")
+                            or vim.v.event.old_mode == "i"
+                        )
+                        and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+                        and not luasnip.session.jump_active
+                    then
+                        luasnip.unlink_current()
+                    end
+                end,
+                group = luasnip_fix_augroup,
             })
         end,
     },

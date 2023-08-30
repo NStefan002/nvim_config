@@ -39,22 +39,6 @@ autocmd("FileType", {
     desc = "exit certain files with just 'q'",
 })
 
-autocmd("BufWritePre", {
-    group = aucmdsStarterPack,
-    pattern = {
-        "*.lua",
-        "*.js",
-        "*.ts",
-        "*.html",
-        "*.py",
-        "*.rs",
-    },
-    callback = function()
-        vim.lsp.buf.format()
-    end,
-    desc = "autoformat certain files on save",
-})
-
 autocmd("ColorScheme", {
     group = aucmdsStarterPack,
     pattern = "*",

@@ -12,14 +12,10 @@ return {
             },
         })
 
-        -- format on keymap
         vim.keymap.set({ "n", "v" }, "<leader>f", function()
-            conform.format({
-                async = true,
-                lsp_fallback = true,
-            })
+            conform.format({ async = true, lsp_fallback = true })
         end, { desc = "[F]ormat File" })
-        -- foramt on save
+
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*",
             callback = function(args)
@@ -30,10 +26,11 @@ return {
                 end
                 conform.format({
                     buf = args.buf,
-                    async = true,
+                    async = false,
                     lsp_fallback = false,
                 })
             end,
+            desc = "Try to format files when saving.",
         })
     end,
 }
