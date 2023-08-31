@@ -13,6 +13,7 @@ vim.keymap.set("n", "<C-{>", "<cmd>tabprev<CR>")
 -- buffers
 vim.keymap.set("n", "<C-l>", "<cmd>bnext<CR>")
 vim.keymap.set("n", "<C-h>", "<cmd>bprev<CR>")
+vim.keymap.set("n", "<C-x>", "<cmd>bdelete<CR>")
 
 -- resizing windows
 vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")

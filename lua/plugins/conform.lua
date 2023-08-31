@@ -1,6 +1,6 @@
 return {
     "stevearc/conform.nvim",
-    lazy = false,
+    event = "BufEnter",
     config = function()
         local conform = require("conform")
         conform.setup({
