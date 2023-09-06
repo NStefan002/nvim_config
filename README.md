@@ -40,6 +40,8 @@
 * [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 * [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 * [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
+* [speedtyper](https://github.com/NStefan002/speedtyper.nvim)
+* [surround](https://github.com/kylechui/nvim-surround)
 * [tagbar](https://github.com/preservim/tagbar)
 * [telescope](https://github.com/nvim-telescope/telescope.nvim) and its [extensions](https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions) :
   - [undo](https://github.com/debugloop/telescope-undo.nvim)
