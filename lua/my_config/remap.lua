@@ -5,15 +5,14 @@ vim.keymap.set("i", "jj", "<Esc>")
 -- vertical split
 vim.keymap.set("n", "<C-s>", [[:vsplit ]])
 
--- tabs
-vim.keymap.set("n", "<leader>tn", [[:tabnew ]])
-vim.keymap.set("n", "<C-}>", "<cmd>tabnext<CR>")
-vim.keymap.set("n", "<C-{>", "<cmd>tabprev<CR>")
-
 -- buffers
 vim.keymap.set("n", "<C-l>", "<cmd>bnext<CR>")
 vim.keymap.set("n", "<C-h>", "<cmd>bprev<CR>")
 vim.keymap.set("n", "<C-x>", "<cmd>bdelete<CR>")
+
+-- quickfix
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
 
 -- resizing windows
 vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")

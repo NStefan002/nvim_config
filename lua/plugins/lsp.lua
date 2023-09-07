@@ -203,7 +203,7 @@ return {
                 nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
                 nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", "v")
-                nmap("<C-k>", vim.lsp.buf.signature_help, "Help")
+                nmap("H", vim.lsp.buf.signature_help, "Help")
                 nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[G]oto [D]efinition")
                 nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
                 nmap(

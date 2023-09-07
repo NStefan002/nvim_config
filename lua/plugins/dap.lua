@@ -2,7 +2,6 @@ return {
     -- debugger support
     {
         "mfussenegger/nvim-dap",
-        lazy = true,
         keys = {
             {
                 "<leader>b",
@@ -84,6 +83,6 @@ return {
         end,
     },
 
-    { "rcarriga/nvim-dap-ui", lazy = true, dependencies = { "mfussenegger/nvim-dap" } },
-    { "theHamsta/nvim-dap-virtual-text", lazy = true },
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+    { "theHamsta/nvim-dap-virtual-text" },
 }

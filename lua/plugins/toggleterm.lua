@@ -25,7 +25,6 @@ return {
     config = function(_, opts)
         require("toggleterm").setup(opts)
         function _G.set_terminal_keymaps()
-            local opts = {}
             vim.keymap.set(
                 "t",
                 "jj",

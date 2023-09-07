@@ -2,8 +2,8 @@ return {
     -- Fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.1",
-        -- or                          , branch = '0.1.1',
+        branch = "0.1.x",
+        -- or                          , tag = '0.1.2',
         dependencies = {
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
