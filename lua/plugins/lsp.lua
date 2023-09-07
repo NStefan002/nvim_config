@@ -3,6 +3,10 @@ return {
         "VonHeikemen/lsp-zero.nvim",
         branch = "dev-v3",
         config = false,
+        init = function()
+            vim.g.lsp_zero_extend_cmp = 0
+            vim.g.lsp_zero_extend_lspconfig = 0
+        end,
     },
 
     {
@@ -27,16 +31,18 @@ return {
             },
         },
         config = function()
-            require("lsp-zero").extend_cmp()
+            local lsp_zero = require("lsp-zero")
+            lsp_zero.extend_cmp()
 
             local cmp = require("cmp")
-            local cmp_action = require("lsp-zero").cmp_action()
+            local cmp_action = lsp_zero.cmp_action()
             local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
-            require("luasnip.loaders.from_vscode").lazy_load({
+            local load_snippets = require("luasnip.loaders.from_vscode")
+            load_snippets.lazy_load({
                 paths = "~/.config/nvim/my_snippets",
             })
-            require("luasnip.loaders.from_vscode").lazy_load({
+            load_snippets.lazy_load({
                 exclude = { "c", "cpp" },
             })
 
@@ -112,7 +118,7 @@ return {
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "path" },
-                    { name = "buffer", keyword_length = 4 },
+                    { name = "buffer",  keyword_length = 4 },
                 }),
             })
 
@@ -143,20 +149,21 @@ return {
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
         cmd = { "LspInfo", "LspInstall", "LspStart" },
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "neovim/nvim-lspconfig" },
+            { "williamboman/mason-lspconfig.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "folke/neodev.nvim" },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
 
-            local lsp = require("lsp-zero").preset({})
+            local lsp_zero = require("lsp-zero")
+            lsp_zero.extend_lspconfig()
 
-            lsp.on_attach(function(client, bufnr)
+            lsp_zero.on_attach(function(client, bufnr)
                 if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
                     vim.keymap.set("n", "<leader>in", function()
                         vim.lsp.inlay_hint(bufnr, nil) -- toggle
@@ -216,7 +223,7 @@ return {
                 end, "[W]orkspace [L]ist Folders")
             end)
 
-            lsp.set_sign_icons({
+            lsp_zero.set_sign_icons({
                 error = "",
                 warn = "",
                 hint = "",
@@ -253,9 +260,10 @@ return {
                     "tsserver",
                 },
                 handlers = {
-                    lsp.default_setup,
+                    lsp_zero.default_setup,
                     lua_ls = function()
-                        lspconfig.lua_ls.setup({
+                        local nvim_lua_opts = lsp_zero.nvim_lua_ls()
+                        local lua_opts = {
                             settings = {
                                 Lua = {
                                     diagnostics = {
@@ -275,7 +283,8 @@ return {
                                     },
                                 },
                             },
-                        })
+                        }
+                        lspconfig.lua_ls.setup(vim.tbl_extend("force", nvim_lua_opts, lua_opts))
                     end,
                     clangd = function()
                         lspconfig.clangd.setup({
