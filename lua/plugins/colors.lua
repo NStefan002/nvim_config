@@ -108,7 +108,7 @@ return {
                     "EndOfBuffer",
                 },
                 -- NOTE: add "NormalFloat" to extra_groups if you stop using TSContext
-                extra_groups = { "NvimTreeNormal" }, -- table: additional groups that should be cleared
+                extra_groups = { "NvimTreeNormal", "FloatBorder" }, -- table: additional groups that should be cleared
                 exclude_groups = { "TreesitterContext" }, -- table: groups you don't want to clear
             })
 
