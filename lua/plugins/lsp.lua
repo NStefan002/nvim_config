@@ -2,7 +2,7 @@ return {
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "dev-v3",
-        config = false,
+        lazy = false,
         init = function()
             vim.g.lsp_zero_extend_cmp = 0
             vim.g.lsp_zero_extend_lspconfig = 0
@@ -118,7 +118,7 @@ return {
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "path" },
-                    { name = "buffer",  keyword_length = 4 },
+                    { name = "buffer", keyword_length = 4 },
                 }),
             })
 
