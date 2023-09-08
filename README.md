@@ -1,7 +1,7 @@
-## Version manager:
-[bob](https://github.com/MordechaiHadad/bob)
+## 📦 Package manager
+[lazy.nvim](https://github.com/folke/lazy.nvim)
 
-## Plugins:
+## 🔌 Plugins
 * [autopairs](https://github.com/windwp/nvim-autopairs)
 * [barbecue](https://github.com/utilyre/barbecue.nvim)
 * [bufferline](https://github.com/akinsho/bufferline.nvim)
@@ -68,5 +68,8 @@
   - [balance-theme](https://github.com/MetriC-DT/balance-theme.nvim)
   - used to use [awesome-vim-colorschemes](https://github.com/rafi/awesome-vim-colorschemes) collection of colorschemes
 
-## GUI
+## 🗃️ Neovim version manager
+[bob](https://github.com/MordechaiHadad/bob)
+
+## ✨ GUI
 [neovide](https://neovide.dev/)
