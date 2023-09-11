@@ -2,7 +2,7 @@ return {
     -- Status bar
     {
         "nvim-lualine/lualine.nvim",
-        event = "BufEnter",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             options = {

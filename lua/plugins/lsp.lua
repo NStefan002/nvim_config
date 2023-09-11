@@ -1,7 +1,7 @@
 return {
     {
         "VonHeikemen/lsp-zero.nvim",
-        branch = "dev-v3",
+        branch = "v3.x",
         lazy = false,
         init = function()
             vim.g.lsp_zero_extend_cmp = 0
@@ -234,7 +234,7 @@ return {
                 virtual_text = true,
                 signs = true,
                 update_in_insert = false,
-                underline = true,
+                underline = false,
                 severity_sort = true,
                 float = {
                     focusable = false,
