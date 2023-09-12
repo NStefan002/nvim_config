@@ -46,12 +46,12 @@ return {
                 exclude = { "c", "cpp" },
             })
 
-            local preferred_sources = cmp.config.sources({
+            local preferred_sources = {
                 { name = "luasnip" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "path" },
-            })
+            }
             local function tooBig(bufnr)
                 local max_filesize = 10 * 1024 -- 100 KB
                 local check_stats
@@ -75,7 +75,7 @@ return {
                         sources[#sources + 1] = { name = "buffer", keyword_length = 4 }
                     end
                     cmp.setup.buffer({
-                        sources = sources,
+                        sources = cmp.config.sources(sources),
                     })
                 end,
             })
