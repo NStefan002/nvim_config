@@ -1,7 +1,7 @@
 return {
     -- color schemes
     {
-        "ray-x/starry.nvim",
+        "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         config = function()
@@ -18,13 +18,6 @@ return {
                 "everblush",
                 "one_monokai",
                 "darcula-dark",
-                "moonlight",
-                "darksolar",
-                "dracula",
-                "dracula_blood",
-                "darker",
-                "emerald",
-                "kanagawa",
                 "light",
             }
 
@@ -50,16 +43,14 @@ return {
                     end
                 end)
             end)
-            vim.cmd.colorscheme("dracula")
+            vim.cmd.colorscheme("tokyonight-storm")
         end,
     },
     { "cpea2506/one_monokai.nvim" },
     { "sekke276/dark_flat.nvim" },
     { "maxmx03/solarized.nvim", opts = { theme = "neo" } },
-    { "rebelot/kanagawa.nvim" },
     { "navarasu/onedark.nvim", opts = { style = "deep", transparent = true } },
     { "dotsilas/darcubox-nvim" },
-    { "folke/tokyonight.nvim" },
     {
         "Everblush/nvim",
         name = "everblush",

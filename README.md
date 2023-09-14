@@ -55,18 +55,15 @@
 * [undo-tree](https://github.com/mbbill/undotree)
 * [visual-multi](https://github.com/mg979/vim-visual-multi)
 * color schemes:
-  - [starry](https://github.com/ray-x/starry.nvim) collection of colorschemes
   - [onedark](https://github.com/navarasu/onedark.nvim)
   - [darcubox](https://github.com/dotsilas/darcubox-nvim)
   - [one_monokai](https://github.com/cpea2506/one_monokai.nvim)
   - [dark_flat](https://github.com/sekke276/dark_flat.nvim)
   - [tokyonight](https://github.com/folke/tokyonight.nvim)
-  - [kanagawa](https://github.com/rebelot/kanagawa.nvim)
   - [solarized](https://github.com/maxmx03/solarized.nvim)
   - [everblush](https://github.com/Everblush/nvim)
   - [darcula-dark](https://github.com/xiantang/darcula-dark.nvim)
   - [balance-theme](https://github.com/MetriC-DT/balance-theme.nvim)
-  - used to use [awesome-vim-colorschemes](https://github.com/rafi/awesome-vim-colorschemes) collection of colorschemes
 
 ## 🗃️ Neovim version manager
 [bob](https://github.com/MordechaiHadad/bob)
