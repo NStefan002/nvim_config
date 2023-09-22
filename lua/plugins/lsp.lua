@@ -3,6 +3,7 @@ return {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v3.x",
         lazy = false,
+        config = false,
         init = function()
             vim.g.lsp_zero_extend_cmp = 0
             vim.g.lsp_zero_extend_lspconfig = 0
@@ -11,7 +12,7 @@ return {
 
     {
         "williamboman/mason.nvim",
-        cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonUninstall" },
+        lazy = false,
         config = true,
     },
 
@@ -88,8 +89,8 @@ return {
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-Space>"] = cmp.mapping.complete({}),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
                     ["<Tab>"] = cmp_action.luasnip_jump_forward(),
                     ["<S-Tab>"] = cmp_action.luasnip_jump_backward(),
                 },

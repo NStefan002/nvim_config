@@ -1,8 +1,8 @@
 -- prettier colors
 vim.opt.termguicolors = true
 
-local block_cursor = "n-v-c-r-o:block"
-local vertical_cursor = "i-ci:ver30"
+local block_cursor = "i-n-v-c-r-o:block"
+local vertical_cursor = "ci:ver30"
 local horizontal_cursor = "cr:hor25"
 local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 local cursor = block_cursor .. "," .. vertical_cursor .. "," .. horizontal_cursor .. "," .. blink
@@ -96,5 +96,3 @@ vim.opt.updatetime = 50
 
 -- :h 'shortmess'
 vim.opt.shm:append({ a = true, I = true, S = true })
-
--- colorscheme on start configured in nvim/lua/custom/plugins/colors.lua
