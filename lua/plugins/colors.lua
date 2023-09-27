@@ -15,7 +15,6 @@ return {
                 "tokyonight-day",
                 "tokyonight-moon",
                 "solarized",
-                "everblush",
                 "one_monokai",
                 "darcula-dark",
                 "light",
@@ -51,16 +50,6 @@ return {
     { "maxmx03/solarized.nvim", opts = { theme = "neo" } },
     { "navarasu/onedark.nvim", opts = { style = "deep", transparent = true } },
     { "dotsilas/darcubox-nvim" },
-    {
-        "Everblush/nvim",
-        name = "everblush",
-        opts = {
-            transparent_background = true,
-            nvim_tree = {
-                contrast = false,
-            },
-        },
-    },
     {
         "xiantang/darcula-dark.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
