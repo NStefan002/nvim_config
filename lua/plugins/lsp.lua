@@ -249,6 +249,8 @@ return {
 
             require("neodev").setup()
             local lspconfig = require("lspconfig")
+            local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+            -- lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "bashls",
@@ -347,6 +349,27 @@ return {
                     html = function()
                         lspconfig.html.setup({
                             filetypes = { "html", "ejs" },
+                        })
+                    end,
+                    pyright = function()
+                        lspconfig.pyright.setup({
+                            capabilities = lspCapabilities,
+                        })
+                    end,
+                    taplo = function()
+                        lspconfig.taplo.setup({
+                            capabilities = lspCapabilities,
+                        })
+                    end,
+                    riff_lsp = function()
+                        lspconfig.riff_lsp.setup({
+                            settings = {
+                                organizeImports = false,
+                            },
+                            -- disable ruff as hover provider to avoid conflicts with pyright
+                            on_attach = function(client)
+                                client.server_capabilities.hoverProvider = false
+                            end,
                         })
                     end,
                 },

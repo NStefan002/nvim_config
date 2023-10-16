@@ -85,4 +85,16 @@ return {
 
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
     { "theHamsta/nvim-dap-virtual-text" },
+    {
+        "mfussenegger/nvim-dap-python",
+        ft = { "python" },
+        dependencies = "mfussenegger/nvim-dap",
+        config = function()
+            -- uses the debugypy installation by mason
+            local debugpyPythonPath = require("mason-registry")
+                .get_package("debugpy")
+                :get_install_path() .. "/venv/bin/python3"
+            require("dap-python").setup(debugpyPythonPath, {})
+        end,
+    },
 }

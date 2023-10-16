@@ -9,6 +9,13 @@ return {
                 c = { "clang_format" },
                 cpp = { "clang_format" },
                 javascript = { "prettierd", "prettier" },
+                html = { "prettierd", "prettier" },
+                css = { "prettierd", "prettier" },
+                markdown = { { "prettierd", "prettier" }, "inject" },
+                zsh = { "beautysh" },
+                bash = { "beautysh" },
+                sh = { "beautysh" },
+                python = { "isort", "black" },
             },
         })
 

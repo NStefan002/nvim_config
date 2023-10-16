@@ -63,12 +63,3 @@ vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent
 vim.keymap.set("n", "<leader>hl", function()
     vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()
 end, { desc = "Toggle [hl]search", silent = true })
-
---for testing plugins
-vim.keymap.set("n", "<leader>rl", function()
-    vim.ui.input({}, function(input)
-        if input ~= nil and input ~= "" then
-            R(input)
-        end
-    end)
-end)
