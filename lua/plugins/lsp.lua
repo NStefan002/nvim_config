@@ -361,8 +361,8 @@ return {
                             capabilities = lspCapabilities,
                         })
                     end,
-                    riff_lsp = function()
-                        lspconfig.riff_lsp.setup({
+                    ruff_lsp = function()
+                        lspconfig.ruff_lsp.setup({
                             settings = {
                                 organizeImports = false,
                             },
