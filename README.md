@@ -2,7 +2,6 @@
 * [lazy.nvim](https://github.com/folke/lazy.nvim)
 ## 🔌 Plugins
 * [balance-theme.nvim](https://github.com/MetriC-DT/balance-theme.nvim)
-* [barbecue.nvim](https://github.com/utilyre/barbecue.nvim)
 * [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
 * [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
 * [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
@@ -41,9 +40,7 @@
 * [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 * [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 * [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-* [nvim-navic](https://github.com/SmiteshP/nvim-navic)
 * [nvim-notify](https://github.com/rcarriga/nvim-notify)
-* [nvim-surround](https://github.com/kylechui/nvim-surround)
 * [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
 * [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 * [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
