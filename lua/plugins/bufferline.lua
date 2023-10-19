@@ -17,7 +17,7 @@ return {
                     separator = true,
                 },
             },
-            color_icons = false, -- whether or not to add the filetype icon highlights
+            color_icons = true, -- whether or not to add the filetype icon highlights
             show_tab_indicators = true,
             separator_style = "slope", -- | "slant" | "thick" | "thin" | { 'any', 'any' },
         },

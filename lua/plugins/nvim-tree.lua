@@ -170,6 +170,9 @@ return {
             filesystem_watchers = { -- improves performance
                 enable = true,
             },
+            notify = {
+                threshold = vim.log.levels.ERROR,
+            },
         })
 
         vim.keymap.set(

@@ -261,6 +261,10 @@ return {
                     "lua_ls",
                     "rust_analyzer",
                     "tsserver",
+                    "cmake",
+                    "pyright",
+                    "ruff_lsp",
+                    "taplo",
                 },
                 handlers = {
                     lsp_zero.default_setup,
