@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-s>", [[:vsplit ]])
 -- buffers
 vim.keymap.set("n", "<C-l>", "<cmd>bnext<CR>")
 vim.keymap.set("n", "<C-h>", "<cmd>bprev<CR>")
-vim.keymap.set("n", "<C-x>", "<cmd>bdelete<CR>")
+vim.keymap.set("n", "X", "<cmd>bdelete<CR>")
 
 -- quickfix
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
