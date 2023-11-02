@@ -26,6 +26,7 @@
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [live-server.nvim](https://github.com/aurum77/live-server.nvim)
+- [lsp-timeout.nvim](https://github.com/hinell/lsp-timeout.nvim)
 - [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim)
 - [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
