@@ -37,10 +37,9 @@ vim.opt.splitright = true
 
 -- wrapping lines
 vim.opt.wrap = true
---[[ NOTE: uncomment when smoothscroll becomes complete
-(currently works only for <C-e>, <C-y> and mouse scroll) ]]
---[[ vim.opt.smoothscroll = true ]]
-vim.opt.showbreak = "==>  "
+-- NOTE: ment when smoothscroll becomes complete (currently works only for <C-e>, <C-y> and mouse scroll)
+-- vim.opt.smoothscroll = true
+vim.opt.showbreak = "󱞪 "
 
 -- backup files
 vim.opt.swapfile = false
@@ -70,7 +69,7 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "manual"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
+vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = "|", foldclose = "" })
 
 function _G.Custom_fold()
     local line = vim.fn.getline(vim.v.foldstart)
@@ -78,7 +77,11 @@ function _G.Custom_fold()
     return " ⚡ " .. line .. ": " .. line_count .. " lines"
 end
 
-vim.wo.foldtext = "v:lua.Custom_fold()"
+if vim.fn.has("nvim-0.10") == 1 then
+    vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
+else
+    vim.wo.foldtext = "v:lua.Custom_fold()"
+end
 
 -- no idea what is this
 vim.opt.isfname:append("@-@")
