@@ -9,13 +9,10 @@ return {
                 "random",
                 "dark_flat",
                 "darcubox",
-                "onedark",
                 "tokyonight-night",
                 "tokyonight-storm",
                 "tokyonight-day",
                 "tokyonight-moon",
-                "solarized",
-                "one_monokai",
                 "darcula-dark",
                 "light",
             }
@@ -45,10 +42,7 @@ return {
             vim.cmd.colorscheme("tokyonight-storm")
         end,
     },
-    { "cpea2506/one_monokai.nvim" },
     { "sekke276/dark_flat.nvim" },
-    { "maxmx03/solarized.nvim", opts = { theme = "neo" } },
-    { "navarasu/onedark.nvim", opts = { style = "deep", transparent = true } },
     { "dotsilas/darcubox-nvim" },
     {
         "xiantang/darcula-dark.nvim",

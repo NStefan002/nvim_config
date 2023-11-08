@@ -404,10 +404,4 @@ return {
             })
         end,
     },
-
-    {
-        "hinell/lsp-timeout.nvim",
-        event = "VeryLazy",
-        dependencies = { "neovim/nvim-lspconfig" },
-    },
 }
