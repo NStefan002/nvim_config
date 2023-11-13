@@ -61,7 +61,7 @@
     "foreach": {
         "prefix": "foreach",
         "body": [
-            "for(${1:auto} ${2:var} : ${3:collection_to_loop})",
+            "for (${1:auto} ${2:var} : ${3:collection_to_loop})",
             "{",
             "\t$0",
             "}"
