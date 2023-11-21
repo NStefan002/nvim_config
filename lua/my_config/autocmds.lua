@@ -72,3 +72,19 @@ autocmd("BufEnter", {
 --     end,
 --     desc = "enable spellcheck for certain files"
 -- })
+
+-- use this instead of lukas-reineke/indent-blankline.nvim
+local function update_lead()
+    local lead = "|"
+    for i = 1, vim.bo.tabstop - 1 do
+        lead = lead .. " "
+    end
+    vim.opt.listchars = { leadmultispace = lead, multispace = lead }
+end
+
+vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = { "listchars", "tabstop", "filetype" },
+    callback = update_lead,
+})
+
+vim.api.nvim_create_autocmd("BufReadPre", { callback = update_lead })

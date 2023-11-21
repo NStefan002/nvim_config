@@ -24,7 +24,6 @@
 - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
-- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [live-server.nvim](https://github.com/aurum77/live-server.nvim)
 - [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim)
 - [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
