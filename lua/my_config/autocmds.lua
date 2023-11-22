@@ -75,7 +75,7 @@ autocmd("BufEnter", {
 
 -- use this instead of lukas-reineke/indent-blankline.nvim
 local function update_lead()
-    local lead = "|"
+    local lead = "╎"
     for i = 1, vim.bo.tabstop - 1 do
         lead = lead .. " "
     end
@@ -88,3 +88,20 @@ vim.api.nvim_create_autocmd("OptionSet", {
 })
 
 vim.api.nvim_create_autocmd("BufReadPre", { callback = update_lead })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "NvimTree",
+        "dashboard",
+        "lspinfo",
+        "mason",
+        "checkhealth",
+        "help",
+        "man",
+        "toggleterm",
+        "lazy",
+    },
+    callback = function()
+        vim.b.miniindentscope_disable = true
+    end,
+})
