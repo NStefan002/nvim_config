@@ -68,6 +68,10 @@ return {
 
             vim.treesitter.language.register("html", "ejs")
             vim.treesitter.language.register("javascript", "ejs")
+
+            -- temporary fix for school project
+            vim.treesitter.language.register("cpp", "conf")
+            vim.treesitter.language.register("cpp", "fsharp")
         end,
     },
     {

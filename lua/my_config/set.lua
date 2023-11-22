@@ -1,12 +1,17 @@
 -- prettier colors
 vim.opt.termguicolors = true
 
+-- cursor opts
 local block_cursor = "i-n-v-c-r-o:block"
 local vertical_cursor = "ci:ver30"
 local horizontal_cursor = "cr:hor25"
 local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 local cursor = block_cursor .. "," .. vertical_cursor .. "," .. horizontal_cursor .. "," .. blink
 vim.opt.guicursor = cursor
+
+-- highlight current line number
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 
 -- line numbering
 vim.opt.number = true
@@ -27,9 +32,6 @@ vim.opt.smartindent = true
 
 -- highlight matching parenthesis
 vim.opt.showmatch = true
-
--- highlight current line
-vim.opt.cursorline = false
 
 -- how to split window
 vim.opt.splitbelow = true
