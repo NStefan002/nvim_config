@@ -16,7 +16,7 @@ return {
             vim.keymap.set("i", lhs, rhs, { expr = true, desc = desc, silent = true })
         end
 
-        imap("<C-a>", function()
+        imap("<c-a>", function()
             return vim.fn["codeium#Accept"]()
         end, "Accept")
         imap("<c-'>", function()

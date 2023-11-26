@@ -146,6 +146,13 @@ return {
                     completion = cmp.config.window.bordered(),
                 },
             })
+            cmp.event:on("menu_opened", function()
+                vim.b.copilot_suggestion_hidden = true
+            end)
+
+            cmp.event:on("menu_closed", function()
+                vim.b.copilot_suggestion_hidden = false
+            end)
         end,
     },
 
@@ -247,7 +254,10 @@ return {
                 },
             })
 
-            require("neodev").setup()
+            require("neodev").setup({
+                -- see https://github.com/rcarriga/nvim-dap-ui
+                library = { plugins = { "nvim-dap-ui" }, types = true },
+            })
             local lspconfig = require("lspconfig")
             local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
             -- lspCapabilities.textDocument.completion.completionItem.snippetSupport = true

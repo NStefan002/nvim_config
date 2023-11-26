@@ -87,21 +87,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
     callback = update_lead,
 })
 
-vim.api.nvim_create_autocmd("BufReadPre", { callback = update_lead })
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "NvimTree",
-        "dashboard",
-        "lspinfo",
-        "mason",
-        "checkhealth",
-        "help",
-        "man",
-        "toggleterm",
-        "lazy",
-    },
-    callback = function()
-        vim.b.miniindentscope_disable = true
-    end,
-})
+vim.api.nvim_create_autocmd(
+    { "BufReadPre", "InsertEnter", "InsertLeave" },
+    { callback = update_lead }
+)
