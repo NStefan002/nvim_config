@@ -87,7 +87,4 @@ vim.api.nvim_create_autocmd("OptionSet", {
     callback = update_lead,
 })
 
-vim.api.nvim_create_autocmd(
-    { "BufReadPre", "InsertEnter", "InsertLeave" },
-    { callback = update_lead }
-)
+vim.api.nvim_create_autocmd("CursorMoved", { callback = update_lead })
