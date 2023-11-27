@@ -4,6 +4,7 @@
 
 ## 🔌 Plugins
 
+- [aerial.nvim](https://github.com/stevearc/aerial.nvim)
 - [balance-theme.nvim](https://github.com/MetriC-DT/balance-theme.nvim)
 - [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -49,7 +50,6 @@
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [speedtyper.nvim](https://github.com/NStefan002/speedtyper.nvim)
-- [tagbar](https://github.com/preservim/tagbar)
 - [telescope-undo.nvim](https://github.com/debugloop/telescope-undo.nvim)
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
