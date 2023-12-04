@@ -46,6 +46,15 @@ return {
                 command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
             }
 
+            local function get_args()
+                local input = vim.fn.input("Enter command line arguments: ")
+                if input ~= "" then
+                    return vim.split(input, "%s+", { plain = false, trimempty = true })
+                else
+                    return nil
+                end
+            end
+
             -- don't forget to add debug flag (e.g. -g for g++/gcc)
             dap.configurations.cpp = {
                 {
@@ -55,6 +64,7 @@ return {
                     program = "a.out",
                     cwd = "${workspaceFolder}",
                     stopAtEntry = true,
+                    args = get_args,
                 },
                 {
                     name = "custom",
@@ -65,6 +75,7 @@ return {
                     end,
                     cwd = "${workspaceFolder}",
                     stopAtEntry = true,
+                    args = get_args,
                 },
                 {
                     name = "Attach to gdbserver :1234",
@@ -77,6 +88,7 @@ return {
                     program = function()
                         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
+                    args = get_args,
                 },
             }
             dap.configurations.c = dap.configurations.cpp
