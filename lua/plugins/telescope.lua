@@ -3,27 +3,11 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
-        -- or                          , tag = '0.1.2',
         dependencies = {
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
         },
         event = "BufEnter",
-        -- keys = {
-        --     { "<leader>lg",  "<cmd>Telescope live_grep<CR>",                 desc = "[L]ive [G]rep" },
-        --     { "<leader>sf",  "<cmd>Telescope find_files<CR>",                desc = "[S]earch [F]iles" },
-        --     { "<leader>gf",  "<cmd>Telescope git_files<CR>",                 desc = "Search [G]it [F]iles" },
-        --     { "<leader>lg",  "<cmd>Telescope live_grep<CR>",                 desc = "[L]ive [G]rep" },
-        --     { "<leader>sh",  "<cmd>Telescope help_tags<CR>",                 desc = "[S]earch [H]elp" },
-        --     { "<leader>sr",  "<cmd>Telescope oldfiles<CR>",                  desc = "[S]earch [R]ecently opened files" },
-        --     { "<leader>sd",  "<cmd>Telescope diagnostics<CR>",               desc = "[S]earch [D]iagnostics" },
-        --     { "<leader>sb",  "<cmd>Telescope buffers<CR>",                   desc = "[S]earch [B]uffers" },
-        --     { "<leader>st",  "<cmd>Telescope treesitter<CR>",                desc = "[S]earch [T]reesitter" },
-        --     { "ff",          "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Current Buffer [Fuzzy] [F]inder" },
-        --     { "<leader>key", "<cmd>Telescope keymaps<CR>",                   desc = "[Key]maps" },
-        --     { "<leader>tu",  "<cmd>Telescope undo<CR>",                      desc = "[T]elescope [U]ndo" },
-        --     { "<leader>h",   "<cmd>Telescope notify<CR>",                    desc = "Notification [H]istory" },
-        -- },
         config = function()
             require("telescope").setup({
                 extensions = {
@@ -68,7 +52,7 @@ return {
 
                 vim.keymap.set("n", keys, func, { desc = desc })
             end
-            -- !!! Very useful !!! https://github.com/nvim-telescope/telescope.nvim#pickers
+            -- NOTE: !!! Very useful !!! https://github.com/nvim-telescope/telescope.nvim#pickers
             local builtin = require("telescope.builtin")
             nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
             nmap("<leader>gf", builtin.git_files, "Search [G]it [F]iles")

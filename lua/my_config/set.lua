@@ -17,9 +17,6 @@ vim.opt.cursorlineopt = "number"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- don't show mode (because lualine already shows it)
-vim.opt.showmode = false
-
 -- tab
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -101,6 +98,3 @@ vim.opt.updatetime = 50
 
 -- :h 'shortmess'
 vim.opt.shm:append({ a = true, I = true, S = true })
-
--- use this and few autocmds instead of lukas-reineke/indent-blankline.nvim
-vim.opt.list = true

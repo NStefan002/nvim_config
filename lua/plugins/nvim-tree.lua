@@ -27,7 +27,7 @@ return {
             end
 
             nmap("<C-]>", api.tree.change_root_to_node, opts("CD"))
-            nmap("<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
+            nmap("<nop>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
             nmap("<C-k>", api.node.show_info_popup, opts("Info"))
             nmap("<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
             nmap("<C-t>", api.node.open.tab, opts("Open: New Tab"))
@@ -79,25 +79,6 @@ return {
             nmap("<2-LeftMouse>", api.node.open.edit, opts("Open"))
             nmap("<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
         end
-
-        local function open_nvim_tree_for_directories(data)
-            -- if the opened file is directory, open nvim-tree
-            local directory = vim.fn.isdirectory(data.file) == 1
-
-            if not directory then
-                return
-            end
-
-            vim.cmd.cd(data.file)
-            require("nvim-tree.api").tree.open()
-        end
-
-        local nvim_tree_augroup = vim.api.nvim_create_augroup("NvimTreeOnStartup", { clear = true })
-        -- call func open_nvim_tree_for_directories on startup
-        vim.api.nvim_create_autocmd({ "VimEnter" }, {
-            group = nvim_tree_augroup,
-            callback = open_nvim_tree_for_directories,
-        })
 
         -- setup with some options
         require("nvim-tree").setup({

@@ -51,13 +51,7 @@ return {
                 },
                 indent = { enable = true, disable = { "python" } },
                 incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<space>a",
-                        node_incremental = "<space>a",
-                        scope_incremental = "<space>x",
-                        node_decremental = "<C-x>",
-                    },
+                    enable = false,
                 },
 
                 -- autoclose and autorename html tag
