@@ -22,8 +22,14 @@ return {
         vim.keymap.set("n", "<C-f>", function()
             harpoon:list():select(3)
         end, { desc = "Harpoon: goto 3rd buffer in the list" })
-        vim.keymap.set("n", "<C-a>", function()
+        vim.keymap.set("n", "<C-i>", function()
             harpoon:list():select(4)
+        end, { desc = "Harpoon: goto 4th buffer in the list" })
+        vim.keymap.set("n", "<C-5>", function()
+            harpoon:list():select(5)
+        end, { desc = "Harpoon: goto 4th buffer in the list" })
+        vim.keymap.set("n", "<C-6>", function()
+            harpoon:list():select(6)
         end, { desc = "Harpoon: goto 4th buffer in the list" })
     end,
 }

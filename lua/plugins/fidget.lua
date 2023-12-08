@@ -25,7 +25,6 @@ return {
                 border = "double", -- Border around the notification window
                 x_padding = 1,
                 y_padding = 0,
-                align_bottom = true,
                 relative = "editor",
             },
         },
