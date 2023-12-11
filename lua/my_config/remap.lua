@@ -6,8 +6,8 @@ vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("n", "<C-s>", [[:vsplit ]])
 
 -- buffers
--- vim.keymap.set("n", "<C-l>", "<cmd>bnext<CR>")
--- vim.keymap.set("n", "<C-h>", "<cmd>bprev<CR>")
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>")
+vim.keymap.set("n", "[b", "<cmd>bprev<CR>")
 vim.keymap.set("n", "X", "<cmd>bdelete<CR>")
 
 -- quickfix
@@ -53,7 +53,7 @@ vim.keymap.set("n", "L", "<nop>")
 vim.keymap.set("n", "H", "<nop>")
 
 -- change all ocurences of the word that's under the cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
