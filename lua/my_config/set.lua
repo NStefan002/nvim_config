@@ -98,3 +98,5 @@ vim.opt.updatetime = 50
 
 -- :h 'shortmess'
 vim.opt.shm:append({ a = true, I = true, S = true })
+
+vim.opt.showmode = false
