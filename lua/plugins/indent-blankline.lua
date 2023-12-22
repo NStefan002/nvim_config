@@ -1,8 +1,14 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
-    version = "2.20.8",
-    lazy = false,
+    main = "ibl",
+    event = "VeryLazy",
     opts = {
-        filetype_exclude = { "help", "man", "dashboard", "notify", "checkhealth", "lspinfo" },
+        indent = {
+            char = "│",
+        },
+        scope = {
+            enabled = false,
+        },
+        exclude = { filetypes = { "help", "man", "dashboard", "notify", "checkhealth", "lspinfo" } },
     },
 }
