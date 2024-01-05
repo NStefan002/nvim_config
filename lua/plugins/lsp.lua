@@ -151,13 +151,13 @@ return {
                     completion = cmp.config.window.bordered(),
                 },
             })
-            cmp.event:on("menu_opened", function()
-                vim.b.copilot_suggestion_hidden = true
-            end)
-
-            cmp.event:on("menu_closed", function()
-                vim.b.copilot_suggestion_hidden = false
-            end)
+            -- cmp.event:on("menu_opened", function()
+            --     vim.b.copilot_suggestion_hidden = true
+            -- end)
+            --
+            -- cmp.event:on("menu_closed", function()
+            --     vim.b.copilot_suggestion_hidden = false
+            -- end)
         end,
     },
 
@@ -326,7 +326,7 @@ return {
                             settings = {
                                 Lua = {
                                     diagnostics = {
-                                        globals = { "vim" },
+                                        globals = { "vim", "describe", "it", "assert" },
                                     },
                                     hint = {
                                         enable = true,

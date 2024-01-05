@@ -1,16 +1,16 @@
 return {
     "andymass/vim-matchup",
-    event = { "BufReadPost" },
+    event = { "BufEnter" },
     init = function()
         vim.o.matchpairs = "(:),{:},[:]"
-    end,
-    config = function()
+        vim.g.matchup_enabled = 1
         vim.g.matchup_matchparen_enabled = 1
         vim.g.matchup_matchparen_deferred = 1
         vim.g.matchup_matchparen_offscreen = { method = "none" }
-        vim.g.matchup_transmute_enabled = 1
+        vim.g.matchup_transmute_enabled = 0
         vim.g.matchup_surround_enabled = 1
-
+    end,
+    config = function()
         vim.api.nvim_create_autocmd("BufReadPre", {
             group = vim.api.nvim_create_augroup("MatchparenSurround", {}),
             pattern = {
@@ -23,7 +23,7 @@ return {
             end,
         })
 
-        vim.api.nvim_create_autocmd({ "ColorScheme", "BufReadPre" }, {
+        vim.api.nvim_create_autocmd({ "ColorScheme", "BufEnter" }, {
             group = vim.api.nvim_create_augroup("MatchParenColor", {}),
             pattern = "*",
             callback = function()

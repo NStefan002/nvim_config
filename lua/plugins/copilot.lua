@@ -1,6 +1,18 @@
 return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    keys = {
+        {
+            "<leader>ec",
+            "<cmd>Copilot enable<CR>",
+            desc = "[E]nable [C]opilot",
+        },
+        {
+            "<leader>dc",
+            "<cmd>Copilot disable<CR>",
+            desc = "[D]isable [C]opilot",
+        },
+    },
     config = function()
         require("copilot").setup({
             panel = {
