@@ -60,15 +60,25 @@ autocmd("BufEnter", {
     desc = "Fix auto-commenting new line when entering insert mode e.g. with 'o'",
 })
 
--- autocmd({ "BufRead", "BufNewFile" }, {
---     group = aucmdsStarterPack,
---     pattern = {
---         '*.txt',
---         '*.md'
---     },
---     callback = function()
---         vim.opt.spell = true
---         vim.opt.spelllang = 'en'
---     end,
---     desc = "enable spellcheck for certain files"
--- })
+autocmd("FileType", {
+    group = aucmdsStarterPack,
+    pattern = {
+        "gitcommit",
+    },
+    callback = function()
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = "en"
+    end,
+    desc = "enable spellcheck for certain files",
+})
+
+autocmd("VimEnter", {
+    group = aucmdsStarterPack,
+    callback = function(ev)
+        local is_dir = vim.fn.isdirectory(ev.file) == 1
+        if is_dir then
+            vim.cmd.cd(ev.file)
+        end
+    end,
+    desc = "cd into directory if vim was opened with a directory as argument",
+})

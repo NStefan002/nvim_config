@@ -39,7 +39,10 @@ return {
                     end
                 end)
             end)
-            vim.cmd.colorscheme("tokyonight-storm")
+            local version = vim.version()
+            if version.minor <= 9 then
+                vim.cmd.colorscheme("tokyonight-storm")
+            end
         end,
     },
     { "sekke276/dark_flat.nvim" },
@@ -53,7 +56,12 @@ return {
         "xiyaowong/transparent.nvim",
         lazy = false,
         cond = function()
-            return not vim.g.neovide
+            local awesome_wm = false
+            if vim.system ~= nil then
+                local obj = vim.system({ "pgrep", "awesome" }, { text = true }):wait()
+                awesome_wm = #obj.stdout > 0
+            end
+            return not vim.g.neovide and not awesome_wm
         end,
         config = function()
             require("transparent").setup({

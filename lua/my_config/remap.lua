@@ -1,6 +1,9 @@
 -- basics
 vim.g.mapleader = " " -- ("<space>")
-vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>")
 
 -- vertical split
 vim.keymap.set("n", "<C-s>", [[:vsplit ]])
@@ -55,7 +58,7 @@ vim.keymap.set("n", "H", "<nop>")
 -- change all ocurences of the word that's under the cursor
 vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- save and source current file
 vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })

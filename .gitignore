@@ -3,3 +3,4 @@ stylua.toml
 !my_snippets/*
 !my_snippets/snippets/*
 !lazy-lock.json
+testing.lua
