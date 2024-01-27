@@ -82,3 +82,14 @@ autocmd("VimEnter", {
     end,
     desc = "cd into directory if vim was opened with a directory as argument",
 })
+
+autocmd("FileType", {
+    group = aucmdsStarterPack,
+    pattern = {
+        "netrw",
+    },
+    callback = function()
+        vim.opt_local.fillchars = { eob = " " }
+    end,
+    desc = "remove '~' when netrw is active",
+})
