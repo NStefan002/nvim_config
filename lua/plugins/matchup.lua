@@ -1,6 +1,6 @@
 return {
     "andymass/vim-matchup",
-    event = { "BufEnter" },
+    event = "VeryLazy",
     init = function()
         vim.o.matchpairs = "(:),{:},[:]"
         vim.g.matchup_enabled = 1

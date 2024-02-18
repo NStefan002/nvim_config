@@ -7,7 +7,21 @@ return {
         "nvim-lua/plenary.nvim",
         "debugloop/telescope-undo.nvim",
     },
-    event = "BufEnter",
+    -- event = "BufEnter",
+    keys = {
+        { "<leader>sf", desc = "[S]earch [F]iles" },
+        { "<leader>gf", desc = "Search [G]it [F]iles" },
+        { "<leader>lg", desc = "[L]ive [G]rep" },
+        { "<leader>sh", desc = "[S]earch [H]elp" },
+        { "<leader>sr", desc = "[S]earch [R]ecently opened files" },
+        { "<leader>sd", desc = "[S]earch [D]iagnostics" },
+        { "<leader>sb", desc = "[S]earch [B]uffers" },
+        { "<leader>st", desc = "[S]earch [T]reesitter" },
+        { "<leader>key", desc = "[Key]maps" },
+        { "<leader>tu", desc = "[T]elescope [U]ndo" },
+        { "<leader>nh", desc = "[N]otification [H]istory" },
+        { "<leader>gs", desc = "Telescope: [G]rep [S]tring" },
+    },
     config = function()
         require("telescope").setup({
             extensions = {

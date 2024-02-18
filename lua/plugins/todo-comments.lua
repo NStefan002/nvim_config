@@ -3,7 +3,7 @@ return {
 
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = { "BufEnter" },
+    event = "VeryLazy",
     config = function()
         require("todo-comments").setup({
             signs = true, -- show icons in the signs column

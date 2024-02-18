@@ -2,8 +2,9 @@ return {
     -- Syntax highlithing and many more features
     {
         "nvim-treesitter/nvim-treesitter",
-        lazy = false,
+        -- lazy = false,
         build = ":TSUpdate",
+        event = "VeryLazy",
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {

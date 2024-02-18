@@ -7,14 +7,11 @@ return {
         config = function()
             local schemes_candidates = {
                 "random",
-                "dark_flat",
-                "darcubox",
+                "default", -- for nightly default theme
                 "tokyonight-night",
                 "tokyonight-storm",
                 "tokyonight-day",
                 "tokyonight-moon",
-                "darcula-dark",
-                "light",
             }
 
             vim.keymap.set("n", "<leader>col", function()
@@ -30,9 +27,6 @@ return {
                             schemes_candidates[math.random(2, #schemes_candidates - 1)]
                         vim.cmd.colorscheme(random_scheme)
                         print(random_scheme)
-                    elseif selected == "light" then
-                        vim.cmd.colorscheme("balance")
-                        vim.cmd("TransparentDisable")
                     else
                         vim.cmd.colorscheme(selected)
                         print(selected)
@@ -45,13 +39,6 @@ return {
             end
         end,
     },
-    { "sekke276/dark_flat.nvim" },
-    { "dotsilas/darcubox-nvim" },
-    {
-        "xiantang/darcula-dark.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-    },
-    { "MetriC-DT/balance-theme.nvim" }, -- light colorscheme for presentation purposes
     {
         "xiyaowong/transparent.nvim",
         lazy = false,

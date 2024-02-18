@@ -1,5 +1,5 @@
 return {
     "NStefan002/visual-surround.nvim",
-    event = "BufEnter",
+    event = "VeryLazy",
     config = true,
 }

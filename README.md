@@ -5,7 +5,6 @@
 ## 🔌 Plugins
 
 - [aerial.nvim](https://github.com/stevearc/aerial.nvim)
-- [balance-theme.nvim](https://github.com/MetriC-DT/balance-theme.nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
 - [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
@@ -15,12 +14,10 @@
 - [Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [conform.nvim](https://github.com/stevearc/conform.nvim)
 - [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
-- [darcubox-nvim](https://github.com/dotsilas/darcubox-nvim)
-- [darcula-dark.nvim](https://github.com/xiantang/darcula-dark.nvim)
-- [dark_flat.nvim](https://github.com/sekke276/dark_flat.nvim)
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+- [git-conflict.nvim](https://github.com/akinsho/git-conflict.nvim)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [harpoon](https://github.com/ThePrimeagen/harpoon)
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)

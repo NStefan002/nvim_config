@@ -1,6 +1,6 @@
 return {
     "numToStr/Comment.nvim",
-    event = "BufEnter",
+    event = "VeryLazy",
     opts = {
         padding = true,
         sticky = true,
