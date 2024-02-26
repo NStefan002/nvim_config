@@ -59,6 +59,11 @@ return {
                 autotag = {
                     enable = true,
                 },
+
+                -- see https://github.com/andymass/vim-matchup?tab=readme-ov-file#tree-sitter-integration
+                matchup = {
+                    enable = true,
+                },
             })
 
             -- temporary fix for school projects

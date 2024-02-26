@@ -1,6 +1,6 @@
 return {
     "andymass/vim-matchup",
-    event = "VeryLazy",
+    event = "BufEnter",
     init = function()
         vim.o.matchpairs = "(:),{:},[:]"
         vim.g.matchup_enabled = 1
@@ -8,7 +8,7 @@ return {
         vim.g.matchup_matchparen_deferred = 1
         vim.g.matchup_matchparen_offscreen = { method = "none" }
         vim.g.matchup_transmute_enabled = 0
-        vim.g.matchup_surround_enabled = 1
+        vim.g.matchup_surround_enabled = 0
     end,
     config = function()
         vim.api.nvim_create_autocmd("BufReadPre", {

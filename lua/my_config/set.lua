@@ -1,3 +1,7 @@
+-- netrw
+vim.g.netrw_banner = 0 -- toggle with 'I'
+vim.g.netrw_liststyle = 0 -- change styles with 'i'
+
 -- prettier colors
 vim.opt.termguicolors = true
 
@@ -7,7 +11,7 @@ local vertical_cursor = "ci:ver30"
 local horizontal_cursor = "cr:hor25"
 local blink = "n-i:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 local cursor = block_cursor .. "," .. vertical_cursor .. "," .. horizontal_cursor .. "," .. blink
-vim.opt.guicursor = cursor
+-- vim.opt.guicursor = cursor
 
 -- highlight current line number
 vim.opt.cursorline = true
