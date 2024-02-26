@@ -1,53 +1,49 @@
 -- basics
 vim.g.mapleader = " " -- ("<space>")
 vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
-vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>")
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
--- vertical split
-vim.keymap.set("n", "<C-s>", [[:vsplit ]])
+-- netrw
+vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
 
 -- buffers
-vim.keymap.set("n", "]b", "<cmd>bnext<CR>")
-vim.keymap.set("n", "[b", "<cmd>bprev<CR>")
-vim.keymap.set("n", "X", "<cmd>bdelete<CR>")
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "[b", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "X", "<cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- quickfix
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
 
 -- resizing windows
-vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>")
-vim.keymap.set("n", "<C-Down>", "<cmd>horizontal resize +3<CR>")
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize +3<CR>")
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -3<CR>")
+vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>", { desc = "Dec. window height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>horizontal resize +3<CR>", { desc = "Inc. window height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize +3<CR>", { desc = "Inc. window width" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -3<CR>", { desc = "Dec. window width" })
 
--- same as Alt + up/down in VSC
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- some default keymaps enhanced
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
--- very useful for quick navigation in medium to large size files
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down half screen" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up half screen" })
 
--- some weird things
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next search result and center it" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to previous search result and center it" })
 
--- e.g. copying highlighted text over other text so the first text stays in buffer
-vim.keymap.set("x", "<C-p>", [["_dP]])
-
--- copying and pasting to/from system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
-
--- copy entire buffer to system clipboard
-vim.keymap.set("n", "<leader>A", 'GVgg"+y')
-
--- delete != cut
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+-- copy pasta stuff
+vim.keymap.set(
+    "x",
+    "<C-p>",
+    [["_dP]],
+    { desc = "Paste yanked text over some other text and keep the first text in the register" }
+)
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+vim.keymap.set("n", "<leader>A", 'GVgg"+y', { desc = "Copy entire buffer to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete != cut" })
 
 -- disable certain keymaps
 vim.keymap.set("n", "<space>", "<nop>")
@@ -55,14 +51,27 @@ vim.keymap.set("n", "<backspace>", "<nop>")
 vim.keymap.set("n", "L", "<nop>")
 vim.keymap.set("n", "H", "<nop>")
 
--- change all ocurences of the word that's under the cursor
-vim.keymap.set("n", "<leader>R", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set(
+    "n",
+    "<leader>R",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Change all ocurences of the word that's under the cursor" }
+)
 
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set(
+    "n",
+    "<leader>x",
+    "<cmd>!chmod +x %<CR>",
+    { silent = true, desc = "Make the current file executable" }
+)
 
--- save and source current file
-vim.keymap.set("n", "<leader><leader>s", "<cmd>w<CR><cmd>source %<CR>", { silent = true })
+vim.keymap.set(
+    "n",
+    "<leader><leader>s",
+    "<cmd>w<CR><cmd>source %<CR>",
+    { silent = true, desc = "Save and source current file" }
+)
 
 vim.keymap.set("n", "<leader>hl", function()
     vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()
-end, { desc = "Toggle [hl]search", silent = true })
+end, { silent = true, desc = "Toggle [hl]search" })
