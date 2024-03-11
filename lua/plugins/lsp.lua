@@ -423,6 +423,11 @@ return {
                             end,
                         })
                     end,
+                    hls = function()
+                        lspconfig.hls.setup({
+                            capabilities = lspCapabilities,
+                        })
+                    end,
                 },
             })
 
