@@ -75,9 +75,15 @@ autocmd("FileType", {
 autocmd("VimEnter", {
     group = aucmdsStarterPack,
     callback = function(ev)
-        local is_dir = vim.fn.isdirectory(ev.file) == 1
-        if is_dir then
-            vim.cmd.cd(ev.file)
+        -- NOTE: uncomment this if you're using netrw instead of oil.nvim
+        -- local is_dir = vim.fn.isdirectory(ev.file) == 1
+        -- if is_dir then
+        --     vim.cmd.cd(ev.file)
+        -- end
+
+        local entry = string.sub(ev.file, 7)
+        if vim.fn.isdirectory(entry) == 1 then
+            vim.cmd.cd(entry)
         end
     end,
     desc = "cd into directory if vim was opened with a directory as argument",

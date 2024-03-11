@@ -8,6 +8,7 @@ return {
             local schemes_candidates = {
                 "random",
                 "default", -- for nightly default theme
+                "light", -- for nightly default theme
                 "tokyonight-night",
                 "tokyonight-storm",
                 "tokyonight-day",
@@ -27,6 +28,9 @@ return {
                             schemes_candidates[math.random(2, #schemes_candidates - 1)]
                         vim.cmd.colorscheme(random_scheme)
                         print(random_scheme)
+                    elseif selected == "light" then
+                        vim.cmd("set background=light")
+                        vim.cmd("TransparentDisable")
                     else
                         vim.cmd.colorscheme(selected)
                         print(selected)

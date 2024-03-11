@@ -49,6 +49,9 @@ return {
         tabline = {},
         winbar = {},
         inactive_winbar = {},
-        extensions = {},
+        extensions = {
+            "quickfix",
+            "aerial",
+        },
     },
 }

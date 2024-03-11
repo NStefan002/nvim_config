@@ -5,7 +5,12 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
 -- netrw
-vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
+-- vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
+
+-- terminal mappings (experimental)
+vim.keymap.set("n", "<leader>tv", "<c-w><c-v><cmd>term<CR>", { desc = "Open terminal in vsplit" })
+vim.keymap.set("n", "<leader>ts", "<c-w><c-s><cmd>term<CR>", { desc = "Open terminal in split" })
+vim.keymap.set("t", "<c-j><c-k>", "<c-\\><c-n>", { desc = "Exit insert mode in terminal" })
 
 -- buffers
 vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
@@ -13,8 +18,8 @@ vim.keymap.set("n", "[b", "<cmd>bprev<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "X", "<cmd>bdelete<CR>", { desc = "Close buffer" })
 
 -- quickfix
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
 
 -- resizing windows
 vim.keymap.set("n", "<C-Up>", "<cmd>horizontal resize -3<CR>", { desc = "Dec. window height" })
@@ -75,3 +80,9 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>hl", function()
     vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()
 end, { silent = true, desc = "Toggle [hl]search" })
+
+-- cmdline
+vim.keymap.set("c", "<c-h>", "<left>", { desc = "Move cursor left in command mode" })
+vim.keymap.set("c", "<c-l>", "<right>", { desc = "Move cursor left in command mode" })
+vim.keymap.set("c", "<c-j>", "<down>", { desc = "Move cursor left in command mode" })
+vim.keymap.set("c", "<c-k>", "<up>", { desc = "Move cursor left in command mode" })
