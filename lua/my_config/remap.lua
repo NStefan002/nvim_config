@@ -47,7 +47,12 @@ vim.keymap.set(
 )
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
-vim.keymap.set("n", "<leader>A", 'GVgg"+y', { desc = "Copy entire buffer to system clipboard" })
+vim.keymap.set(
+    "n",
+    "<leader>A",
+    'mzGVgg"+y`z',
+    { desc = "Copy entire buffer to system clipboard and preserve the cursor position" }
+)
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete != cut" })
 
 -- disable certain keymaps
