@@ -86,6 +86,9 @@ return {
             ssh = {
                 border = "rounded",
             },
+            view_options = {
+                show_hidden = true,
+            },
         })
     end,
 }
