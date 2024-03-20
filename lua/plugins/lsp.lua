@@ -306,10 +306,8 @@ return {
                     "html",
                     "jsonls",
                     "lua_ls",
-                    "rust_analyzer",
                     "tsserver",
                     "cmake",
-                    "pyright",
                     "ruff_lsp",
                     "taplo",
                 },
@@ -402,9 +400,10 @@ return {
                             filetypes = { "html", "ejs" },
                         })
                     end,
-                    pyright = function()
-                        lspconfig.pyright.setup({
+                    basedpyright = function()
+                        lspconfig.basedpyright.setup({
                             capabilities = lspCapabilities,
+                            filetypes = { "python" },
                         })
                     end,
                     taplo = function()
@@ -417,7 +416,7 @@ return {
                             settings = {
                                 organizeImports = false,
                             },
-                            -- disable ruff as hover provider to avoid conflicts with pyright
+                            -- disable ruff as hover provider to avoid conflicts with basedpyright
                             on_attach = function(client)
                                 client.server_capabilities.hoverProvider = false
                             end,
