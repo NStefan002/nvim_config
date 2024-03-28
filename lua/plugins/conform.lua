@@ -27,7 +27,7 @@ return {
             pattern = "*",
             callback = function(args)
                 -- Disable autoformat on certain filetypes
-                local ignore_filetypes = { "c", "cpp", "python" }
+                local ignore_filetypes = { "c", "cpp", "python", "markdown" }
                 if vim.tbl_contains(ignore_filetypes, vim.bo[args.buf].filetype) then
                     return
                 end

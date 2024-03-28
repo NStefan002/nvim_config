@@ -50,7 +50,7 @@ vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system c
 vim.keymap.set(
     "n",
     "<leader>A",
-    'mzGVgg"+y`z',
+    'mzGVgg"+y`zzz',
     { desc = "Copy entire buffer to system clipboard and preserve the cursor position" }
 )
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete != cut" })

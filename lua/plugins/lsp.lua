@@ -176,8 +176,7 @@ return {
                     vim.keymap.set("n", "<leader>in", function()
                         vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr)) -- toggle
                     end, { desc = "Lsp-[In]layhints Toggle", buffer = bufnr })
-                    local inlay_hint_grp =
-                        vim.api.nvim_create_augroup("InlayHintsInInsert", { clear = true })
+                    local inlay_hint_grp = vim.api.nvim_create_augroup("InlayHintsInInsert", {})
                     vim.api.nvim_create_autocmd("InsertLeave", {
                         group = inlay_hint_grp,
                         pattern = "*",
@@ -297,20 +296,39 @@ return {
             })
             local lspconfig = require("lspconfig")
             local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+            vim.api.nvim_create_user_command("MasonInstallAll", function()
+                local ensure_installed = {
+                    "clangd",
+                    "taplo",
+                    "bash-language-server",
+                    "beautysh",
+                    "black",
+                    "clang-format",
+                    "cmake-language-server",
+                    "cpptools",
+                    "css-lsp",
+                    "debugpy",
+                    "html-lsp",
+                    "isort",
+                    "json-lsp",
+                    "lua-language-server",
+                    "luacheck",
+                    "prettier",
+                    "prettierd",
+                    "pyright",
+                    "basedpyright",
+                    "ruff-lsp",
+                    "stylua",
+                    "typescript-language-server",
+                }
+
+                vim.cmd(string.format("MasonInstall %s", table.concat(ensure_installed, " ")))
+            end, {
+                nargs = 0,
+                desc = "Install all tools specified in the ensure_installed list.",
+            })
             -- lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "bashls",
-                    "clangd",
-                    "cssls",
-                    "html",
-                    "jsonls",
-                    "lua_ls",
-                    "tsserver",
-                    "cmake",
-                    "ruff_lsp",
-                    "taplo",
-                },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
@@ -404,6 +422,11 @@ return {
                         lspconfig.basedpyright.setup({
                             capabilities = lspCapabilities,
                             filetypes = { "python" },
+                        })
+                    end,
+                    pyright = function()
+                        lspconfig.pyright.setup({
+                            capabilities = lspCapabilities,
                         })
                     end,
                     taplo = function()
