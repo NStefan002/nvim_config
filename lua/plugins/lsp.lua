@@ -239,7 +239,6 @@ return {
                 nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
                 nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", "v")
-                nmap("H", vim.lsp.buf.signature_help, "Help")
                 nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[G]oto [D]efinition")
                 nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
                 nmap(
@@ -250,6 +249,13 @@ return {
                 nmap("<leader>wl", function()
                     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                 end, "[W]orkspace [L]ist Folders")
+
+                vim.keymap.set(
+                    "i",
+                    "<c-k>",
+                    vim.lsp.buf.signature_help,
+                    { desc = "Show function signature" }
+                )
             end)
 
             -- for versions <= 0.9.4

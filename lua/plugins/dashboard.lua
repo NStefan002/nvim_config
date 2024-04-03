@@ -1,27 +1,12 @@
 return {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
     config = function()
         require("dashboard").setup({
             theme = "hyper",
             config = {
                 header = {
-                    -- ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-                    -- ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-                    -- ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-                    -- ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-                    -- ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-                    -- ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-                    -- [[                                                                       ]],
-                    -- [[  ██████   █████                   █████   █████  ███                  ]],
-                    -- [[ ░░██████ ░░███                   ░░███   ░░███  ░░░                   ]],
-                    -- [[  ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████   ]],
-                    -- [[  ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███  ]],
-                    -- [[  ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███  ]],
-                    -- [[  ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███  ]],
-                    -- [[  █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████ ]],
-                    -- [[ ░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░  ]],
-                    -- [[                                                                       ]],
                     "         ██████╗       ██████╗  █████╗ ███████╗███████╗        ",
                     "        ██╔═══██╗      ██╔══██╗██╔══██╗╚══███╔╝╚══███╔╝        ",
                     "        ██║   ██║█████╗██████╔╝███████║  ███╔╝   ███╔╝         ",
@@ -35,7 +20,7 @@ return {
                 },
                 shortcut = {
                     {
-                        icon = "󰊳  ",
+                        icon = " ",
                         icon_hl = "@property",
                         desc = "Update",
                         group = "@property",
@@ -43,7 +28,7 @@ return {
                         key = "u",
                     },
                     {
-                        icon = "󰿶 ",
+                        icon = " ",
                         icon_hl = "@property",
                         desc = "Checkhealth",
                         group = "@property",
@@ -51,28 +36,12 @@ return {
                         key = "c",
                     },
                     {
-                        icon = "󱑃 ",
+                        icon = "󰥔 ",
                         icon_hl = "@property",
                         desc = "Profile",
-                        group = "Label",
+                        group = "@property",
                         action = "Lazy profile",
                         key = "p",
-                    },
-                    {
-                        icon = " ",
-                        icon_hl = "@variable",
-                        desc = "Files",
-                        group = "@property",
-                        action = "Telescope find_files",
-                        key = "f",
-                    },
-                    {
-                        icon = "󰅳 ",
-                        icon_hl = "@variable",
-                        desc = "String",
-                        group = "@property",
-                        action = "Telescope live_grep",
-                        key = "s",
                     },
                 },
             },
@@ -89,5 +58,4 @@ return {
             end,
         })
     end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
 }
