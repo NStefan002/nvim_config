@@ -1,26 +1,13 @@
 return {
-    -- Fuzzy finder
-
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "debugloop/telescope-undo.nvim",
     },
-    -- event = "BufEnter",
     keys = {
-        { "<leader>sf", desc = "[S]earch [F]iles" },
-        { "<leader>gf", desc = "Search [G]it [F]iles" },
-        { "<leader>lg", desc = "[L]ive [G]rep" },
-        { "<leader>sh", desc = "[S]earch [H]elp" },
-        { "<leader>sr", desc = "[S]earch [R]ecently opened files" },
-        { "<leader>sd", desc = "[S]earch [D]iagnostics" },
-        { "<leader>sb", desc = "[S]earch [B]uffers" },
-        { "<leader>st", desc = "[S]earch [T]reesitter" },
-        { "<leader>key", desc = "[Key]maps" },
         { "<leader>tu", desc = "[T]elescope [U]ndo" },
         { "<leader>nh", desc = "[N]otification [H]istory" },
-        { "<leader>gs", desc = "Telescope: [G]rep [S]tring" },
     },
     config = function()
         require("telescope").setup({
@@ -59,25 +46,17 @@ return {
         require("telescope").load_extension("undo")
         require("telescope").load_extension("notify")
 
-        local nmap = function(keys, func, desc)
-            if desc then
-                desc = "Telescope: " .. desc
-            end
-
-            vim.keymap.set("n", keys, func, { desc = desc })
-        end
-        local builtin = require("telescope.builtin")
-        nmap("<leader>sf", builtin.find_files, "[S]earch [F]iles")
-        nmap("<leader>gf", builtin.git_files, "Search [G]it [F]iles")
-        nmap("<leader>lg", builtin.live_grep, "[L]ive [G]rep")
-        nmap("<leader>sh", builtin.help_tags, "[S]earch [H]elp")
-        nmap("<leader>sr", builtin.oldfiles, "[S]earch [R]ecently opened files")
-        nmap("<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
-        nmap("<leader>sb", builtin.buffers, "[S]earch [B]uffers")
-        nmap("<leader>st", builtin.treesitter, "[S]earch [T]reesitter")
-        nmap("<leader>key", builtin.keymaps, "[Key]maps")
-        nmap("<leader>tu", "<cmd>Telescope undo<CR>", "[T]elescope [U]ndo")
-        nmap("<leader>nh", "<cmd>Telescope notify<CR>", "[N]otification [H]istory")
-        nmap("<leader>gs", builtin.grep_string, "Telescope: [G]rep [S]tring")
+        vim.keymap.set(
+            "n",
+            "<leader>tu",
+            "<cmd>Telescope undo<CR>",
+            { desc = "[T]elescope [U]ndo" }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>nh",
+            "<cmd>Telescope notify<CR>",
+            { desc = "[N]otification [H]istory" }
+        )
     end,
 }
