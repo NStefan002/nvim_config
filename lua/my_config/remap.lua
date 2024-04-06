@@ -4,9 +4,6 @@ vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
--- netrw
--- vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
-
 -- terminal mappings (experimental)
 vim.keymap.set("n", "<leader>tv", "<c-w><c-v><cmd>term<CR>", { desc = "Open terminal in vsplit" })
 vim.keymap.set("n", "<leader>ts", "<c-w><c-s><cmd>term<CR>", { desc = "Open terminal in split" })
@@ -31,8 +28,8 @@ vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -3<CR>", { desc = "Dec. w
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down half screen" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up half screen" })
+vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { desc = "Scroll down half screen" })
+vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { desc = "Scroll up half screen" })
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next search result and center it" })
@@ -91,3 +88,11 @@ vim.keymap.set("c", "<c-h>", "<left>", { desc = "Move cursor left in command mod
 vim.keymap.set("c", "<c-l>", "<right>", { desc = "Move cursor left in command mode" })
 vim.keymap.set("c", "<c-j>", "<down>", { desc = "Move cursor left in command mode" })
 vim.keymap.set("c", "<c-k>", "<up>", { desc = "Move cursor left in command mode" })
+
+-- builtin plugins
+
+-- netrw
+-- vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
+
+-- comment
+vim.keymap.set({ "n", "x", "o" }, "<leader>c", "gc", { remap = true })
