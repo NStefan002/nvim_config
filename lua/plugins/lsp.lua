@@ -456,6 +456,11 @@ return {
                             capabilities = lspCapabilities,
                         })
                     end,
+                    gopls = function()
+                        lspconfig.gopls.setup({
+                            capabilities = lspCapabilities,
+                        })
+                    end,
                 },
             })
 

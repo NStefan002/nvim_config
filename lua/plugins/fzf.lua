@@ -3,6 +3,14 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
+        require("fzf-lua").setup({
+            keymap = {
+                builtin = {
+                    ["<c-d>"] = "preview-page-down",
+                    ["<c-u>"] = "preview-page-up",
+                },
+            },
+        })
         local nmap_fzf = function(keys, cmd, desc)
             if desc then
                 desc = "FzfLua: " .. desc

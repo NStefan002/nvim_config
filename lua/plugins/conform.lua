@@ -16,6 +16,7 @@ return {
                 bash = { "beautysh" },
                 sh = { "beautysh" },
                 python = { "isort", "black" },
+                go = { "goimports", "gofmt" },
             },
         })
 
