@@ -1,9 +1,9 @@
 return {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
-    cond = function()
-        return vim.version().minor < 10
-    end,
+    -- cond = function()
+    --     return vim.version().minor < 10
+    -- end,
     opts = {
         padding = true,
         sticky = true,
