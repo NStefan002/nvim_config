@@ -94,6 +94,82 @@ return {
             dap.configurations.c = dap.configurations.cpp
             dap.configurations.rust = dap.configurations.cpp
 
+            -- For debugging Neovim's source code
+            local home = vim.uv.os_homedir()
+            table.insert(
+                dap.configurations.c,
+                setmetatable({
+                    name = "Neovim",
+                    type = "cppdbg",
+                    request = "launch",
+                    program = home .. "/repos/neovim/build/bin/nvim",
+                    cwd = "${workspaceFolder}",
+                    stopAtEntry = true,
+                    args = get_args,
+                    externalConsole = true,
+                }, {
+                    __call = function(config)
+                        -- Listeners are indexed by a key.
+                        -- This is like a namespace and must not conflict with what plugins
+                        -- like nvim-dap-ui or nvim-dap itself uses.
+                        -- It's best to not use anything starting with `dap`
+                        local key = "neovim-debug-auto-attach"
+
+                        -- dap.listeners.<before | after>.<event_or_command>.<plugin_key>`
+                        -- We listen to the `initialize` response. It indicates a new session got initialized
+                        dap.listeners.after.initialize[key] = function(session)
+                            -- Immediately clear the listener, we don't want to run this logic for additional sessions
+                            dap.listeners.after.initialize[key] = nil
+
+                            -- The first argument to a event or response is always the session
+                            -- A session contains a `on_close` table that allows us to register functions
+                            -- that get called when the session closes.
+                            -- We use this to ensure the listeners get cleaned up
+                            session.on_close[key] = function()
+                                for _, handler in pairs(dap.listeners.after) do
+                                    handler[key] = nil
+                                end
+                            end
+                        end
+
+                        -- We listen to `event_process` to get the pid:
+                        dap.listeners.after.event_process[key] = function(_, body)
+                            -- Immediately clear the listener, we don't want to run this logic for additional sessions
+                            dap.listeners.after.event_process[key] = nil
+
+                            local ppid = body.systemProcessId
+                            -- The pid is the parent pid, we need to attach to the child. This uses the `ps` tool to get it
+                            -- It takes a bit for the child to arrive. This uses the `vim.wait` function to wait up to a second
+                            -- to get the child pid.
+                            vim.wait(1000, function()
+                                return tonumber(
+                                    vim.fn.system("ps -o pid= --ppid " .. tostring(ppid))
+                                ) ~= nil
+                            end)
+                            local pid =
+                                tonumber(vim.fn.system("ps -o pid= --ppid " .. tostring(ppid)))
+
+                            -- If we found it, spawn another debug session that attaches to the pid.
+                            if pid then
+                                dap.run({
+                                    name = "Neovim embedded",
+                                    type = "cppdbg",
+                                    request = "attach",
+                                    pid = pid,
+                                    program = home .. "/repos/neovim/build/bin/nvim",
+                                    env = {
+                                        "VIMRUNTIME=" .. home .. "/repos/neovim/runtime",
+                                    },
+                                    cwd = home .. "/repos/neovim/",
+                                    externalConsole = false,
+                                })
+                            end
+                        end
+                        return config
+                    end,
+                })
+            )
+
             -- icons
             local dap_breakpoint = {
                 error = {
@@ -113,6 +189,11 @@ return {
             vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
             vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
             vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
+
+            dap.defaults.fallback.external_terminal = {
+                command = "/usr/bin/wezterm",
+                args = { "-e" },
+            }
         end,
     },
 
