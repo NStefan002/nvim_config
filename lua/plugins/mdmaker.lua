@@ -1,4 +1,6 @@
 return {
+    -- TODO: completely rewrite this bs
+    dev = true,
     "NStefan002/mdmaker.nvim",
     cmd = "MdMake",
     opts = {
