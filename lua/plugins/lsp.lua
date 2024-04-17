@@ -343,7 +343,17 @@ return {
                             settings = {
                                 Lua = {
                                     diagnostics = {
-                                        globals = { "vim", "describe", "it", "assert" },
+                                        globals = {
+                                            -- nvim <-> lua
+                                            "vim",
+                                            "describe",
+                                            "it",
+                                            "assert",
+                                            -- awesome wm
+                                            "awesome",
+                                            "client",
+                                            "root",
+                                        },
                                     },
                                     hint = {
                                         enable = true,

@@ -9,6 +9,9 @@ return {
                     ["<c-d>"] = "preview-page-down",
                     ["<c-u>"] = "preview-page-up",
                 },
+                fzf = {
+                    ["ctrl-q"] = "select-all+accept",
+                },
             },
         })
         local nmap_fzf = function(keys, cmd, desc)
