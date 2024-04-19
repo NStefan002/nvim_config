@@ -174,14 +174,17 @@ return {
             lsp_zero.on_attach(function(client, bufnr)
                 if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
                     vim.keymap.set("n", "<leader>in", function()
-                        vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr)) -- toggle
+                        vim.lsp.inlay_hint.enable(
+                            not vim.lsp.inlay_hint.is_enabled(bufnr),
+                            { bufnr = bufnr }
+                        ) -- toggle
                     end, { desc = "Lsp-[In]layhints Toggle", buffer = bufnr })
                     local inlay_hint_grp = vim.api.nvim_create_augroup("InlayHintsInInsert", {})
                     vim.api.nvim_create_autocmd("InsertLeave", {
                         group = inlay_hint_grp,
                         pattern = "*",
                         callback = function()
-                            vim.lsp.inlay_hint.enable(bufnr, false)
+                            vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
                         end,
                         desc = "Hide inlay hints",
                     })
@@ -189,7 +192,7 @@ return {
                         group = inlay_hint_grp,
                         pattern = "*",
                         callback = function()
-                            vim.lsp.inlay_hint.enable(bufnr, true)
+                            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                         end,
                         desc = "Show inlay hints",
                     })
