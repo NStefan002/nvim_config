@@ -1,9 +1,10 @@
-## 📦 Package manager
+## 💤 Plugin manager
 
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ## 🔌 Plugins
 
+- [15puzzle.nvim](https://github.com/NStefan002/15puzzle.nvim)
 - [2048.nvim](https://github.com/NStefan002/2048.nvim)
 - [aerial.nvim](https://github.com/stevearc/aerial.nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -15,6 +16,7 @@
 - [Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [conform.nvim](https://github.com/stevearc/conform.nvim)
 - [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
+- [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - [donut.nvim](https://github.com/NStefan002/donut.nvim)
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
@@ -26,6 +28,7 @@
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [killersheep.nvim](https://github.com/seandewar/killersheep.nvim)
+- [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [live-server.nvim](https://github.com/aurum77/live-server.nvim)
 - [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim)
 - [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
@@ -34,7 +37,6 @@
 - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
-- [mdmaker.nvim](https://github.com/NStefan002/mdmaker.nvim)
 - [neodev.nvim](https://github.com/folke/neodev.nvim)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -43,7 +45,9 @@
 - [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [nvim-nio](https://github.com/nvim-neotest/nvim-nio)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)
+- [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [oil.nvim](https://github.com/stevearc/oil.nvim)
