@@ -86,6 +86,7 @@ require("lazy").setup("plugins", {
                     end
                     file:write(table.concat(file_content, "\n"))
                     file:close()
+                    vim.notify("README.md succesfully generated", vim.log.levels.INFO, {})
                 end,
                 desc = "Generate README.md file",
             },
