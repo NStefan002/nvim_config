@@ -1,5 +1,17 @@
 return {
     {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                { path = "wezterm-types", mods = { "wezterm" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true }, -- `vim.uv` types
+    { "justinsgithub/wezterm-types", lazy = true }, -- wezterm types
+    {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v3.x",
         lazy = false,
@@ -57,6 +69,10 @@ return {
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "path" },
+                {
+                    name = "lazydev",
+                    group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+                },
             }
             local function tooBig(bufnr)
                 local max_filesize = 10 * 1024 -- 100 KB
@@ -163,7 +179,6 @@ return {
         dependencies = {
             { "williamboman/mason-lspconfig.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
-            { "folke/neodev.nvim" },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -293,16 +308,12 @@ return {
                     focusable = false,
                     style = "minimal",
                     border = "rounded",
-                    source = "always",
+                    source = true,
                     header = "",
                     prefix = "",
                 },
             })
 
-            require("neodev").setup({
-                -- see https://github.com/rcarriga/nvim-dap-ui
-                library = { plugins = { "nvim-dap-ui" }, types = true },
-            })
             local lspconfig = require("lspconfig")
             local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
             vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -329,6 +340,8 @@ return {
                     "ruff-lsp",
                     "stylua",
                     "typescript-language-server",
+                    "goimports",
+                    "haskell-language-server",
                 }
 
                 vim.cmd(string.format("MasonInstall %s", table.concat(ensure_installed, " ")))
@@ -476,6 +489,8 @@ return {
                     end,
                 },
             })
+
+            vim.filetype.add({ extension = { pro = "prolog" } })
 
             local luasnip = require("luasnip")
             -- Neovim by default does not recognize .ejs files (test with :echo &filetype)
