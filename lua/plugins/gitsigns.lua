@@ -28,7 +28,7 @@ return {
                         gs.next_hunk()
                     end)
                     return "<Ignore>"
-                end, { expr = true })
+                end, { expr = true, desc = "Gitsigns: next hunk" })
 
                 map("n", "[h", function()
                     if vim.wo.diff then
@@ -38,17 +38,27 @@ return {
                         gs.prev_hunk()
                     end)
                     return "<Ignore>"
-                end, { expr = true })
+                end, { expr = true, desc = "Gitsigns: prev hunk" })
 
                 -- Actions
-                map("n", "<leader>ht", gs.toggle_current_line_blame)
-                map("n", "<leader>hd", gs.diffthis)
+                map(
+                    "n",
+                    "<leader>ht",
+                    gs.toggle_current_line_blame,
+                    { desc = "Gitsigns: toggle current line blame" }
+                )
+                map("n", "<leader>hd", gs.diffthis, { desc = "Gitsigns diff" })
                 map("n", "<leader>hD", function()
                     gs.diffthis("~")
-                end)
+                end, { desc = "Gitsigns diff ~" })
 
                 -- Text object
-                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+                map(
+                    { "o", "x" },
+                    "ih",
+                    ":<C-U>Gitsigns select_hunk<CR>",
+                    { desc = "Gitsigns hunk text object" }
+                )
             end,
         })
     end,
