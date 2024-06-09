@@ -38,7 +38,7 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             {
-                "L3MON4D3/LuaSnip",
+                { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
                 "rafamadriz/friendly-snippets",
                 "onsails/lspkind.nvim",
                 "hrsh7th/cmp-buffer",
