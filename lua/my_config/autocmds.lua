@@ -65,6 +65,7 @@ autocmd("FileType", {
     group = aucmdsStarterPack,
     pattern = {
         "gitcommit",
+        "markdown",
     },
     callback = function()
         vim.opt_local.spell = true

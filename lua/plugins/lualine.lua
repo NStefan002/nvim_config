@@ -33,7 +33,13 @@ return {
         sections = {
             lualine_a = { "mode" },
             lualine_b = { "branch", "diff", "diagnostics" },
-            lualine_c = { "filename", "filesize" },
+            lualine_c = {
+                "filename",
+                "filesize",
+                function()
+                    return require("screenkey").get_keys()
+                end,
+            },
             lualine_x = { "filetype" },
             lualine_y = { "searchcount", "progress" },
             lualine_z = { "location" },

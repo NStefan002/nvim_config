@@ -16,19 +16,21 @@ return {
                     "diff",
                     "gitcommit",
                     "gitignore",
+                    "go",
+                    "haskell",
                     "html",
                     "java",
-                    "python",
                     "javascript",
                     "json",
                     "lua",
                     "make",
+                    "markdown",
+                    "markdown_inline",
+                    "python",
                     "toml",
                     "vim",
                     "vimdoc",
                     "yaml",
-                    "markdown",
-                    "markdown_inline",
                 },
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -44,7 +46,7 @@ return {
                     -- disable for larger files
                     disable = function(lang, buf)
                         local max_filesize = 10 * 1024 -- 10 KB
-                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                         if ok and stats and stats.size > max_filesize then
                             return true
                         end
