@@ -11,7 +11,7 @@ return {
                 javascript = { "prettierd", "prettier" },
                 html = { "prettierd", "prettier" },
                 css = { "prettierd", "prettier" },
-                markdown = { { "prettierd", "prettier" }, "injected" },
+                markdown = { { "markdownlint", "prettierd", "prettier" }, "injected" },
                 zsh = { "beautysh" },
                 bash = { "beautysh" },
                 sh = { "beautysh" },
