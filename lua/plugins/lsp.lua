@@ -293,30 +293,31 @@ return {
             local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
             vim.api.nvim_create_user_command("MasonInstallAll", function()
                 local ensure_installed = {
-                    "clangd",
-                    "taplo",
+                    "basedpyright",
                     "bash-language-server",
                     "beautysh",
                     "black",
                     "clang-format",
+                    "clangd",
                     "cmake-language-server",
                     "cpptools",
                     "css-lsp",
                     "debugpy",
+                    "goimports",
+                    "haskell-language-server",
                     "html-lsp",
                     "isort",
                     "json-lsp",
                     "lua-language-server",
                     "luacheck",
+                    "markdownlint",
                     "prettier",
                     "prettierd",
                     "pyright",
-                    "basedpyright",
                     "ruff-lsp",
                     "stylua",
+                    "taplo",
                     "typescript-language-server",
-                    "goimports",
-                    "haskell-language-server",
                 }
 
                 vim.cmd(string.format("MasonInstall %s", table.concat(ensure_installed, " ")))
