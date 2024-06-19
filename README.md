@@ -46,6 +46,7 @@
 - [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+- [nvim-lint](https://github.com/mfussenegger/nvim-lint)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-nio](https://github.com/nvim-neotest/nvim-nio)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)

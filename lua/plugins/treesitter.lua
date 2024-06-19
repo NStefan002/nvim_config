@@ -52,7 +52,7 @@ return {
                         end
                     end,
                 },
-                indent = { enable = true, disable = { "python" } },
+                indent = { enable = true, disable = { "python", "markdown" } },
                 incremental_selection = {
                     enable = false,
                 },
