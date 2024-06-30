@@ -13,6 +13,15 @@ return {
                     ["ctrl-q"] = "select-all+accept",
                 },
             },
+            previewers = {
+                builtin = {
+                    extensions = {
+                        ["png"] = { "chafa", "{file}" },
+                        ["svg"] = { "chafa", "{file}" },
+                        ["jpg"] = { "chafa", "{file}" },
+                    },
+                },
+            },
         })
         local nmap_fzf = function(keys, cmd, desc)
             if desc then
