@@ -27,6 +27,7 @@ return {
                     "markdown",
                     "markdown_inline",
                     "python",
+                    "regex",
                     "toml",
                     "vim",
                     "vimdoc",

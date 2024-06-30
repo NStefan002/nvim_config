@@ -1,7 +1,11 @@
 return {
     dev = true,
     "NStefan002/screenkey.nvim",
-    cmd = "Screenkey",
+    lazy = false,
     version = "*",
-    opts = {},
+    opts = {
+        disable = {
+            buftypes = { "terminal" },
+        },
+    },
 }

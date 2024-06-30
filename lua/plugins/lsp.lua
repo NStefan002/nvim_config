@@ -304,6 +304,8 @@ return {
                     "css-lsp",
                     "debugpy",
                     "goimports",
+                    "golangci-lint",
+                    "gopls",
                     "haskell-language-server",
                     "html-lsp",
                     "isort",
@@ -317,6 +319,7 @@ return {
                     "ruff-lsp",
                     "stylua",
                     "taplo",
+                    "templ",
                     "typescript-language-server",
                 }
 
@@ -460,6 +463,11 @@ return {
                     end,
                     gopls = function()
                         lspconfig.gopls.setup({
+                            capabilities = lspCapabilities,
+                        })
+                    end,
+                    templ = function()
+                        lspconfig.templ.setup({
                             capabilities = lspCapabilities,
                         })
                     end,
