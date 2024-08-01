@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     config = function()
         require("lint").linters_by_ft = {
-            -- lua = { "luacheck" },
+            lua = { "luacheck" },
             markdown = { "markdownlint" },
             go = { "golangcilint" },
         }

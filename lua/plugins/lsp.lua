@@ -6,11 +6,16 @@ return {
             library = {
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
                 { path = "wezterm-types", mods = { "wezterm" } },
+                { path = "luassert-types/library", words = { "assert" } },
+                { path = "busted-types/library", words = { "describe" } },
             },
         },
     },
     { "Bilal2453/luvit-meta", lazy = true }, -- `vim.uv` types
     { "justinsgithub/wezterm-types", lazy = true }, -- wezterm types
+    { "LuaCATS/luassert", name = "luassert-types", lazy = true },
+    { "LuaCATS/busted", name = "busted-types", lazy = true },
+
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v3.x",
@@ -174,7 +179,7 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        cmd = { "LspInfo", "LspInstall", "LspStart" },
+        cmd = { "LspInfo", "LspInstall", "LspStart", "MasonInstallAll" },
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             { "williamboman/mason-lspconfig.nvim" },
@@ -341,9 +346,12 @@ return {
                                         globals = {
                                             -- nvim <-> lua
                                             "vim",
+                                            "assert",
+                                            "after_each",
+                                            "before_each",
                                             "describe",
                                             "it",
-                                            "assert",
+                                            "pending",
                                             -- awesome wm
                                             "awesome",
                                             "client",
