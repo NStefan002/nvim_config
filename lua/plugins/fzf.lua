@@ -23,31 +23,35 @@ return {
                 },
             },
         })
-        local nmap_fzf = function(keys, cmd, desc)
-            if desc then
-                desc = "FzfLua: " .. desc
-            end
 
-            vim.keymap.set("n", keys, string.format("<cmd>FzfLua %s<cr>", cmd), { desc = desc })
+        ---@param lhs string
+        ---@param rhs string
+        ---@param desc string
+        ---@param modes? string[]
+        local function map(lhs, rhs, desc, modes)
+            desc = "FzfLua: " .. desc
+            modes = modes or { "n" }
+            vim.keymap.set(modes, lhs, string.format("<cmd>FzfLua %s<cr>", rhs), { desc = desc })
         end
 
         -- buffers and files
-        nmap_fzf("<leader>sf", "files", "[S]earch [F]iles")
-        nmap_fzf("<leader>sb", "buffers", "[S]earch [B]uffers")
+        map("<leader>sf", "files", "[S]earch [F]iles")
+        map("<leader>sb", "buffers", "[S]earch [B]uffers")
 
         -- search
-        nmap_fzf("<leader>lg", "live_grep_native", "[L]ive [G]rep")
-        nmap_fzf("<leader>gw", "grep_cword", "[G]rep c[w]ord")
-        nmap_fzf("<leader>gW", "grep_cWORD", "[G]rep c[W]ORD")
+        map("<leader>lg", "live_grep_native", "[L]ive [G]rep")
+        map("<leader>gw", "grep_cword", "[G]rep c[w]ord")
+        map("<leader>gW", "grep_cWORD", "[G]rep c[W]ORD")
+        map("<leader>gv", "grep_visual", "[G]rep [V]isual", { "v" })
 
         --git
-        nmap_fzf("<leader>gf", "git_files", "Search [G]it [F]iles")
+        map("<leader>gf", "git_files", "Search [G]it [F]iles")
 
         -- lsp
-        nmap_fzf("<leader>sd", "diagnostics_workspace", "[S]earch [D]iagnostics")
+        map("<leader>sd", "diagnostics_workspace", "[S]earch [D]iagnostics")
 
         -- nvim
-        nmap_fzf("<leader>key", "keymaps", "[Key]maps")
-        nmap_fzf("<leader>sh", "helptags", "[S]earch [H]elp")
+        map("<leader>key", "keymaps", "[Key]maps")
+        map("<leader>sh", "helptags", "[S]earch [H]elp")
     end,
 }
