@@ -83,6 +83,10 @@ vim.keymap.set("n", "<leader>hl", function()
     vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()
 end, { silent = true, desc = "Toggle [hl]search" })
 
+vim.keymap.set("n", "<leader>W", function()
+    vim.opt.wrap = not vim.opt.wrap:get()
+end, { silent = true, desc = "Toggle [W]rap" })
+
 -- cmdline
 vim.keymap.set("c", "<c-h>", "<left>", { desc = "Move cursor left in command mode" })
 vim.keymap.set("c", "<c-l>", "<right>", { desc = "Move cursor left in command mode" })
