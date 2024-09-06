@@ -1,10 +1,9 @@
 return {
-    -- todo highlither
-
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function()
+        vim.keymap.set("n", "<leader>td", "<cmd>TodoFzfLua<CR>", { desc = "[T]o[d]o FzfLua" })
         require("todo-comments").setup({
             signs = true, -- show icons in the signs column
             sign_priority = 8, -- sign priority
