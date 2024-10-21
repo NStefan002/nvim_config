@@ -7,6 +7,7 @@ return {
             local schemes_candidates = {
                 "random",
                 "default",
+                "rose-pine",
                 "tokyonight-night",
                 "tokyonight-storm",
                 "tokyonight-moon",
@@ -50,4 +51,5 @@ return {
             vim.cmd("TransparentDisable")
         end,
     },
+    { "rose-pine/neovim", name = "rose-pine" },
 }
