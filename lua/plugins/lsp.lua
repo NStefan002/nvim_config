@@ -256,14 +256,6 @@ return {
                 )
             end)
 
-            -- for versions <= 0.9.4
-            lsp_zero.set_sign_icons({
-                error = "",
-                warn = "",
-                hint = "",
-                info = "",
-            })
-
             vim.diagnostic.config({
                 virtual_text = true,
                 -- for nightly builds

@@ -17,6 +17,7 @@ return {
                 sh = { "beautysh" },
                 python = { "isort", "black" },
                 go = { "goimports", "gofmt" },
+                sql = { "sqlfmt" },
             },
         })
 
