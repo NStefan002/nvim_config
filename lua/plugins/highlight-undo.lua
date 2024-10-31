@@ -1,13 +1,12 @@
 return {
     {
         "tzachar/highlight-undo.nvim",
-        event = "VeryLazy",
+        keys = { { "u" }, { "<C-r>" } },
         opts = {
-            hlgroup = "HighlightUndo",
             duration = 300,
             keymaps = {
-                { "n", "u", "undo", {} },
-                { "n", "<C-r>", "redo", {} },
+                paste = { disabled = true },
+                Paste = { disabled = true },
             },
         },
     },
