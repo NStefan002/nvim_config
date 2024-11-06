@@ -1,5 +1,9 @@
 ignore = {
     "631", -- max_line_length
+    "122", -- setting read-only field of global variable 'vim'
+}
+globals = {
+    "vim",
 }
 read_globals = {
     "vim",
