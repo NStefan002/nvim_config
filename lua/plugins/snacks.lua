@@ -7,7 +7,7 @@ return {
         ---@module "snacks"
         ---@type snacks.Config
         local opts = {
-            styles = {},
+            styles = { lazygit = { border = "double" } },
             bigfile = { enabled = false },
             notifier = { enabled = false },
             quickfile = { enabled = true },
