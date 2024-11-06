@@ -69,24 +69,21 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 
 -- folds
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0"
 vim.opt.foldenable = true
-vim.opt.foldmethod = "manual"
+-- vim.opt.foldmethod = "manual"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = "|", foldclose = "" })
+vim.opt.fillchars:append({ fold = " ", foldopen = "", foldsep = "│", foldclose = "" })
 
 function _G.Custom_fold()
-    local line = vim.fn.getline(vim.v.foldstart)
+    local line_txt = vim.fn.getline(vim.v.foldstart)
     local line_count = vim.v.foldend - vim.v.foldstart + 1
-    return " ⚡ " .. line .. ": " .. line_count .. " lines"
+    return line_txt .. ": " .. line_count .. " lines"
 end
-
-if vim.fn.has("nvim-0.10") == 1 then
-    vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
-else
-    vim.wo.foldtext = "v:lua.Custom_fold()"
-end
+vim.wo.foldtext = "v:lua.Custom_fold()"
 
 -- no idea what is this
 vim.opt.isfname:append("@-@")
