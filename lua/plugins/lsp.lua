@@ -298,6 +298,7 @@ return {
                     "clangd",
                     "cmake-language-server",
                     "cpptools",
+                    "cspell",
                     "css-lsp",
                     "debugpy",
                     "goimports",
