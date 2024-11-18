@@ -8,6 +8,7 @@ return {
             markdown = { "markdownlint", "cspell" },
             go = { "golangcilint" },
             text = { "cspell" },
+            gitcommit = { "cspell" },
         }
         -- change the severity of all diagnostics produced by cspell
         lint.linters.cspell = require("lint.util").wrap(lint.linters.cspell, function(diagnostic)

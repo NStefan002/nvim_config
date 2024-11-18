@@ -65,12 +65,10 @@ return {
 
         -- redirect print (lua func) to snacks.notifier
         print = function(...)
-            local print_safe_args = {}
-            local args = { ... }
-            for i = 1, #args do
-                table.insert(print_safe_args, tostring(args[i]))
-            end
-            vim.notify(table.concat(print_safe_args, " "), vim.log.levels.INFO)
+            local args = vim.tbl_map(function(v)
+                return tostring(v)
+            end, { ... })
+            vim.notify(table.concat(args, " "), vim.log.levels.INFO)
         end
 
         vim.keymap.set("n", "<leader>nh", function()
@@ -86,6 +84,7 @@ return {
         })
 
         -- lazygit
+
         vim.keymap.set("n", "<leader>gg", function()
             snacks.lazygit()
         end, {
@@ -93,6 +92,7 @@ return {
         })
 
         -- gitbrowse
+
         vim.keymap.set("n", "<leader>gB", function()
             snacks.gitbrowse()
         end, {

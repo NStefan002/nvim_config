@@ -4,6 +4,7 @@ return {
     event = "VeryLazy",
     config = function()
         require("fzf-lua").setup({
+            "default-title",
             keymap = {
                 builtin = {
                     ["<c-d>"] = "preview-page-down",

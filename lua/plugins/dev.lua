@@ -1,6 +1,18 @@
 return {
     { dev = true, "NStefan002/busted-wrapper.nvim", lazy = false, opts = {} },
-
+    {
+        dev = true,
+        "NStefan002/wormhole.nvim",
+        lazy = false,
+        config = function()
+            vim.keymap.set(
+                "n",
+                "<c-s-i>",
+                "<Plug>(WormholeLabelsToggle)",
+                { desc = "Wormhole Labels Toggle" }
+            )
+        end,
+    },
     {
         dev = true,
         "NStefan002/speedtyper.nvim",
