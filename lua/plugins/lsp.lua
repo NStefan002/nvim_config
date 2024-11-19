@@ -22,7 +22,7 @@ return {
         lazy = false,
         config = false,
         init = function()
-            vim.g.lsp_zero_extend_cmp = 0
+            -- vim.g.lsp_zero_extend_cmp = 0
             vim.g.lsp_zero_extend_lspconfig = 0
         end,
     },
@@ -39,143 +39,276 @@ return {
     },
 
     {
-        "hrsh7th/nvim-cmp",
-        event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = {
-            {
-                { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
-                "rafamadriz/friendly-snippets",
-                "onsails/lspkind.nvim",
-                "hrsh7th/cmp-buffer",
-                "hrsh7th/cmp-path",
-                "saadparwaiz1/cmp_luasnip",
-                "hrsh7th/cmp-nvim-lua",
-                "hrsh7th/cmp-cmdline",
+        "saghen/blink.cmp",
+        lazy = false,
+        dependencies = { { "rafamadriz/friendly-snippets" }, { "saghen/blink.compat" } },
+        version = "v0.*",
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = {
+                ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
+                ["<c-x>"] = { "hide" },
+                ["<c-y>"] = { "select_and_accept" },
+                ["<cr>"] = { "select_and_accept", "fallback" },
+
+                ["<c-p>"] = { "select_prev", "fallback" },
+                ["<c-n>"] = { "select_next", "fallback" },
+
+                ["<c-u>"] = { "scroll_documentation_up", "fallback" },
+                ["<c-d>"] = { "scroll_documentation_down", "fallback" },
+
+                ["<tab>"] = { "snippet_forward", "fallback" },
+                ["<s-tab>"] = { "snippet_backward", "fallback" },
             },
-        },
-        config = function()
-            local lsp_zero = require("lsp-zero")
-            lsp_zero.extend_cmp()
 
-            local cmp = require("cmp")
-            local cmp_action = lsp_zero.cmp_action()
-            local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
+            accept = {
+                create_undo_point = true,
+                auto_brackets = { enabled = false },
+            },
 
-            local load_snippets = require("luasnip.loaders.from_vscode")
-            load_snippets.lazy_load({
-                paths = "~/.config/nvim/my_snippets",
-            })
-            load_snippets.lazy_load({
-                exclude = { "c", "cpp" },
-            })
-
-            local preferred_sources = {
-                { name = "luasnip" },
-                { name = "nvim_lsp" },
-                { name = "nvim_lua" },
-                { name = "path" },
-                {
-                    name = "lazydev",
-                    group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            trigger = {
+                signature_help = {
+                    enabled = true,
+                    -- when true, will show the signature help window when the cursor comes after a trigger character when entering insert mode
+                    show_on_insert_on_trigger_character = true,
                 },
-            }
-            local function tooBig(bufnr)
-                local max_filesize = 10 * 1024 -- 100 KB
-                local check_stats = (vim.uv or vim.loop).fs_stat
-                local ok, stats = pcall(check_stats, vim.api.nvim_buf_get_name(bufnr))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                else
-                    return false
-                end
-            end
-            vim.api.nvim_create_autocmd("BufRead", {
-                group = vim.api.nvim_create_augroup("CmpBufferDisableGrp", { clear = true }),
-                callback = function(ev)
-                    local sources = preferred_sources
-                    if not tooBig(ev.buf) then
-                        sources[#sources + 1] = { name = "buffer", keyword_length = 4 }
-                    end
-                    cmp.setup.buffer({
-                        sources = cmp.config.sources(sources),
-                    })
-                end,
-            })
+            },
 
-            cmp.setup({
-                mapping = {
-                    ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select_opts),
-                    ["<C-n>"] = cmp.mapping.select_next_item(cmp_select_opts),
-                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-Space>"] = cmp.mapping.complete({}),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<Tab>"] = cmp_action.luasnip_jump_forward(),
-                    ["<S-Tab>"] = cmp_action.luasnip_jump_backward(),
+            fuzzy = {
+                -- frencency tracks the most recently/frequently used items and boosts the score of the item
+                use_frecency = true,
+                -- proximity bonus boosts the score of items matching nearby words
+                use_proximity = true,
+                max_items = 200,
+                -- controls which sorts to use and in which order, these three are currently the only allowed options
+                sorts = { "label", "kind", "score" },
+
+                prebuilt_binaries = {
+                    -- Whether or not to automatically download a prebuilt binary from github. If this is set to `false`
+                    -- you will need to manually build the fuzzy binary dependencies by running `cargo build --release`
+                    download = true,
+                    -- When downloading a prebuilt binary, force the downloader to resolve this version. If this is unset
+                    -- then the downloader will attempt to infer the version from the checked out git tag (if any).
+                    --
+                    -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
+                    force_version = nil,
+                    -- When downloading a prebuilt binary, force the downloader to use this system triple. If this is unset
+                    -- then the downloader will attempt to infer the system triple from `jit.os` and `jit.arch`.
+                    -- Check the latest release for all available system triples
+                    --
+                    -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
+                    force_system_triple = nil,
                 },
-                preselect = "item",
+            },
+
+            sources = {
+                -- list of enabled providers
                 completion = {
-                    completeopt = "menu,menuone,noinsert",
+                    enabled_providers = { "lsp", "path", "snippets", "buffer" },
                 },
-                formatting = {
-                    fields = { "abbr", "kind", "menu" },
-                    format = require("lspkind").cmp_format({
-                        mode = "symbol_text",
-                        maxwidth = 50,
-                        ellipsis_char = "...",
-                    }),
-                    expandable_indicator = true,
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                experimental = {
-                    ghost_text = false,
-                },
-                sources = cmp.config.sources({
-                    { name = "luasnip" },
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lua" },
-                    { name = "path" },
-                    { name = "buffer", keyword_length = 4 },
-                }),
-            })
 
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline({
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                cmp.select_next_item({ cmp_select_opts })
-                            else
-                                cmp.confirm()
-                            end
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c" }),
-                }),
-                sources = cmp.config.sources({
-                    { name = "cmdline" },
-                    { name = "path" },
-                }),
-                window = {
-                    completion = cmp.config.window.bordered(),
+                providers = {
+                    -- snippets = {
+                    --     name = "Snippets",
+                    --     module = "blink.cmp.sources.snippets",
+                    --     score_offset = -3,
+                    --     opts = {
+                    --         friendly_snippets = true,
+                    --         search_paths = { vim.fn.stdpath("config") .. "/my_snippets" },
+                    --         global_snippets = { "all" },
+                    --         extended_filetypes = {},
+                    --         ignored_filetypes = {},
+                    --     },
+                    -- },
                 },
-            })
-            -- cmp.event:on("menu_opened", function()
-            --     vim.b.copilot_suggestion_hidden = true
-            -- end)
-            --
-            -- cmp.event:on("menu_closed", function()
-            --     vim.b.copilot_suggestion_hidden = false
-            -- end)
-        end,
+            },
+
+            windows = {
+                autocomplete = {
+                    border = "double",
+                    -- keep the cursor X lines away from the top/bottom of the window
+                    scrolloff = 2,
+                    -- Controls how the completion items are selected
+                    -- 'preselect' will automatically select the first item in the completion list
+                    -- 'manual' will not select any item by default
+                    -- 'auto_insert' will not select any item by default, and insert the completion items automatically when selecting them
+                    selection = "preselect",
+                    -- Controls how the completion items are rendered on the popup window
+                    -- 'simple' will render the item's kind icon the left alongside the label
+                    -- 'reversed' will render the label on the left and the kind icon + name on the right
+                    -- 'minimal' will render the label on the left and the kind name on the right
+                    -- 'function(blink.cmp.CompletionRenderContext): blink.cmp.Component[]' for custom rendering
+                    draw = "reversed",
+                    -- Controls the cycling behavior when reaching the beginning or end of the completion list.
+                    cycle = {
+                        -- When `true`, calling `select_next` at the *bottom* of the completion list will select the *first* completion item.
+                        from_bottom = true,
+                        -- When `true`, calling `select_prev` at the *top* of the completion list will select the *last* completion item.
+                        from_top = true,
+                    },
+                },
+                documentation = {
+                    border = "single",
+                    auto_show = true,
+                    auto_show_delay_ms = 0,
+                    update_delay_ms = 50,
+                },
+                signature_help = {
+                    border = "rounded",
+                },
+                ghost_text = {
+                    enabled = false,
+                },
+            },
+
+            -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+            -- adjusts spacing to ensure icons are aligned
+            nerd_font_variant = "mono",
+
+            -- don't show completions or signature help for these filetypes. Keymaps are also disabled.
+            blocked_filetypes = {},
+        },
     },
+
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     event = { "InsertEnter", "CmdlineEnter" },
+    --     dependencies = {
+    --         {
+    --             { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+    --             "rafamadriz/friendly-snippets",
+    --             "onsails/lspkind.nvim",
+    --             "hrsh7th/cmp-buffer",
+    --             "hrsh7th/cmp-path",
+    --             "saadparwaiz1/cmp_luasnip",
+    --             "hrsh7th/cmp-nvim-lua",
+    --             "hrsh7th/cmp-cmdline",
+    --         },
+    --     },
+    --     config = function()
+    --         local lsp_zero = require("lsp-zero")
+    --         lsp_zero.extend_cmp()
+    --
+    --         local cmp = require("cmp")
+    --         local cmp_action = lsp_zero.cmp_action()
+    --         local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
+    --
+    --         local load_snippets = require("luasnip.loaders.from_vscode")
+    --         load_snippets.lazy_load({
+    --             paths = "~/.config/nvim/my_snippets",
+    --         })
+    --         load_snippets.lazy_load({
+    --             exclude = { "c", "cpp" },
+    --         })
+    --
+    --         local preferred_sources = {
+    --             { name = "luasnip" },
+    --             { name = "nvim_lsp" },
+    --             { name = "nvim_lua" },
+    --             { name = "path" },
+    --             {
+    --                 name = "lazydev",
+    --                 group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+    --             },
+    --         }
+    --         local function tooBig(bufnr)
+    --             local max_filesize = 10 * 1024 -- 100 KB
+    --             local check_stats = (vim.uv or vim.loop).fs_stat
+    --             local ok, stats = pcall(check_stats, vim.api.nvim_buf_get_name(bufnr))
+    --             if ok and stats and stats.size > max_filesize then
+    --                 return true
+    --             else
+    --                 return false
+    --             end
+    --         end
+    --         vim.api.nvim_create_autocmd("BufRead", {
+    --             group = vim.api.nvim_create_augroup("CmpBufferDisableGrp", { clear = true }),
+    --             callback = function(ev)
+    --                 local sources = preferred_sources
+    --                 if not tooBig(ev.buf) then
+    --                     sources[#sources + 1] = { name = "buffer", keyword_length = 4 }
+    --                 end
+    --                 cmp.setup.buffer({
+    --                     sources = cmp.config.sources(sources),
+    --                 })
+    --             end,
+    --         })
+    --
+    --         cmp.setup({
+    --             mapping = {
+    --                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select_opts),
+    --                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select_opts),
+    --                 ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+    --                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    --                 ["<C-Space>"] = cmp.mapping.complete({}),
+    --                 ["<C-e>"] = cmp.mapping.abort(),
+    --                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    --                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    --                 ["<Tab>"] = cmp_action.luasnip_jump_forward(),
+    --                 ["<S-Tab>"] = cmp_action.luasnip_jump_backward(),
+    --             },
+    --             preselect = "item",
+    --             completion = {
+    --                 completeopt = "menu,menuone,noinsert",
+    --             },
+    --             formatting = {
+    --                 fields = { "abbr", "kind", "menu" },
+    --                 format = require("lspkind").cmp_format({
+    --                     mode = "symbol_text",
+    --                     maxwidth = 50,
+    --                     ellipsis_char = "...",
+    --                 }),
+    --                 expandable_indicator = true,
+    --             },
+    --             window = {
+    --                 completion = cmp.config.window.bordered(),
+    --                 documentation = cmp.config.window.bordered(),
+    --             },
+    --             experimental = {
+    --                 ghost_text = false,
+    --             },
+    --             sources = cmp.config.sources({
+    --                 { name = "luasnip" },
+    --                 { name = "nvim_lsp" },
+    --                 { name = "nvim_lua" },
+    --                 { name = "path" },
+    --                 { name = "buffer", keyword_length = 4 },
+    --             }),
+    --         })
+    --
+    --         cmp.setup.cmdline(":", {
+    --             mapping = cmp.mapping.preset.cmdline({
+    --                 ["<Tab>"] = cmp.mapping(function(fallback)
+    --                     if cmp.visible() then
+    --                         local entry = cmp.get_selected_entry()
+    --                         if not entry then
+    --                             cmp.select_next_item({ cmp_select_opts })
+    --                         else
+    --                             cmp.confirm()
+    --                         end
+    --                     else
+    --                         fallback()
+    --                     end
+    --                 end, { "i", "s", "c" }),
+    --             }),
+    --             sources = cmp.config.sources({
+    --                 { name = "cmdline" },
+    --                 { name = "path" },
+    --             }),
+    --             window = {
+    --                 completion = cmp.config.window.bordered(),
+    --             },
+    --         })
+    --         cmp.event:on("menu_opened", function()
+    --             vim.b.copilot_suggestion_hidden = true
+    --         end)
+    --
+    --         cmp.event:on("menu_closed", function()
+    --             vim.b.copilot_suggestion_hidden = false
+    --         end)
+    --     end,
+    -- },
 
     {
         "neovim/nvim-lspconfig",
@@ -183,7 +316,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             { "williamboman/mason-lspconfig.nvim" },
-            { "hrsh7th/cmp-nvim-lsp" },
+            -- { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -217,26 +350,25 @@ return {
                         desc = "Show inlay hints",
                     })
                 end
-                -- function for shorter code
-                local function nmap(keys, func, desc, additionalMode)
+                ---function for shorter code
+                ---@param keys string
+                ---@param func string | fun()
+                ---@param desc? string
+                local function nmap(keys, func, desc)
                     if desc then
                         desc = "LSP: " .. desc
                     end
-                    local mode
-                    if additionalMode then
-                        mode = { "n", additionalMode }
-                    else
-                        mode = "n"
-                    end
-                    vim.keymap.set(mode, keys, func, { buffer = bufnr, remap = false, desc = desc })
+                    vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false, desc = desc })
                 end
 
                 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
                 nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-                nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+                -- nmap("K", function()
+                --     vim.lsp.buf.hover({ border = "rounded" })
+                -- end, "Hover Documentation")
                 nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
-                nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame", "v")
+                nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
                 nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[G]oto [D]efinition")
                 nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
                 nmap(
@@ -314,7 +446,7 @@ return {
                     "prettier",
                     "prettierd",
                     "pyright",
-                    "ruff-lsp",
+                    "ruff",
                     "stylua",
                     "taplo",
                     "templ",
@@ -446,8 +578,8 @@ return {
                             capabilities = lspCapabilities,
                         })
                     end,
-                    ruff_lsp = function()
-                        lspconfig.ruff_lsp.setup({
+                    ruff = function()
+                        lspconfig.ruff.setup({
                             settings = {
                                 organizeImports = false,
                             },
@@ -477,29 +609,29 @@ return {
 
             vim.filetype.add({ extension = { pro = "prolog" } })
 
-            local luasnip = require("luasnip")
+            -- local luasnip = require("luasnip")
             -- Neovim by default does not recognize .ejs files (test with :echo &filetype)
             vim.filetype.add({ extension = { ejs = "ejs" } })
-            luasnip.filetype_set("ejs", { "html", "javascript", "ejs" })
-
-            local luasnip_fix_augroup =
-                vim.api.nvim_create_augroup("LuaSnipHistory", { clear = true })
-            vim.api.nvim_create_autocmd("ModeChanged", {
-                pattern = "*",
-                callback = function()
-                    if
-                        (
-                            (vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n")
-                            or vim.v.event.old_mode == "i"
-                        )
-                        and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
-                        and not luasnip.session.jump_active
-                    then
-                        luasnip.unlink_current()
-                    end
-                end,
-                group = luasnip_fix_augroup,
-            })
+            -- luasnip.filetype_set("ejs", { "html", "javascript", "ejs" })
+            --
+            -- local luasnip_fix_augroup =
+            --     vim.api.nvim_create_augroup("LuaSnipHistory", { clear = true })
+            -- vim.api.nvim_create_autocmd("ModeChanged", {
+            --     pattern = "*",
+            --     callback = function()
+            --         if
+            --             (
+            --                 (vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n")
+            --                 or vim.v.event.old_mode == "i"
+            --             )
+            --             and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+            --             and not luasnip.session.jump_active
+            --         then
+            --             luasnip.unlink_current()
+            --         end
+            --     end,
+            --     group = luasnip_fix_augroup,
+            -- })
         end,
     },
 }
