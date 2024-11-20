@@ -39,6 +39,7 @@
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [mini.icons](https://github.com/echasnovski/mini.icons)
+- [mini.sessions](https://github.com/echasnovski/mini.sessions)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
