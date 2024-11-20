@@ -103,3 +103,5 @@ vim.opt.updatetime = 50
 vim.opt.shm:append({ a = true, I = true, S = true })
 
 vim.opt.showmode = false
+
+vim.opt.sessionoptions = { "buffers", "curdir", "folds", "terminal", "winsize" }
