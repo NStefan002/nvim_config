@@ -43,6 +43,14 @@ return {
                         action = "Lazy profile",
                         key = "p",
                     },
+                    {
+                        icon = " ",
+                        icon_hl = "@property",
+                        desc = "Sessions",
+                        group = "@property",
+                        action = "lua MiniSessions.select()",
+                        key = "s",
+                    },
                 },
             },
         })
