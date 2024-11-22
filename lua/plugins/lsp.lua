@@ -19,8 +19,11 @@ return {
     {
         "saghen/blink.cmp",
         lazy = false,
-        dependencies = { { "rafamadriz/friendly-snippets" }, { "saghen/blink.compat" } },
-        version = "v0.*",
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            "saghen/blink.compat",
+        },
+        build = "cargo build --release",
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -61,23 +64,6 @@ return {
                 max_items = 200,
                 -- controls which sorts to use and in which order, these three are currently the only allowed options
                 sorts = { "label", "kind", "score" },
-
-                prebuilt_binaries = {
-                    -- Whether or not to automatically download a prebuilt binary from github. If this is set to `false`
-                    -- you will need to manually build the fuzzy binary dependencies by running `cargo build --release`
-                    download = true,
-                    -- When downloading a prebuilt binary, force the downloader to resolve this version. If this is unset
-                    -- then the downloader will attempt to infer the version from the checked out git tag (if any).
-                    --
-                    -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
-                    force_version = nil,
-                    -- When downloading a prebuilt binary, force the downloader to use this system triple. If this is unset
-                    -- then the downloader will attempt to infer the system triple from `jit.os` and `jit.arch`.
-                    -- Check the latest release for all available system triples
-                    --
-                    -- Beware that if the FFI ABI changes while tracking main then this may result in blink breaking.
-                    force_system_triple = nil,
-                },
             },
 
             sources = {
@@ -86,19 +72,58 @@ return {
                     enabled_providers = { "lsp", "path", "snippets", "buffer" },
                 },
 
+                -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
                 providers = {
-                    -- snippets = {
-                    --     name = "Snippets",
-                    --     module = "blink.cmp.sources.snippets",
-                    --     score_offset = -3,
-                    --     opts = {
-                    --         friendly_snippets = true,
-                    --         search_paths = { vim.fn.stdpath("config") .. "/my_snippets" },
-                    --         global_snippets = { "all" },
-                    --         extended_filetypes = {},
-                    --         ignored_filetypes = {},
-                    --     },
-                    -- },
+                    lsp = {
+                        name = "LSP",
+                        module = "blink.cmp.sources.lsp",
+
+                        -- NOTE: all of the providers have following options
+                        enabled = true, -- whether or not to enable the provider
+                        transform_items = nil, -- function to transform the items before they're returned
+                        should_show_items = true, -- whether or not to show the items
+                        max_items = nil, -- maximum number of items to return
+                        min_keyword_length = 1, -- minimum number of characters to trigger the provider
+                        fallback_for = {}, -- if any of these providers return 0 items, it will fallback to this provider
+                        score_offset = 0, -- boost/penalize the score of the items
+                        override = nil, -- override the source's functions
+                    },
+                    path = {
+                        name = "Path",
+                        module = "blink.cmp.sources.path",
+                        min_keyword_length = 3,
+                        score_offset = 3,
+                        opts = {
+                            trailing_slash = false,
+                            label_trailing_slash = true,
+                            get_cwd = function(context)
+                                return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+                            end,
+                            show_hidden_files_by_default = false,
+                        },
+                    },
+                    snippets = {
+                        name = "Snippets",
+                        module = "blink.cmp.sources.snippets",
+                        score_offset = -3,
+                        opts = {
+                            friendly_snippets = true,
+                            -- TODO: find out why this doesn't work (next 3 lines)
+                            search_paths = { vim.fn.stdpath("config") .. "/my_snippets" },
+                            global_snippets = { "all" },
+                            extended_filetypes = { "c", "cpp" },
+                            ignored_filetypes = { "c", "cpp" },
+                            get_filetype = function(_)
+                                return vim.bo.filetype
+                            end,
+                        },
+                    },
+                    buffer = {
+                        name = "Buffer",
+                        module = "blink.cmp.sources.buffer",
+                        min_keyword_length = 3,
+                        fallback_for = { "lsp" },
+                    },
                 },
             },
 
@@ -113,11 +138,19 @@ return {
                     -- 'auto_insert' will not select any item by default, and insert the completion items automatically when selecting them
                     selection = "preselect",
                     -- Controls how the completion items are rendered on the popup window
-                    -- 'simple' will render the item's kind icon the left alongside the label
-                    -- 'reversed' will render the label on the left and the kind icon + name on the right
-                    -- 'minimal' will render the label on the left and the kind name on the right
-                    -- 'function(blink.cmp.CompletionRenderContext): blink.cmp.Component[]' for custom rendering
-                    draw = "reversed",
+                    draw = {
+                        align_to_component = "label", -- or 'none' to disable
+                        -- Left and right padding, optionally { left, right } for different padding on each side
+                        padding = 1,
+                        -- Gap between columns
+                        gap = 1,
+
+                        -- Components to render, grouped by column
+                        columns = {
+                            { "label", "label_description", gap = 1 },
+                            { "kind_icon", "kind", gap = 1 },
+                        },
+                    },
                     -- Controls the cycling behavior when reaching the beginning or end of the completion list.
                     cycle = {
                         -- When `true`, calling `select_next` at the *bottom* of the completion list will select the *first* completion item.
@@ -131,9 +164,15 @@ return {
                     auto_show = true,
                     auto_show_delay_ms = 0,
                     update_delay_ms = 50,
+                    -- whether to use treesitter highlighting, disable if you run into performance issues
+                    -- WARN: temporary, eventually blink will support regex highlighting
+                    treesitter_highlighting = true,
                 },
                 signature_help = {
                     border = "rounded",
+                    -- whether to use treesitter highlighting, disable if you run into performance issues
+                    -- WARN: temporary, eventually blink will support regex highlighting
+                    treesitter_highlighting = true,
                 },
                 ghost_text = {
                     enabled = false,
@@ -145,7 +184,7 @@ return {
             nerd_font_variant = "mono",
 
             -- don't show completions or signature help for these filetypes. Keymaps are also disabled.
-            blocked_filetypes = {},
+            blocked_filetypes = { "speedtyper" },
         },
     },
 
