@@ -228,7 +228,7 @@ return {
                         else
                             fallback()
                         end
-                    end, { "i", "s", "c" }),
+                    end, { "c" }),
                 }),
                 sources = cmp.config.sources({
                     { name = "cmdline" },
