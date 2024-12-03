@@ -53,6 +53,10 @@ return {
                 },
                 refresh = 50, -- refresh at most every 50ms
             },
+
+            scratch = {
+                enabled = true,
+            },
         }
 
         local snacks = require("snacks")
@@ -63,40 +67,43 @@ return {
         -- use snacks.notifier as a default way of showing notifications
         vim.notify = snacks.notifier.notify
 
-        -- redirect print (lua func) to snacks.notifier
+        -- redirect print (lua func) to vim.notify
+        -- and enhance it with vim.inspect
         print = function(...)
-            local args = vim.tbl_map(function(v)
-                return tostring(v)
-            end, { ... })
-            vim.notify(table.concat(args, " "), vim.log.levels.INFO)
+            local args = { ... }
+            local output = {}
+            for _, v in ipairs(args) do
+                table.insert(output, vim.inspect(v))
+            end
+            vim.notify(table.concat(output, "\n\n"), vim.log.levels.INFO)
         end
 
         vim.keymap.set("n", "<leader>nh", function()
             snacks.notifier.show_history()
-        end, {
-            desc = "Get notification history",
-        })
+        end, { desc = "Get notification history" })
 
         vim.keymap.set("n", "<leader>no", function()
             snacks.notifier.hide()
-        end, {
-            desc = "Dismiss All Notifications",
-        })
+        end, { desc = "Dismiss All Notifications" })
 
         -- lazygit
 
         vim.keymap.set("n", "<leader>gg", function()
             snacks.lazygit()
-        end, {
-            desc = "Lazygit",
-        })
+        end, { desc = "Lazygit" })
 
         -- gitbrowse
 
         vim.keymap.set("n", "<leader>gB", function()
             snacks.gitbrowse()
-        end, {
-            desc = "Git Browse",
-        })
+        end, { desc = "Git Browse" })
+
+        -- scratch
+        vim.keymap.set("n", "<leader>.", function()
+            snacks.scratch()
+        end, { desc = "Toggle Scratch Buffer" })
+        vim.keymap.set("n", "<leader>S", function()
+            snacks.scratch.select()
+        end, { desc = "Select Scratch Buffer" })
     end,
 }

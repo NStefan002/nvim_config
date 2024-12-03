@@ -65,7 +65,7 @@ return {
     {
         dev = true,
         "NStefan002/grammar.nvim",
-        lazy = false,
+        cmd = "Grammar",
         opts = {},
     },
 }
