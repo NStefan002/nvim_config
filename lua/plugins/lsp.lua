@@ -12,12 +12,13 @@ return {
         },
     },
     { "Bilal2453/luvit-meta", lazy = true }, -- `vim.uv` types
-    { "justinsgithub/wezterm-types", lazy = true }, -- wezterm types
+    { "gonstoll/wezterm-types", lazy = true }, -- wezterm types
     { "LuaCATS/luassert", name = "luassert-types", lazy = true },
     { "LuaCATS/busted", name = "busted-types", lazy = true },
 
     {
         "saghen/blink.cmp",
+        version = "v0.*",
         lazy = false,
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -43,33 +44,82 @@ return {
                 ["<s-tab>"] = { "snippet_backward", "fallback" },
             },
 
-            accept = {
-                create_undo_point = true,
-                auto_brackets = { enabled = false },
-            },
+            -- Disables keymaps, completions and signature help for these filetypes
+            blocked_filetypes = { "speedtyper" },
 
-            trigger = {
-                signature_help = {
-                    enabled = true,
-                    -- when true, will show the signature help window when the cursor comes after a trigger character when entering insert mode
-                    show_on_insert_on_trigger_character = true,
+            completion = {
+                trigger = {
+                    show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
+                },
+
+                menu = {
+                    border = "double",
+                    -- Controls how the completion items are rendered on the popup window
+                    draw = {
+                        -- Aligns the keyword you've typed to a component in the menu
+                        align_to_component = "label", -- or 'none' to disable
+                        -- Left and right padding, optionally { left, right } for different padding on each side
+                        padding = 1,
+                        -- Gap between columns
+                        gap = 1,
+                        -- Use treesitter to highlight the label text
+                        treesitter = true,
+
+                        -- Components to render, grouped by column
+                        columns = {
+                            { "label", "label_description", gap = 1 },
+                            { "kind_icon", "kind", gap = 1 },
+                        },
+                    },
+                },
+
+                documentation = {
+                    -- Controls whether the documentation window will automatically show when selecting a completion item
+                    auto_show = true,
+                    -- Delay before showing the documentation window
+                    auto_show_delay_ms = 0,
+                    -- Delay before updating the documentation window when selecting a new item,
+                    -- while an existing item is still visible
+                    update_delay_ms = 50,
+                    -- Whether to use treesitter highlighting, disable if you run into performance issues
+                    treesitter_highlighting = true,
+                    window = {
+                        border = "single",
+                    },
+                },
+
+                ghost_text = {
+                    enabled = false,
                 },
             },
 
-            fuzzy = {
-                -- frencency tracks the most recently/frequently used items and boosts the score of the item
-                use_frecency = true,
-                -- proximity bonus boosts the score of items matching nearby words
-                use_proximity = true,
-                max_items = 200,
-                -- controls which sorts to use and in which order, these three are currently the only allowed options
-                sorts = { "label", "kind", "score" },
+            -- Experimental signature help support
+            signature = {
+                enabled = true,
+                window = {
+                    border = "padded",
+                    -- Disable if you run into performance issues
+                    treesitter_highlighting = true,
+                },
             },
 
             sources = {
-                -- list of enabled providers
                 completion = {
-                    enabled_providers = { "lsp", "path", "snippets", "buffer" },
+                    enabled_providers = function(_)
+                        local ok, node = pcall(vim.treesitter.get_node)
+                        if
+                            ok
+                            and node
+                            and vim.tbl_contains(
+                                { "comment", "line_comment", "block_comment" },
+                                node:type()
+                            )
+                        then
+                            return { "buffer", "path" }
+                        else
+                            return { "lsp", "path", "snippets", "buffer" }
+                        end
+                    end,
                 },
 
                 -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
@@ -78,15 +128,14 @@ return {
                         name = "LSP",
                         module = "blink.cmp.sources.lsp",
 
-                        -- NOTE: all of the providers have following options
-                        enabled = true, -- whether or not to enable the provider
-                        transform_items = nil, -- function to transform the items before they're returned
-                        should_show_items = true, -- whether or not to show the items
-                        max_items = nil, -- maximum number of items to return
-                        min_keyword_length = 1, -- minimum number of characters to trigger the provider
-                        fallback_for = {}, -- if any of these providers return 0 items, it will fallback to this provider
-                        score_offset = 0, -- boost/penalize the score of the items
-                        override = nil, -- override the source's functions
+                        enabled = true, -- Whether or not to enable the provider
+                        transform_items = nil, -- Function to transform the items before they're returned
+                        should_show_items = true, -- Whether or not to show the items
+                        max_items = nil, -- Maximum number of items to display in the menu
+                        min_keyword_length = 0, -- Minimum number of characters in the keyword to trigger the provider
+                        fallback_for = {}, -- If any of these providers return 0 items, it will fallback to this provider
+                        score_offset = 0, -- Boost/penalize the score of the items
+                        override = nil, -- Override the source's functions
                     },
                     path = {
                         name = "Path",
@@ -94,12 +143,7 @@ return {
                         min_keyword_length = 3,
                         score_offset = 3,
                         opts = {
-                            trailing_slash = false,
-                            label_trailing_slash = true,
-                            get_cwd = function(context)
-                                return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
-                            end,
-                            show_hidden_files_by_default = false,
+                            show_hidden_files_by_default = true,
                         },
                     },
                     snippets = {
@@ -108,83 +152,20 @@ return {
                         score_offset = -3,
                         opts = {
                             friendly_snippets = true,
-                            -- TODO: find out why this doesn't work (next 3 lines)
-                            search_paths = { vim.fn.stdpath("config") .. "/my_snippets" },
+                            search_paths = { vim.fn.stdpath("config") .. "/snippets" },
                             global_snippets = { "all" },
-                            extended_filetypes = { "c", "cpp" },
-                            ignored_filetypes = { "c", "cpp" },
-                            get_filetype = function(_)
-                                return vim.bo.filetype
-                            end,
+                            extended_filetypes = { "c", "cpp", "ejs" },
+                            ignored_filetypes = {},
                         },
                     },
                     buffer = {
                         name = "Buffer",
                         module = "blink.cmp.sources.buffer",
-                        min_keyword_length = 3,
                         fallback_for = { "lsp" },
+                        min_keyword_length = 4,
                     },
                 },
             },
-
-            windows = {
-                autocomplete = {
-                    border = "double",
-                    -- keep the cursor X lines away from the top/bottom of the window
-                    scrolloff = 2,
-                    -- Controls how the completion items are selected
-                    -- 'preselect' will automatically select the first item in the completion list
-                    -- 'manual' will not select any item by default
-                    -- 'auto_insert' will not select any item by default, and insert the completion items automatically when selecting them
-                    selection = "preselect",
-                    -- Controls how the completion items are rendered on the popup window
-                    draw = {
-                        align_to_component = "label", -- or 'none' to disable
-                        -- Left and right padding, optionally { left, right } for different padding on each side
-                        padding = 1,
-                        -- Gap between columns
-                        gap = 1,
-
-                        -- Components to render, grouped by column
-                        columns = {
-                            { "label", "label_description", gap = 1 },
-                            { "kind_icon", "kind", gap = 1 },
-                        },
-                    },
-                    -- Controls the cycling behavior when reaching the beginning or end of the completion list.
-                    cycle = {
-                        -- When `true`, calling `select_next` at the *bottom* of the completion list will select the *first* completion item.
-                        from_bottom = true,
-                        -- When `true`, calling `select_prev` at the *top* of the completion list will select the *last* completion item.
-                        from_top = true,
-                    },
-                },
-                documentation = {
-                    border = "single",
-                    auto_show = true,
-                    auto_show_delay_ms = 0,
-                    update_delay_ms = 50,
-                    -- whether to use treesitter highlighting, disable if you run into performance issues
-                    -- WARN: temporary, eventually blink will support regex highlighting
-                    treesitter_highlighting = true,
-                },
-                signature_help = {
-                    border = "rounded",
-                    -- whether to use treesitter highlighting, disable if you run into performance issues
-                    -- WARN: temporary, eventually blink will support regex highlighting
-                    treesitter_highlighting = true,
-                },
-                ghost_text = {
-                    enabled = false,
-                },
-            },
-
-            -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- adjusts spacing to ensure icons are aligned
-            nerd_font_variant = "mono",
-
-            -- don't show completions or signature help for these filetypes. Keymaps are also disabled.
-            blocked_filetypes = { "speedtyper" },
         },
     },
 
@@ -346,7 +327,7 @@ return {
                             group = inlay_hint_grp,
                             pattern = "*",
                             callback = function()
-                                vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+                                pcall(vim.lsp.inlay_hint.enable, false, { bufnr = bufnr })
                             end,
                             desc = "Hide inlay hints",
                         })
@@ -354,7 +335,7 @@ return {
                             group = inlay_hint_grp,
                             pattern = "*",
                             callback = function()
-                                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                                pcall(vim.lsp.inlay_hint.enable, true, { bufnr = bufnr })
                             end,
                             desc = "Show inlay hints",
                         })
