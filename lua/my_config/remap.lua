@@ -127,3 +127,5 @@ end, { desc = "Previous warning" })
 
 -- comment
 -- vim.keymap.set({ "n", "x", "o" }, "<leader>c", "gc", { remap = true })
+
+vim.keymap.set("n", "z=", require("my_config.util.nicer_z_eq"), {})
