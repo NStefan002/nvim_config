@@ -5,19 +5,20 @@ return {
         local conform = require("conform")
         conform.setup({
             formatters_by_ft = {
-                lua = { "stylua" },
+                bash = { "beautysh" },
                 c = { "clang_format" },
                 cpp = { "clang_format" },
-                javascript = { "prettierd", "prettier" },
-                html = { "prettierd", "prettier" },
                 css = { "prettierd", "prettier" },
-                markdown = { "markdownlint", "injected" },
-                zsh = { "beautysh" },
-                bash = { "beautysh" },
-                sh = { "beautysh" },
-                python = { "isort", "black" },
                 go = { "goimports", "gofmt" },
+                haskell = { "fourmolu" },
+                html = { "prettierd", "prettier" },
+                javascript = { "prettierd", "prettier" },
+                lua = { "stylua" },
+                markdown = { "markdownlint", "injected" },
+                python = { "isort", "black" },
+                sh = { "beautysh" },
                 sql = { "sqlfmt" },
+                zsh = { "beautysh" },
             },
         })
 
