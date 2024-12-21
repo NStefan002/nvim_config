@@ -25,87 +25,95 @@ return {
             "saghen/blink.compat",
         },
         build = "cargo build --release",
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            keymap = {
-                ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
-                ["<c-x>"] = { "hide" },
-                ["<c-y>"] = { "select_and_accept" },
-                ["<cr>"] = { "select_and_accept", "fallback" },
+        config = function()
+            require("blink.cmp").setup({
+                keymap = {
+                    ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
+                    ["<c-x>"] = { "hide" },
+                    ["<c-y>"] = { "select_and_accept" },
+                    ["<cr>"] = { "select_and_accept", "fallback" },
 
-                ["<c-p>"] = { "select_prev", "fallback" },
-                ["<c-n>"] = { "select_next", "fallback" },
+                    ["<c-p>"] = { "select_prev", "fallback" },
+                    ["<c-n>"] = { "select_next", "fallback" },
 
-                ["<c-u>"] = { "scroll_documentation_up", "fallback" },
-                ["<c-d>"] = { "scroll_documentation_down", "fallback" },
+                    ["<c-u>"] = { "scroll_documentation_up", "fallback" },
+                    ["<c-d>"] = { "scroll_documentation_down", "fallback" },
 
-                ["<tab>"] = { "snippet_forward", "fallback" },
-                ["<s-tab>"] = { "snippet_backward", "fallback" },
-            },
+                    ["<tab>"] = { "snippet_forward", "fallback" },
+                    ["<s-tab>"] = { "snippet_backward", "fallback" },
 
-            -- Disables keymaps, completions and signature help for these filetypes
-            blocked_filetypes = { "speedtyper" },
+                    cmdline = {
+                        ["<c-e>"] = { "show" },
+                        ["<c-x>"] = { "hide" },
+                        ["<tab>"] = { "select_and_accept" },
 
-            completion = {
-                trigger = {
-                    show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
+                        ["<c-p>"] = { "select_prev" },
+                        ["<c-n>"] = { "select_next" },
+                    },
                 },
 
-                menu = {
-                    border = "double",
-                    -- Controls how the completion items are rendered on the popup window
-                    draw = {
-                        -- Aligns the keyword you've typed to a component in the menu
-                        align_to_component = "label", -- or 'none' to disable
-                        -- Left and right padding, optionally { left, right } for different padding on each side
-                        padding = 1,
-                        -- Gap between columns
-                        gap = 1,
-                        -- Use treesitter to highlight the label text
-                        treesitter = true,
+                -- Enables keymaps, completions and signature help when true
+                enabled = function()
+                    return vim.bo.buftype ~= "prompt"
+                        and not vim.tbl_contains({ "oil", "DressingInput" }, vim.bo.filetype) -- add more filetypes if needed
+                        and vim.b.completion ~= false
+                end,
 
-                        -- Components to render, grouped by column
-                        columns = {
-                            { "label", "label_description", gap = 1 },
-                            { "kind_icon", "kind", gap = 1 },
+                completion = {
+                    trigger = {
+                        show_on_trigger_character = true,
+                        show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
+                    },
+
+                    accept = {
+                        auto_brackets = {
+                            enabled = false,
                         },
                     },
-                },
 
-                documentation = {
-                    -- Controls whether the documentation window will automatically show when selecting a completion item
-                    auto_show = true,
-                    -- Delay before showing the documentation window
-                    auto_show_delay_ms = 0,
-                    -- Delay before updating the documentation window when selecting a new item,
-                    -- while an existing item is still visible
-                    update_delay_ms = 50,
-                    -- Whether to use treesitter highlighting, disable if you run into performance issues
-                    treesitter_highlighting = true,
-                    window = {
-                        border = "single",
+                    menu = {
+                        border = "double",
+                        auto_show = true,
+                        draw = {
+                            align_to_component = "label", -- or 'none' to disable
+                            padding = 1,
+                            gap = 1,
+                            -- Use treesitter to highlight the label text
+                            treesitter = { "lsp" },
+                            -- Components to render, grouped by column
+                            columns = {
+                                { "label", "label_description", gap = 1 },
+                                { "kind_icon", "kind", gap = 1 },
+                            },
+                        },
+                    },
+
+                    documentation = {
+                        auto_show = true,
+                        auto_show_delay_ms = 0,
+                        treesitter_highlighting = true,
+                        window = {
+                            border = "single",
+                        },
+                    },
+
+                    ghost_text = {
+                        enabled = false,
                     },
                 },
 
-                ghost_text = {
-                    enabled = false,
+                -- Experimental signature help support
+                signature = {
+                    enabled = true,
+                    window = {
+                        border = "padded",
+                        -- Disable if you run into performance issues
+                        treesitter_highlighting = true,
+                    },
                 },
-            },
 
-            -- Experimental signature help support
-            signature = {
-                enabled = true,
-                window = {
-                    border = "padded",
-                    -- Disable if you run into performance issues
-                    treesitter_highlighting = true,
-                },
-            },
-
-            sources = {
-                completion = {
-                    enabled_providers = function(_)
+                sources = {
+                    default = function()
                         local ok, node = pcall(vim.treesitter.get_node)
                         if
                             ok
@@ -120,120 +128,67 @@ return {
                             return { "lsp", "path", "snippets", "buffer" }
                         end
                     end,
-                },
 
-                -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
-                providers = {
-                    lsp = {
-                        name = "LSP",
-                        module = "blink.cmp.sources.lsp",
-
-                        enabled = true, -- Whether or not to enable the provider
-                        transform_items = nil, -- Function to transform the items before they're returned
-                        should_show_items = true, -- Whether or not to show the items
-                        max_items = nil, -- Maximum number of items to display in the menu
-                        min_keyword_length = 0, -- Minimum number of characters in the keyword to trigger the provider
-                        fallback_for = {}, -- If any of these providers return 0 items, it will fallback to this provider
-                        score_offset = 0, -- Boost/penalize the score of the items
-                        override = nil, -- Override the source's functions
+                    -- You may also define providers per filetype
+                    per_filetype = {
+                        -- lua = { 'lsp', 'path' },
                     },
-                    path = {
-                        name = "Path",
-                        module = "blink.cmp.sources.path",
-                        min_keyword_length = 3,
-                        score_offset = 3,
-                        opts = {
-                            show_hidden_files_by_default = true,
-                        },
-                    },
-                    snippets = {
-                        name = "Snippets",
-                        module = "blink.cmp.sources.snippets",
-                        score_offset = -3,
-                        opts = {
-                            friendly_snippets = true,
-                            search_paths = { vim.fn.stdpath("config") .. "/snippets" },
-                            global_snippets = { "all" },
-                            extended_filetypes = { "c", "cpp", "ejs" },
-                            ignored_filetypes = {},
-                        },
-                    },
-                    buffer = {
-                        name = "Buffer",
-                        module = "blink.cmp.sources.buffer",
-                        fallback_for = { "lsp" },
-                        min_keyword_length = 4,
-                    },
-                },
-            },
-        },
-    },
 
-    -- use this for cmdline completion until blink implements it
-    {
-        "hrsh7th/nvim-cmp",
-        lazy = false,
-        dependencies = {
-            {
-                "hrsh7th/cmp-path",
-                "hrsh7th/cmp-cmdline",
-            },
-        },
-        config = function()
-            local cmp = require("cmp")
-            local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
-
-            cmp.setup({
-                preselect = "item",
-                completion = {
-                    completeopt = "menu,menuone,noinsert",
-                },
-                formatting = {
-                    fields = { "abbr", "kind", "menu" },
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                },
-            })
-
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline({
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                cmp.select_next_item({ cmp_select_opts })
-                            else
-                                cmp.confirm()
-                            end
-                        else
-                            fallback()
+                    cmdline = function()
+                        if vim.fn.getcmdtype() == ":" then
+                            return { "cmdline" }
                         end
-                    end, { "c" }),
-                }),
-                sources = cmp.config.sources({
-                    { name = "cmdline" },
-                    { name = "path" },
-                }),
-                window = {
-                    completion = cmp.config.window.bordered(),
+                        return {}
+                    end,
+
+                    min_keyword_length = 0,
+
+                    -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
+                    providers = {
+                        path = {
+                            score_offset = 3,
+                            min_keyword_length = 3,
+                            opts = {
+                                show_hidden_files_by_default = true,
+                            },
+                        },
+                        snippets = {
+                            score_offset = -3,
+                            opts = {
+                                friendly_snippets = true,
+                                search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+                                global_snippets = { "all" },
+                                extended_filetypes = { "c", "cpp", "ejs" },
+                                ignored_filetypes = {},
+                            },
+                        },
+                        buffer = {
+                            min_keyword_length = 4,
+                        },
+                    },
                 },
             })
 
-            local grp = vim.api.nvim_create_augroup("CmpCmdlineToggle", {})
+            -- FIX: does not work for some reason
+            -- NOTE: this is a workaround for https://github.com/Saghen/blink.cmp/issues/668
+            local grp = vim.api.nvim_create_augroup("BlinkCmpCmdline", {})
             vim.api.nvim_create_autocmd("CmdlineEnter", {
                 group = grp,
                 callback = function()
-                    cmp.setup({ enabled = true })
+                    require("blink.cmp").setup({
+                        completion = { list = { selection = "auto_insert" } },
+                    })
                 end,
-                desc = "Enable cmp when entering cmdline",
+                desc = "Use auto_insert selection method in cmdline",
             })
             vim.api.nvim_create_autocmd("CmdlineLeave", {
                 group = grp,
                 callback = function()
-                    cmp.setup({ enabled = false })
+                    require("blink.cmp").setup({
+                        completion = { list = { selection = "preselect" } },
+                    })
                 end,
-                desc = "Disable cmp when leaving cmdline",
+                desc = "Return to preselect selection method when leaving cmdline",
             })
         end,
     },
@@ -545,6 +500,11 @@ return {
                             on_attach = function(client)
                                 client.server_capabilities.hoverProvider = false
                             end,
+                        })
+                    end,
+                    harper_ls = function()
+                        lspconfig.harper_ls.setup({
+                            autostart = false,
                         })
                     end,
                 },
