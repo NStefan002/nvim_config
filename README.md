@@ -10,8 +10,6 @@
 - [blink.cmp](https://github.com/saghen/blink.cmp)
 - [blink.compat](https://github.com/saghen/blink.compat)
 - [busted-types](https://github.com/LuaCATS/busted)
-- [cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
-- [cmp-path](https://github.com/hrsh7th/cmp-path)
 - [codesnap.nvim](https://github.com/mistricky/codesnap.nvim)
 - [Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [conform.nvim](https://github.com/stevearc/conform.nvim)
@@ -40,9 +38,7 @@
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [mini.icons](https://github.com/echasnovski/mini.icons)
-- [mini.sessions](https://github.com/echasnovski/mini.sessions)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 - [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
@@ -67,7 +63,7 @@
 - [undotree](https://github.com/mbbill/undotree)
 - [vim-matchup](https://github.com/andymass/vim-matchup)
 - [visual-surround.nvim](https://github.com/NStefan002/visual-surround.nvim)
-- [wezterm-types](https://github.com/justinsgithub/wezterm-types)
+- [wezterm-types](https://github.com/gonstoll/wezterm-types)
 - [wormhole.nvim](https://github.com/NStefan002/wormhole.nvim)
 
 ## 🗃️ Version manager
