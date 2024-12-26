@@ -23,174 +23,173 @@ return {
         dependencies = {
             "rafamadriz/friendly-snippets",
             "saghen/blink.compat",
+            "echasnovski/mini.icons",
         },
         build = "cargo build --release",
-        config = function()
-            require("blink.cmp").setup({
-                keymap = {
-                    ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
+        opts = {
+            keymap = {
+                ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
+                ["<c-x>"] = { "hide" },
+                ["<c-y>"] = { "select_and_accept" },
+                ["<cr>"] = { "select_and_accept", "fallback" },
+
+                ["<c-p>"] = { "select_prev", "fallback" },
+                ["<c-n>"] = { "select_next", "fallback" },
+
+                ["<c-u>"] = { "scroll_documentation_up", "fallback" },
+                ["<c-d>"] = { "scroll_documentation_down", "fallback" },
+
+                ["<tab>"] = { "snippet_forward", "fallback" },
+                ["<s-tab>"] = { "snippet_backward", "fallback" },
+
+                cmdline = {
+                    ["<c-e>"] = { "show" },
                     ["<c-x>"] = { "hide" },
-                    ["<c-y>"] = { "select_and_accept" },
-                    ["<cr>"] = { "select_and_accept", "fallback" },
+                    ["<tab>"] = { "select_and_accept" },
 
-                    ["<c-p>"] = { "select_prev", "fallback" },
-                    ["<c-n>"] = { "select_next", "fallback" },
+                    ["<c-p>"] = { "select_prev" },
+                    ["<c-n>"] = { "select_next" },
+                },
+            },
 
-                    ["<c-u>"] = { "scroll_documentation_up", "fallback" },
-                    ["<c-d>"] = { "scroll_documentation_down", "fallback" },
+            -- Enables keymaps, completions and signature help when true
+            enabled = function()
+                return vim.bo.buftype ~= "prompt"
+                    and not vim.tbl_contains({ "oil", "DressingInput" }, vim.bo.filetype) -- add more filetypes if needed
+                    and vim.b.completion ~= false
+            end,
 
-                    ["<tab>"] = { "snippet_forward", "fallback" },
-                    ["<s-tab>"] = { "snippet_backward", "fallback" },
-
-                    cmdline = {
-                        ["<c-e>"] = { "show" },
-                        ["<c-x>"] = { "hide" },
-                        ["<tab>"] = { "select_and_accept" },
-
-                        ["<c-p>"] = { "select_prev" },
-                        ["<c-n>"] = { "select_next" },
-                    },
+            completion = {
+                list = {
+                    selection = function(ctx)
+                        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+                    end,
                 },
 
-                -- Enables keymaps, completions and signature help when true
-                enabled = function()
-                    return vim.bo.buftype ~= "prompt"
-                        and not vim.tbl_contains({ "oil", "DressingInput" }, vim.bo.filetype) -- add more filetypes if needed
-                        and vim.b.completion ~= false
-                end,
+                trigger = {
+                    show_on_trigger_character = true,
+                    show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
+                },
 
-                completion = {
-                    trigger = {
-                        show_on_trigger_character = true,
-                        show_on_x_blocked_trigger_characters = { "'", '"', "(", "{" },
-                    },
-
-                    accept = {
-                        auto_brackets = {
-                            enabled = false,
-                        },
-                    },
-
-                    menu = {
-                        border = "double",
-                        auto_show = true,
-                        draw = {
-                            align_to_component = "label", -- or 'none' to disable
-                            padding = 1,
-                            gap = 1,
-                            -- Use treesitter to highlight the label text
-                            treesitter = { "lsp" },
-                            -- Components to render, grouped by column
-                            columns = {
-                                { "label", "label_description", gap = 1 },
-                                { "kind_icon", "kind", gap = 1 },
-                            },
-                        },
-                    },
-
-                    documentation = {
-                        auto_show = true,
-                        auto_show_delay_ms = 0,
-                        treesitter_highlighting = true,
-                        window = {
-                            border = "single",
-                        },
-                    },
-
-                    ghost_text = {
+                accept = {
+                    auto_brackets = {
                         enabled = false,
                     },
                 },
 
-                -- Experimental signature help support
-                signature = {
-                    enabled = true,
+                menu = {
+                    border = "double",
+                    auto_show = true,
+                    draw = {
+                        align_to_component = "label", -- or 'none' to disable
+                        padding = 1,
+                        gap = 1,
+                        -- Use treesitter to highlight the label text
+                        treesitter = { "lsp" },
+                        -- Components to render, grouped by column
+                        columns = {
+                            { "label", "label_description", gap = 1 },
+                            { "kind_icon", "kind", gap = 1 },
+                        },
+                        -- use mini.icons when drawing blink.cmp components
+                        components = {
+                            kind_icon = {
+                                ellipsis = false,
+                                text = function(ctx)
+                                    local kind_icon, _, _ =
+                                        require("mini.icons").get("lsp", ctx.kind)
+                                    return kind_icon
+                                end,
+                                -- Optionally, you may also use the highlights from mini.icons
+                                highlight = function(ctx)
+                                    local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+                                    return hl
+                                end,
+                            },
+                        },
+                    },
+                },
+
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 0,
+                    treesitter_highlighting = true,
                     window = {
-                        border = "padded",
-                        -- Disable if you run into performance issues
-                        treesitter_highlighting = true,
+                        border = "single",
                     },
                 },
 
-                sources = {
-                    default = function()
-                        local ok, node = pcall(vim.treesitter.get_node)
-                        if
-                            ok
-                            and node
-                            and vim.tbl_contains(
-                                { "comment", "line_comment", "block_comment" },
-                                node:type()
-                            )
-                        then
-                            return { "buffer", "path" }
-                        else
-                            return { "lsp", "path", "snippets", "buffer" }
-                        end
-                    end,
+                ghost_text = {
+                    enabled = false,
+                },
+            },
 
-                    -- You may also define providers per filetype
-                    per_filetype = {
-                        -- lua = { 'lsp', 'path' },
+            -- Experimental signature help support
+            signature = {
+                enabled = true,
+                window = {
+                    border = "padded",
+                    -- Disable if you run into performance issues
+                    treesitter_highlighting = true,
+                },
+            },
+
+            sources = {
+                default = function()
+                    local ok, node = pcall(vim.treesitter.get_node)
+                    if
+                        ok
+                        and node
+                        and vim.tbl_contains(
+                            { "comment", "line_comment", "block_comment" },
+                            node:type()
+                        )
+                    then
+                        return { "buffer", "path" }
+                    else
+                        return { "lsp", "path", "snippets", "buffer" }
+                    end
+                end,
+
+                -- You may also define providers per filetype
+                per_filetype = {
+                    -- lua = { 'lsp', 'path' },
+                },
+
+                cmdline = function()
+                    if vim.fn.getcmdtype() == ":" then
+                        return { "cmdline" }
+                    end
+                    return {}
+                end,
+
+                min_keyword_length = 0,
+
+                -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
+                providers = {
+                    path = {
+                        score_offset = 3,
+                        min_keyword_length = 3,
+                        opts = {
+                            show_hidden_files_by_default = true,
+                        },
                     },
-
-                    cmdline = function()
-                        if vim.fn.getcmdtype() == ":" then
-                            return { "cmdline" }
-                        end
-                        return {}
-                    end,
-
-                    min_keyword_length = 0,
-
-                    -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
-                    providers = {
-                        path = {
-                            score_offset = 3,
-                            min_keyword_length = 3,
-                            opts = {
-                                show_hidden_files_by_default = true,
-                            },
+                    snippets = {
+                        score_offset = -3,
+                        opts = {
+                            friendly_snippets = true,
+                            search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+                            global_snippets = { "all" },
+                            extended_filetypes = { "c", "cpp", "ejs" },
+                            ignored_filetypes = {},
                         },
-                        snippets = {
-                            score_offset = -3,
-                            opts = {
-                                friendly_snippets = true,
-                                search_paths = { vim.fn.stdpath("config") .. "/snippets" },
-                                global_snippets = { "all" },
-                                extended_filetypes = { "c", "cpp", "ejs" },
-                                ignored_filetypes = {},
-                            },
-                        },
-                        buffer = {
-                            min_keyword_length = 4,
-                        },
+                    },
+                    buffer = {
+                        min_keyword_length = 4,
                     },
                 },
-            })
-
-            -- FIX: does not work for some reason
-            -- NOTE: this is a workaround for https://github.com/Saghen/blink.cmp/issues/668
-            local grp = vim.api.nvim_create_augroup("BlinkCmpCmdline", {})
-            vim.api.nvim_create_autocmd("CmdlineEnter", {
-                group = grp,
-                callback = function()
-                    require("blink.cmp").setup({
-                        completion = { list = { selection = "auto_insert" } },
-                    })
-                end,
-                desc = "Use auto_insert selection method in cmdline",
-            })
-            vim.api.nvim_create_autocmd("CmdlineLeave", {
-                group = grp,
-                callback = function()
-                    require("blink.cmp").setup({
-                        completion = { list = { selection = "preselect" } },
-                    })
-                end,
-                desc = "Return to preselect selection method when leaving cmdline",
-            })
-        end,
+            },
+        },
     },
 
     {
