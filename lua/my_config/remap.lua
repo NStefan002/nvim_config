@@ -4,9 +4,7 @@ vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
--- terminal mappings (experimental)
-vim.keymap.set("n", "<leader>tv", "<c-w><c-v><cmd>term<CR>", { desc = "Open terminal in vsplit" })
-vim.keymap.set("n", "<leader>ts", "<c-w><c-s><cmd>term<CR>", { desc = "Open terminal in split" })
+-- terminal mappings
 vim.keymap.set("t", "<c-j><c-k>", "<c-\\><c-n>", { desc = "Exit insert mode in terminal" })
 
 -- buffers

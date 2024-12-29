@@ -57,6 +57,11 @@ return {
             scratch = { enabled = true },
 
             indent = { enabled = true },
+
+            terminal = {
+                enabled = true,
+                win = { style = "terminal", border = "single" },
+            },
         }
 
         local snacks = require("snacks")
@@ -105,5 +110,9 @@ return {
         vim.keymap.set("n", "<leader>S", function()
             snacks.scratch.select()
         end, { desc = "Select Scratch Buffer" })
+
+        vim.keymap.set("n", "<leader>T", function()
+            snacks.terminal.toggle("zsh")
+        end, { desc = "Toggle floating terminal" })
     end,
 }
