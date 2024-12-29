@@ -25,7 +25,6 @@
 - [harpoon](https://github.com/ThePrimeagen/harpoon)
 - [helpview.nvim](https://github.com/OXY2DEV/helpview.nvim)
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
-- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [killersheep.nvim](https://github.com/seandewar/killersheep.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [lazydev.nvim](https://github.com/folke/lazydev.nvim)

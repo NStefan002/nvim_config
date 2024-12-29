@@ -54,9 +54,9 @@ return {
                 refresh = 50, -- refresh at most every 50ms
             },
 
-            scratch = {
-                enabled = true,
-            },
+            scratch = { enabled = true },
+
+            indent = { enabled = true },
         }
 
         local snacks = require("snacks")
