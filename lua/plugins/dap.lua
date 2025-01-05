@@ -3,11 +3,12 @@ return {
     {
         "mfussenegger/nvim-dap",
         keys = {
-            {
-                "<leader>B",
-                "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
-                desc = "DAP: Toggle [B]reakpoint",
-            },
+            "<leader>B",
+            "<F5>",
+            "<F6>",
+            "<F7>",
+            "<F8>",
+            "<leader>ro",
         },
         config = function()
             local nmap = function(keys, func, desc)
@@ -18,6 +19,11 @@ return {
                 vim.keymap.set("n", keys, func, { desc = desc })
             end
 
+            nmap(
+                "<leader>B",
+                "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+                "Toggle [B]reakpoint"
+            )
             nmap("<F5>", "<cmd>lua require'dap'.continue()<CR>", "Continue")
             nmap("<F6>", "<cmd>lua require'dap'.step_into()<CR>", "Step Into")
             nmap("<F7>", "<cmd>lua require'dap'.step_over()<CR>", "Step Over")

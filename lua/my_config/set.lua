@@ -105,3 +105,5 @@ vim.opt.shm:append({ a = true, I = true, S = true })
 vim.opt.showmode = false
 
 vim.opt.sessionoptions = { "buffers", "curdir", "folds", "terminal", "winsize" }
+
+vim.opt.startofline = true

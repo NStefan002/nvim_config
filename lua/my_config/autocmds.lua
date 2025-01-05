@@ -39,19 +39,6 @@ autocmd("FileType", {
     desc = "exit certain files with just 'q'",
 })
 
-autocmd("ColorScheme", {
-    group = aucmdsStarterPack,
-    pattern = "*",
-    callback = function()
-        local hl = vim.api.nvim_set_hl
-        -- NOTE: not needed for 0.10.0+ default colorscheme, uncomment if you change colorscheme
-        -- hl(0, "Search", { link = "IncSearch" })
-        -- hl(0, "CurSearch", { undercurl = true, italic = true, fg = "lime" })
-        hl(0, "FoldColumn", {})
-    end,
-    desc = "Update hlgroups for / and ?, fix some highlights",
-})
-
 autocmd("BufEnter", {
     group = augroup("CommentFixGrp", { clear = true }),
     pattern = "*",

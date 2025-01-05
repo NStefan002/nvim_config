@@ -11,10 +11,10 @@ return {
             },
         },
     },
-    { "Bilal2453/luvit-meta", lazy = true }, -- `vim.uv` types
-    { "gonstoll/wezterm-types", lazy = true }, -- wezterm types
-    { "LuaCATS/luassert", name = "luassert-types", lazy = true },
-    { "LuaCATS/busted", name = "busted-types", lazy = true },
+    { "Bilal2453/luvit-meta" }, -- `vim.uv` types
+    { "gonstoll/wezterm-types" }, -- wezterm types
+    { "LuaCATS/luassert", name = "luassert-types" },
+    { "LuaCATS/busted", name = "busted-types" },
 
     {
         "saghen/blink.cmp",
@@ -55,7 +55,7 @@ return {
             -- Enables keymaps, completions and signature help when true
             enabled = function()
                 return vim.bo.buftype ~= "prompt"
-                    and not vim.tbl_contains({ "oil", "DressingInput" }, vim.bo.filetype) -- add more filetypes if needed
+                    and not vim.tbl_contains({ "DressingInput" }, vim.bo.filetype) -- add more filetypes if needed
                     and vim.b.completion ~= false
             end,
 
@@ -81,7 +81,7 @@ return {
                     border = "double",
                     auto_show = true,
                     draw = {
-                        align_to_component = "label", -- or 'none' to disable
+                        align_to = "label", -- or 'none' to disable, or 'cursor' to align to the cursor
                         padding = 1,
                         gap = 1,
                         -- Use treesitter to highlight the label text
@@ -154,6 +154,7 @@ return {
                 -- You may also define providers per filetype
                 per_filetype = {
                     -- lua = { 'lsp', 'path' },
+                    oil = {},
                 },
 
                 cmdline = function()

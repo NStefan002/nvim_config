@@ -54,5 +54,6 @@ return {
         -- nvim
         map("<leader>key", "keymaps", "[Key]maps")
         map("<leader>sh", "helptags", "[S]earch [H]elp")
+        map("<leader>ch", "command_history", "[C]ommandline [H]istory")
     end,
 }

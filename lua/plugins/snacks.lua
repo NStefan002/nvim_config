@@ -8,10 +8,11 @@ return {
         ---@type snacks.Config
         local opts = {
             styles = {
-                lazygit = { border = "double" },
+                lazygit = { border = "double", relative = "editor" },
 
                 ["notification.history"] = {
                     border = "rounded",
+                    relative = "editor",
                     minimal = true,
                     title = "Notification History",
                     title_pos = "right",
@@ -104,12 +105,15 @@ return {
         end, { desc = "Git Browse" })
 
         -- scratch
+
         vim.keymap.set("n", "<leader>.", function()
             snacks.scratch()
         end, { desc = "Toggle Scratch Buffer" })
         vim.keymap.set("n", "<leader>S", function()
             snacks.scratch.select()
         end, { desc = "Select Scratch Buffer" })
+
+        -- terminal
 
         vim.keymap.set("n", "<leader>T", function()
             snacks.terminal.toggle("zsh")

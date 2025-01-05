@@ -48,7 +48,7 @@ return {
                 extra_groups = { "NvimTreeNormal", "FloatBorder" }, -- table: additional groups that should be cleared
                 exclude_groups = { "TreesitterContext" }, -- table: groups you don't want to clear
             })
-            vim.cmd("TransparentDisable")
+            vim.cmd("TransparentEnable")
         end,
     },
     { "rose-pine/neovim", name = "rose-pine" },
