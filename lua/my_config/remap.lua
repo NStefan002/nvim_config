@@ -124,6 +124,7 @@ end, { desc = "Previous warning" })
 -- vim.keymap.set("n", "<C-b>", "<cmd>Ex<CR>", { desc = "Open the file explorer" })
 
 -- comment
--- vim.keymap.set({ "n", "x", "o" }, "<leader>c", "gc", { remap = true })
+vim.keymap.set({ "n", "x", "o" }, "<leader>c", "gc", { remap = true, desc = "comment" })
 
-vim.keymap.set("n", "z=", require("my_config.util.nicer_z_eq"), {})
+-- custom functionalities
+vim.keymap.set("n", "z=", require("my_config.util.nicer_z_eq"), { desc = "nicer z=" })
