@@ -1,5 +1,14 @@
 local api = vim.api
 
+---@param radius integer
+---@return integer
+local function calc_donut_area(radius)
+    local inner_radius = math.ceil(radius / 4)
+    local outer_area = math.floor(math.pi * radius ^ 2)
+    local inner_area = math.floor(math.pi * inner_radius ^ 2)
+    return outer_area - inner_area
+end
+
 ---@param text_len integer
 ---@return integer, integer
 local function determine_radius(text_len)
@@ -7,9 +16,7 @@ local function determine_radius(text_len)
 
     for outer_radius = 60, 7, -1 do
         local inner_radius = math.ceil(outer_radius / 4)
-        local outer_area = math.floor(math.pi * outer_radius ^ 2)
-        local inner_area = math.floor(math.pi * inner_radius ^ 2)
-        local donut_area = outer_area - inner_area
+        local donut_area = calc_donut_area(outer_radius)
 
         if donut_area <= text_len then
             best_outer_radius, best_inner_radius = outer_radius, inner_radius
@@ -18,16 +25,6 @@ local function determine_radius(text_len)
     end
 
     return best_outer_radius, best_inner_radius
-end
-
----@param radius integer
----@return integer
-local function donut_number_of_characters(radius)
-    local inner_radius = math.ceil(radius / 4)
-    local outer_area = math.floor(math.pi * radius ^ 2)
-    local inner_area = math.floor(math.pi * inner_radius ^ 2)
-    local donut_area = outer_area - inner_area
-    return donut_area
 end
 
 ---@param text string
@@ -100,7 +97,7 @@ local function cmd(data)
     end
 
     local donuts = {}
-    local default_donut_max_chars = donut_number_of_characters(default_radius)
+    local default_donut_max_chars = calc_donut_area(default_radius)
     while text_len > default_donut_max_chars do
         table.insert(
             donuts,

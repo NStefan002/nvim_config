@@ -20,5 +20,8 @@ end
 local pane_id = wezterm.split_pane("right", true)
 vim.g.ghcid_pane_id = pane_id
 vim.g.ghcid_split_is_open = true
-wezterm.spawn_command(("ghcid --command 'ghci %s' --test ':main'"):format(current_file), pane_id)
+wezterm.spawn_command(
+    ("ghcid --command 'stack ghci %s' --test ':main'"):format(current_file),
+    pane_id
+)
 vim.g.ghcid_current_file = current_file
