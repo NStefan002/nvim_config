@@ -15,6 +15,7 @@
 - [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
 - [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - [donut.nvim](https://github.com/NStefan002/donut.nvim)
+- [donutlify.nvim](https://github.com/NStefan002/donutlify.nvim)
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)

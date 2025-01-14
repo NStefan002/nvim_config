@@ -100,7 +100,7 @@ return {
 
         -- gitbrowse
 
-        vim.keymap.set("n", "<leader>gB", function()
+        vim.keymap.set({ "n", "v" }, "<leader>gb", function()
             snacks.gitbrowse()
         end, { desc = "Git Browse" })
 

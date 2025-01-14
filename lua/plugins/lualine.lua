@@ -61,31 +61,5 @@ return {
                 "aerial",
             },
         })
-
-        vim.api.nvim_create_autocmd({ "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("LualineFlashFileName", {}),
-            callback = function()
-                if vim.g.lualine_c_hl_changed then
-                    return
-                end
-
-                vim.g.lualine_c_hl_changed = true
-
-                local orig_highlight =
-                    vim.api.nvim_get_hl(0, { name = "lualine_c_normal", link = false })
-                vim.api.nvim_set_hl(0, "lualine_c_normal", {
-                    bg = "#ffcc00",
-                    fg = "#000080",
-                })
-                vim.defer_fn(function()
-                    vim.g.lualine_c_hl_changed = false
-                    vim.api.nvim_set_hl(0, "lualine_c_normal", {
-                        bg = orig_highlight.bg,
-                        fg = orig_highlight.fg,
-                    })
-                end, 300)
-            end,
-            desc = "Flash filename on buffer change",
-        })
     end,
 }

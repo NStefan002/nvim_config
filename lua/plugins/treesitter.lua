@@ -21,6 +21,7 @@ return {
                     "html",
                     "java",
                     "javascript",
+                    "jsdoc",
                     "json",
                     "lua",
                     "make",
