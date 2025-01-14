@@ -68,4 +68,9 @@ return {
         cmd = "Grammar",
         opts = {},
     },
+    {
+        "NStefan002/donutlify.nvim",
+        dev = true,
+        lazy = false,
+    },
 }
