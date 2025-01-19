@@ -46,6 +46,7 @@
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-nio](https://github.com/nvim-neotest/nvim-nio)
 - [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
+- [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [oil.nvim](https://github.com/stevearc/oil.nvim)

@@ -99,4 +99,37 @@ return {
             on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
         },
     },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = {
+                                query = "@function.outer",
+                                desc = "[a]round [f]unction textobject",
+                            },
+                            ["if"] = {
+                                query = "@function.inner",
+                                desc = "[i]nside [f]unction textobject",
+                            },
+                        },
+                    },
+                    swap = {
+                        enable = true,
+                        swap_next = {
+                            ["<leader>]"] = "@parameter.inner",
+                        },
+                        swap_previous = {
+                            ["<leader>["] = "@parameter.inner",
+                        },
+                    },
+                },
+            })
+        end,
+    },
 }
