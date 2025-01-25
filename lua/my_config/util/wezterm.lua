@@ -52,4 +52,19 @@ function M.spawn_command(command, pane_id)
     }, { text = true })
 end
 
+---@param delta string
+function M.change_font_size(delta)
+    local stdout = vim.uv.new_tty(1, false)
+    if not stdout then
+        return
+    end
+    stdout:write(
+        ("\x1b]1337;SetUserVar=%s=%s\b"):format(
+            "WEZTERM_FONT_SIZE",
+            vim.fn.system({ "base64" }, tostring(delta))
+        )
+    )
+    vim.cmd([[redraw]])
+end
+
 return M
