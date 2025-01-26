@@ -10,13 +10,15 @@ vim.api.nvim_create_user_command("Showcase", function(_)
         local wztrm = require("my_config.util.wezterm")
         wztrm.change_font_size("-3")
         vim.cmd("Screenkey toggle")
-        vim.cmd("LspStart")
+        -- in case lsp-related plugins are not yet loaded
+        pcall(vim.cmd, "LspStart")
         vim.g.showcase_mode_active = false
     else
         local wztrm = require("my_config.util.wezterm")
         wztrm.change_font_size("+3")
         vim.cmd("Screenkey toggle")
-        vim.cmd("LspStop")
+        -- in case lsp-related plugins are not yet loaded
+        pcall(vim.cmd, "LspStart")
         vim.g.showcase_mode_active = true
     end
 end, {
