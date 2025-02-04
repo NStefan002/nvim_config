@@ -18,7 +18,7 @@ return {
         "NStefan002/speedtyper.nvim",
         lazy = false,
         config = function()
-            vim.keymap.set("n", "<C-q>", "<cmd>SpeedTyper<CR>")
+            vim.keymap.set("n", "<C-q>", "<cmd>Speedtyper<CR>")
         end,
     },
     { dev = true, "NStefan002/2048.nvim", cmd = "Play2048", config = true },
@@ -32,7 +32,7 @@ return {
         dev = true,
         "NStefan002/donut.nvim",
         opts = {
-            timeout = 20 * 60,
+            timeout = 0,
         },
         lazy = false,
     },
@@ -60,7 +60,17 @@ return {
         dev = true,
         "NStefan002/visual-surround.nvim",
         event = "VeryLazy",
-        config = true,
+        config = function()
+            require("visual-surround").setup({
+                enable_wrapped_deletion = true,
+                exit_visual_mode = false,
+            })
+            vim.keymap.set("v", "ss", function()
+                local opening = vim.fn.input("Opening: ")
+                local closing = vim.fn.input("Closing: ")
+                require("visual-surround").surround(opening, closing)
+            end, { desc = "[visual-surround] Surround selection with custom string" })
+        end,
     },
     {
         dev = true,
@@ -69,8 +79,24 @@ return {
         opts = {},
     },
     {
+        "sphamba/smear-cursor.nvim",
+        -- dev = true,
+        -- enabled = function()
+        --     return not vim.g.neovide
+        -- end,
+        -- event = "VimEnter",
+        opts = {
+            cursor_color = "#ff8800",
+            stiffness = 0.6,
+            trailing_stiffness = 0.1,
+            trailing_exponent = 5,
+            gamma = 1,
+        },
+    },
+    {
         "NStefan002/donutlify.nvim",
         dev = true,
         lazy = false,
     },
+    { dev = true, "JesperLundberg/svartafanan.nvim", event = "VeryLazy" },
 }
