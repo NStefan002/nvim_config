@@ -41,15 +41,6 @@ return {
 
                 ["<tab>"] = { "snippet_forward", "fallback" },
                 ["<s-tab>"] = { "snippet_backward", "fallback" },
-
-                cmdline = {
-                    ["<c-e>"] = { "show" },
-                    ["<c-x>"] = { "hide" },
-                    ["<tab>"] = { "select_and_accept" },
-
-                    ["<c-p>"] = { "select_prev" },
-                    ["<c-n>"] = { "select_next" },
-                },
             },
 
             -- Enables keymaps, completions and signature help when true
@@ -153,27 +144,23 @@ return {
                     then
                         return { "buffer", "path" }
                     else
-                        return { "lsp", "path", "snippets", "buffer" }
+                        return { "lazydev", "lsp", "path", "snippets", "buffer" }
                     end
                 end,
 
                 -- You may also define providers per filetype
                 per_filetype = {
-                    -- lua = { 'lsp', 'path' },
                     oil = {},
                 },
-
-                cmdline = function()
-                    if vim.fn.getcmdtype() == ":" then
-                        return { "cmdline" }
-                    end
-                    return {}
-                end,
 
                 min_keyword_length = 0,
 
                 -- Please see https://github.com/Saghen/blink.compat for using `nvim-cmp` sources
                 providers = {
+                    lsp = {
+                        min_keyword_length = 0,
+                        score_offset = 3,
+                    },
                     path = {
                         score_offset = 3,
                         min_keyword_length = 3,
@@ -182,7 +169,8 @@ return {
                         },
                     },
                     snippets = {
-                        score_offset = -3,
+                        min_keyword_length = 2,
+                        score_offset = 4,
                         opts = {
                             friendly_snippets = true,
                             search_paths = { vim.fn.stdpath("config") .. "/snippets" },
@@ -194,7 +182,33 @@ return {
                     buffer = {
                         min_keyword_length = 4,
                     },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
                 },
+            },
+
+            -- override options for cmdline and terminal modes
+            cmdline = {
+                keymap = {
+                    ["<c-e>"] = { "show" },
+                    ["<c-x>"] = { "hide" },
+                    ["<tab>"] = { "select_and_accept" },
+
+                    ["<c-p>"] = { "select_prev" },
+                    ["<c-n>"] = { "select_next" },
+                },
+
+                sources = function()
+                    local type = vim.fn.getcmdtype()
+                    if type == ":" or type == "@" then
+                        return { "cmdline" }
+                    end
+                    return {}
+                end,
             },
         },
     },
