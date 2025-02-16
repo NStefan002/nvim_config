@@ -66,6 +66,11 @@ return {
             },
 
             image = { enabled = true },
+
+            input = {
+                enabled = true,
+                icon = "",
+            },
         }
 
         snacks.setup(opts)
