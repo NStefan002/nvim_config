@@ -41,5 +41,8 @@ return {
         vim.keymap.set("n", "<C-3>", function()
             harpoon:list():select(6)
         end, { desc = "Harpoon: goto 6th buffer in the list" })
+
+        local harpoon_extensions = require("harpoon.extensions")
+        harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
     end,
 }

@@ -44,6 +44,9 @@ return {
                         key = "p",
                     },
                 },
+                project = { enable = false },
+                mru = { enable = false },
+                footer = {},
             },
         })
 

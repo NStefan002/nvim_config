@@ -4,7 +4,8 @@ return {
     lazy = false,
     dependencies = { { "echasnovski/mini.icons", version = false } },
     config = function()
-        ---@module "snacks"
+        local snacks = require("snacks")
+
         ---@type snacks.Config
         local opts = {
             styles = {
@@ -63,9 +64,10 @@ return {
                 enabled = true,
                 win = { style = "terminal", border = "single" },
             },
+
+            image = { enabled = true },
         }
 
-        local snacks = require("snacks")
         snacks.setup(opts)
 
         -- notifier

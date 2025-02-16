@@ -65,7 +65,7 @@ return {
                 enable_wrapped_deletion = true,
                 exit_visual_mode = false,
             })
-            vim.keymap.set("v", "ss", function()
+            vim.keymap.set("x", "ss", function()
                 local opening = vim.fn.input("Opening: ")
                 local closing = vim.fn.input("Closing: ")
                 require("visual-surround").surround(opening, closing)

@@ -2,6 +2,9 @@ return {
     -- debugger support
     {
         "mfussenegger/nvim-dap",
+        dependencies = {
+            { "igorlfs/nvim-dap-view", opts = {} },
+        },
         keys = {
             "<leader>B",
             "<F5>",
@@ -33,9 +36,10 @@ return {
             nmap("<leader>ro", ":lua require'dap'.repl.open()<CR>")
 
             require("nvim-dap-virtual-text").setup({})
-            require("dapui").setup()
 
-            local dap, dapui = require("dap"), require("dapui")
+            local dap, dapui = require("dap"), require("dap-view")
+            -- local dap, dapui = require("dap"), require("dapui")
+            -- dapui.setup()
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapui.open()
             end
@@ -203,7 +207,7 @@ return {
         end,
     },
 
-    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+    -- { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
     { "theHamsta/nvim-dap-virtual-text" },
     {
         "mfussenegger/nvim-dap-python",
