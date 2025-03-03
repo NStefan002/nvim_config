@@ -209,6 +209,10 @@ return {
                     end
                     return {}
                 end,
+
+                completion = {
+                    menu = { auto_show = true },
+                },
             },
         },
     },
@@ -503,7 +507,7 @@ return {
                     end,
                     html = function()
                         lspconfig.html.setup({
-                            filetypes = { "html", "ejs" },
+                            filetypes = { "html", "ejs", "templ" },
                         })
                     end,
                     basedpyright = function()

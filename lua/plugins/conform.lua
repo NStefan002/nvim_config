@@ -18,6 +18,7 @@ return {
                 python = { "isort", "black" },
                 sh = { "beautysh" },
                 sql = { "sqlfmt" },
+                templ = { "templ" },
                 zsh = { "beautysh" },
             },
         })
