@@ -92,31 +92,54 @@ vim.keymap.set("c", "<c-j>", "<down>", { desc = "Move cursor left in command mod
 vim.keymap.set("c", "<c-k>", "<up>", { desc = "Move cursor left in command mode" })
 
 -- diagnostics
-vim.keymap.set("n", "<leader>of", vim.diagnostic.open_float, { desc = "[O]pen [F]loating window" })
+-- NOTE: use this until you get accustomed to <c-w>d (far better keymap)
+vim.keymap.set(
+    "n",
+    "<leader>of",
+    "<c-w>d",
+    { desc = "[O]pen diagnostics in the [F]loating window" }
+)
+
 vim.keymap.set("n", "]d", function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jump({ count = 1 })
     vim.cmd("normal zz")
 end, { desc = "Next diagnostic" })
+
 vim.keymap.set("n", "[d", function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jump({ count = -1 })
     vim.cmd("normal zz")
 end, { desc = "Previous diagnostic" })
+
 vim.keymap.set("n", "]e", function()
-    vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
     vim.cmd("normal zz")
 end, { desc = "Next error" })
+
 vim.keymap.set("n", "[e", function()
-    vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
     vim.cmd("normal zz")
 end, { desc = "Previous error" })
+
 vim.keymap.set("n", "]w", function()
-    vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN })
     vim.cmd("normal zz")
 end, { desc = "Next warning" })
+
 vim.keymap.set("n", "[w", function()
-    vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN })
     vim.cmd("normal zz")
 end, { desc = "Previous warning" })
+
+vim.keymap.set("n", "<leader>D", function()
+    if vim.g.qraz_diagnostics_virtual_lines == nil then
+        vim.g.qraz_diagnostics_virtual_lines = true
+    end
+    vim.diagnostic.config({
+        virtual_lines = vim.g.qraz_diagnostics_virtual_lines,
+        virtual_text = not vim.g.qraz_diagnostics_virtual_lines,
+    })
+    vim.g.qraz_diagnostics_virtual_lines = not vim.g.qraz_diagnostics_virtual_lines
+end, { desc = "Toggle multiline diagnostics" })
 
 -- builtin plugins
 
