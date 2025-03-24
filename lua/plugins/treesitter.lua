@@ -46,8 +46,12 @@ return {
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false,
-                    -- disable for larger files
+                    -- disable for larger files and for checkhealth buffers
                     disable = function(lang, buf)
+                        local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+                        if filetype == "checkhealth" then
+                            return true
+                        end
                         local max_filesize = 50 * 1024 -- 50 KB
                         local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                         if ok and stats and stats.size > max_filesize then
