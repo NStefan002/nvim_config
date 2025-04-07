@@ -13,6 +13,7 @@ return {
                 haskell = { "fourmolu" },
                 html = { "prettierd", "prettier" },
                 javascript = { "prettierd", "prettier" },
+                json = { "prettierd", "prettier" },
                 lua = { "stylua" },
                 markdown = { "markdownlint", "injected" },
                 python = { "isort", "black" },

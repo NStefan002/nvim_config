@@ -92,14 +92,6 @@ vim.keymap.set("c", "<c-j>", "<down>", { desc = "Move cursor left in command mod
 vim.keymap.set("c", "<c-k>", "<up>", { desc = "Move cursor left in command mode" })
 
 -- diagnostics
--- NOTE: use this until you get accustomed to <c-w>d (far better keymap)
-vim.keymap.set(
-    "n",
-    "<leader>of",
-    "<c-w>d",
-    { desc = "[O]pen diagnostics in the [F]loating window" }
-)
-
 vim.keymap.set("n", "]d", function()
     vim.diagnostic.jump({ count = 1 })
     vim.cmd("normal zz")
