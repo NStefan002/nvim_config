@@ -188,6 +188,7 @@ return {
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
                     },
+                    ecolog = { name = "ecolog", module = "ecolog.integrations.cmp.blink_cmp" },
                 },
             },
 
