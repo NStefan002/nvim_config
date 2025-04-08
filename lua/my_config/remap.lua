@@ -63,12 +63,9 @@ vim.keymap.set(
     { desc = "Change all ocurences of the word that's under the cursor" }
 )
 
-vim.keymap.set(
-    "n",
-    "<leader>x",
-    "<cmd>!chmod +x %<CR>",
-    { silent = true, desc = "Make the current file executable" }
-)
+vim.keymap.set("n", "<leader>x", function()
+    require("my_config.util.toggle_executable").toggle()
+end, { desc = "Make the current file executable" })
 
 vim.keymap.set(
     "n",
