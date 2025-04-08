@@ -3,7 +3,7 @@ if not vim.g.neovide then
 end
 
 vim.opt.guicursor = "" -- block cursor
-vim.g.neovide_transparency = 1
+vim.g.neovide_opacity = 1
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_fullscreen = false
 vim.g.neovide_confirm_quit = false
@@ -24,18 +24,18 @@ local function toggle_fullscreen()
 end
 vim.keymap.set("n", "<C-`>", toggle_fullscreen, { desc = "Neovide: toggle fullscreen" })
 
-local function change_transparency_factor(delta)
-    if vim.g.neovide_transparency - delta <= 1 and vim.g.neovide_transparency - delta >= 0 then
-        vim.g.neovide_transparency = vim.g.neovide_transparency - delta
+local function change_opacity_factor(delta)
+    if vim.g.neovide_opacity - delta <= 1 and vim.g.neovide_opacity - delta >= 0 then
+        vim.g.neovide_opacity = vim.g.neovide_opacity - delta
     end
 end
 
 vim.keymap.set("n", "<A-T>", function()
-    change_transparency_factor(-0.1)
+    change_opacity_factor(-0.1)
 end, { desc = "Neovide: decrease transparancy" })
 
 vim.keymap.set("n", "<A-t>", function()
-    change_transparency_factor(0.1)
+    change_opacity_factor(0.1)
 end, { desc = "Neovide: increase transparancy" })
 
 vim.g.neovide_cursor_animation_length = 0.11
