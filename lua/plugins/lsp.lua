@@ -28,7 +28,7 @@ return {
         build = "cargo build --release",
         opts = {
             keymap = {
-                ["<c-e>"] = { "show", "show_documentation", "hide_documentation" },
+                ["<c-space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<c-x>"] = { "hide" },
                 ["<c-y>"] = { "select_and_accept" },
                 ["<cr>"] = { "select_and_accept", "fallback" },
@@ -125,7 +125,7 @@ return {
             signature = {
                 enabled = true,
                 window = {
-                    border = "padded",
+                    border = "single",
                     -- Disable if you run into performance issues
                     treesitter_highlighting = true,
                 },
