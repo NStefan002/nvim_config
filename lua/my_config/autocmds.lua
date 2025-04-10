@@ -85,3 +85,11 @@ autocmd("FileType", {
     end,
     desc = "remove '~' when netrw is active",
 })
+
+autocmd("ColorScheme", {
+    group = aucmdsStarterPack,
+    callback = function()
+        require("my_config.util.tabline").set_hl_groups()
+    end,
+    desc = "change some default colors",
+})

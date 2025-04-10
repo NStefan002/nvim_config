@@ -110,3 +110,6 @@ vim.opt.startofline = true
 
 -- per project configuration
 vim.opt.exrc = true
+
+vim.opt.showtabline = 2
+vim.opt.tabline = "%!v:lua.require('my_config.util.tabline').tabline()"
