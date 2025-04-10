@@ -19,6 +19,9 @@ function M.tabline()
     -- `nvim_list_tabpages` returns a list of tab IDs in order they appear visually
     local tab_ids = vim.api.nvim_list_tabpages()
     local current_file = vim.fn.expand("%:t")
+    local current_filetype = vim.bo.filetype
+    current_file = (current_file == "" and current_filetype ~= "") and current_filetype
+        or current_file
     current_file = current_file == "" and " [No Name] " or (" %s "):format(current_file)
     local tabline = ""
     if #tab_ids > 1 then
