@@ -92,21 +92,23 @@ autocmd("FileType", {
     pattern = {
         "snacks_terminal",
     },
-    callback = function()
+    callback = function(ev)
         -- NOTE: we need to wait a little bit for lazygit to open up
         vim.defer_fn(function()
-            if vim.fn.expand("%:t") == "lazygit" then
+            local start, _, _ = vim.api.nvim_buf_get_name(ev.buf):find("lazygit")
+            local is_lazygit = start ~= nil
+            if is_lazygit then
                 vim.keymap.set(
                     "t",
                     "TN",
                     "<cmd>tabnext<cr>",
-                    { buffer = true, desc = "[lazygit] move to next tab" }
+                    { buffer = ev.buf, desc = "[lazygit] move to next tab" }
                 )
                 vim.keymap.set(
                     "t",
                     "TP",
                     "<cmd>tabprevious<cr>",
-                    { buffer = true, desc = "[lazygit] move to previous tab" }
+                    { buffer = ev.buf, desc = "[lazygit] move to previous tab" }
                 )
             end
         end, 1000)

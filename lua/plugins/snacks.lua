@@ -102,7 +102,10 @@ return {
         -- lazygit
 
         vim.keymap.set("n", "<leader>gg", function()
+            vim.cmd("tabnew")
             snacks.lazygit()
+            vim.cmd("tabprevious")
+            vim.api.nvim_input("<Esc>")
         end, { desc = "Lazygit" })
 
         -- gitbrowse
