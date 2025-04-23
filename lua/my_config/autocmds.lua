@@ -22,12 +22,13 @@ autocmd("BufWritePre", {
 autocmd("FileType", {
     group = aucmdsStarterPack,
     pattern = {
-        "help",
-        "vim", -- for opening commands history on accident with q:
-        "man",
         "checkhealth",
+        "help",
+        "man",
         "notify",
-        "fugitive",
+        "screenkey_log",
+        "snacks_notif",
+        "vim", -- for opening commands history on accident with q:
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -84,6 +85,32 @@ autocmd("FileType", {
         vim.opt_local.fillchars = { eob = " " }
     end,
     desc = "remove '~' when netrw is active",
+})
+
+autocmd("FileType", {
+    group = aucmdsStarterPack,
+    pattern = {
+        "snacks_terminal",
+    },
+    callback = function()
+        -- NOTE: we need to wait a little bit for lazygit to open up
+        vim.defer_fn(function()
+            if vim.fn.expand("%:t") == "lazygit" then
+                vim.keymap.set(
+                    "t",
+                    "TN",
+                    "<cmd>tabnext<cr>",
+                    { buffer = true, desc = "[lazygit] move to next tab" }
+                )
+                vim.keymap.set(
+                    "t",
+                    "TP",
+                    "<cmd>tabprevious<cr>",
+                    { buffer = true, desc = "[lazygit] move to previous tab" }
+                )
+            end
+        end, 1000)
+    end,
 })
 
 autocmd("ColorScheme", {
