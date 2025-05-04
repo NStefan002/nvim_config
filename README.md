@@ -14,7 +14,6 @@
 - [codesnap.nvim](https://github.com/mistricky/codesnap.nvim)
 - [conform.nvim](https://github.com/stevearc/conform.nvim)
 - [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
-- [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
 - [donut.nvim](https://github.com/NStefan002/donut.nvim)
 - [donutlify.nvim](https://github.com/NStefan002/donutlify.nvim)
 - [ecolog.nvim](https://github.com/philosofonusus/ecolog.nvim)
