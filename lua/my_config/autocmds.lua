@@ -115,10 +115,35 @@ autocmd("FileType", {
     end,
 })
 
+autocmd("WinClosed", {
+    group = aucmdsStarterPack,
+    pattern = "*",
+    callback = function(ev)
+        local name = vim.api.nvim_buf_get_name(ev.buf)
+        local start, _, _ = name:find("lazygit")
+        local is_lazygit = start ~= nil
+        if is_lazygit then
+            vim.cmd("tabclose")
+        end
+    end,
+    desc = "close tab if lazygit window is closed",
+})
+
 autocmd("ColorScheme", {
     group = aucmdsStarterPack,
     callback = function()
         require("my_config.util.tabline").set_hl_groups()
     end,
     desc = "change some default colors",
+})
+
+autocmd("VimEnter", {
+    group = aucmdsStarterPack,
+    pattern = "*",
+    callback = function()
+        if vim.api.nvim_buf_get_name(0) == "" then
+            vim.opt_local.fillchars = { eob = " " }
+        end
+    end,
+    desc = "remove '~' when dashboard is active",
 })

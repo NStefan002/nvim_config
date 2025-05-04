@@ -49,16 +49,5 @@ return {
                 footer = {},
             },
         })
-
-        -- remove '~' when dashboard is active
-        vim.api.nvim_create_autocmd("VimEnter", {
-            group = vim.api.nvim_create_augroup("DashboardNoTilde", {}),
-            pattern = "*",
-            callback = function()
-                if vim.api.nvim_buf_get_name(0) == "" then
-                    vim.opt_local.fillchars = { eob = " " }
-                end
-            end,
-        })
     end,
 }
