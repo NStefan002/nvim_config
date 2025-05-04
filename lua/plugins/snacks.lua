@@ -225,5 +225,24 @@ return {
         vim.keymap.set("n", "<leader>T", function()
             snacks.terminal.toggle("zsh")
         end, { desc = "Toggle floating terminal" })
+        vim.keymap.set("n", "<leader>run", function()
+            local frequently_used_tools = {
+                "bluetui",
+                "htop",
+                "lazydocker",
+                "lazygit",
+                "wrkflw",
+            }
+            vim.ui.select(frequently_used_tools, {
+                prompt = "Select a tool to run in the floating terminal: ",
+            }, function(item)
+                if not item then
+                    return
+                end
+                snacks.terminal.open(item)
+            end)
+        end, {
+            desc = "Select and run one of the frequently used tools in the floating terminal",
+        })
     end,
 }
