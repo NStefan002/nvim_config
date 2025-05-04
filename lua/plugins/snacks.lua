@@ -71,6 +71,105 @@ return {
                 enabled = true,
                 icon = "",
             },
+
+            dashboard = {
+                enabled = true,
+                width = 80,
+                pane_gap = 5, -- empty columns between vertical panes
+                preset = {
+                    keys = {
+                        {
+                            icon = " ",
+                            key = "c",
+                            desc = "Checkhealth",
+                            action = ":checkhealth",
+                        },
+                        {
+                            icon = "󰥔 ",
+                            key = "p",
+                            desc = "Profile",
+                            action = ":Lazy profile",
+                            enabled = package.loaded.lazy ~= nil,
+                        },
+                        {
+                            icon = "󰒲 ",
+                            key = "u",
+                            desc = "Update plugins",
+                            action = ":Lazy update",
+                            enabled = package.loaded.lazy ~= nil,
+                        },
+                    },
+                    -- Used by the `header` section
+                    header = [[
+         ██████╗       ██████╗  █████╗ ███████╗███████╗
+        ██╔═══██╗      ██╔══██╗██╔══██╗╚══███╔╝╚══███╔╝
+        ██║   ██║█████╗██████╔╝███████║  ███╔╝   ███╔╝
+        ██║▄▄ ██║╚════╝██╔══██╗██╔══██║ ███╔╝   ███╔╝
+███████╗╚██████╔╝      ██║  ██║██║  ██║███████╗███████╗███████╗
+╚══════╝ ╚══▀▀═╝       ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝]],
+                },
+                sections = {
+                    { section = "header", align = "left" },
+                    { section = "keys", gap = 1, padding = 1 },
+                    {
+                        pane = 2,
+                        icon = " ",
+                        desc = "Browse Repo",
+                        padding = 1,
+                        key = "b",
+                        action = function()
+                            snacks.gitbrowse()
+                        end,
+                    },
+                    function()
+                        local in_git = snacks.git.get_root() ~= nil
+                        local cmds = {
+                            -- {
+                            --     title = "Notifications",
+                            --     cmd = "gh notify -s -a -n5",
+                            --     action = function()
+                            --         vim.ui.open("https://github.com/notifications")
+                            --     end,
+                            --     key = "N",
+                            --     icon = " ",
+                            --     height = 5,
+                            --     enabled = true,
+                            -- },
+                            {
+                                title = "Open Issues",
+                                cmd = "gh issue list -L 3",
+                                key = "I",
+                                action = function()
+                                    vim.fn.jobstart("gh issue list --web", { detach = true })
+                                end,
+                                icon = " ",
+                                height = 7,
+                            },
+                            {
+                                icon = " ",
+                                title = "Open PRs",
+                                cmd = "gh pr list -L 3",
+                                key = "P",
+                                action = function()
+                                    vim.fn.jobstart("gh pr list --web", { detach = true })
+                                end,
+                                height = 7,
+                            },
+                        }
+                        return vim.tbl_map(function(cmd)
+                            return vim.tbl_extend("force", {
+                                pane = 2,
+                                section = "terminal",
+                                enabled = in_git,
+                                padding = 1,
+                                ttl = 5 * 60,
+                                indent = 3,
+                            }, cmd)
+                        end, cmds)
+                    end,
+                    { section = "startup" },
+                },
+            },
         }
 
         snacks.setup(opts)
