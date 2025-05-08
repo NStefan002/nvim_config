@@ -1,5 +1,8 @@
 vim.cmd.colorscheme("default")
 
+-- floating widows
+-- vim.opt.winborder = "double"
+
 -- netrw
 vim.g.netrw_banner = 0 -- toggle with 'I'
 vim.g.netrw_liststyle = 0 -- change styles with 'i'

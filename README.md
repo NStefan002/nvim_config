@@ -34,7 +34,7 @@
 - [luvit-meta](https://github.com/Bilal2453/luvit-meta)
 - [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 - [markview.nvim](https://github.com/OXY2DEV/markview.nvim)
-- [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
+- [mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [mini.icons](https://github.com/echasnovski/mini.icons)
 - [neogen](https://github.com/danymat/neogen)

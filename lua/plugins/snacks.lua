@@ -228,6 +228,7 @@ return {
         vim.keymap.set("n", "<leader>run", function()
             local frequently_used_tools = {
                 "bluetui",
+                "gh dash",
                 "htop",
                 "lazydocker",
                 "lazygit",

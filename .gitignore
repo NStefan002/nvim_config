@@ -1,3 +1,2 @@
 *.json
-!lazy-lock.json
 testing.lua

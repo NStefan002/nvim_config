@@ -15,7 +15,7 @@ return {
                 javascript = { "prettierd", "prettier" },
                 json = { "prettierd", "prettier" },
                 lua = { "stylua" },
-                markdown = { "markdownlint", "injected" },
+                markdown = { "prettierd", "markdownlint", "injected", "prettier" },
                 python = { "isort", "black" },
                 sh = { "beautysh" },
                 sql = { "sqlfmt" },
@@ -44,5 +44,8 @@ return {
             end,
             desc = "Try to format files when saving.",
         })
+
+        -- set 'formatexpr'
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
 }
