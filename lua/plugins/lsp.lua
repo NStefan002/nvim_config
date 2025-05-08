@@ -220,13 +220,22 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        cmd = { "LspInfo", "LspInstall", "LspStart", "MasonInstallAll" },
+        cmd = { "LspInfo", "LspStart", "LspStop", "LspLog", "MasonInstallAll" },
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "williamboman/mason-lspconfig.nvim" },
+            {
+                -- used only to automatically call `vim.lsp.enable()` for all installed LSPs
+                "mason-org/mason-lspconfig.nvim",
+                opts = {
+                    automatic_enable = {
+                        exclude = {
+                            "harper_ls",
+                        },
+                    },
+                },
+            },
             {
                 "williamboman/mason.nvim",
-                lazy = false,
                 opts = {
                     registries = {
                         "github:nvim-java/mason-registry",
@@ -344,7 +353,7 @@ return {
                 underline = false,
                 severity_sort = true,
                 float = {
-                    focusable = false,
+                    focusable = true,
                     style = "minimal",
                     border = "rounded",
                     source = true,
@@ -353,13 +362,6 @@ return {
                 },
             })
 
-            local lspconfig = require("lspconfig")
-            local lspconfig_defaults = lspconfig.util.default_config
-            lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-                "force",
-                lspconfig_defaults.capabilities,
-                require("blink.cmp").get_lsp_capabilities()
-            )
             vim.api.nvim_create_user_command("MasonInstallAll", function()
                 local ensure_installed = {
                     "basedpyright",
@@ -397,142 +399,6 @@ return {
             end, {
                 nargs = 0,
                 desc = "Install all tools specified in the ensure_installed list.",
-            })
-
-            require("mason-lspconfig").setup({
-                handlers = {
-                    -- default handler
-                    function(server_name)
-                        lspconfig[server_name].setup({
-                            on_attach = function(client)
-                                -- disable semantic highlights
-                                -- client.server_capabilities.semanticTokensProvider = nil
-                                -- disable formatting capabilities (formatting is done by conform.nvim)
-                                client.server_capabilities.documentFormattingProvider = false
-                                client.server_capabilities.documentFormattingRangeProvider = false
-                            end,
-                        })
-                    end,
-                    lua_ls = function()
-                        lspconfig.lua_ls.setup({
-                            settings = {
-                                Lua = {
-                                    diagnostics = {
-                                        globals = {
-                                            -- nvim <-> lua
-                                            "vim",
-                                            "assert",
-                                            "after_each",
-                                            "before_each",
-                                            "describe",
-                                            "it",
-                                            "pending",
-                                            -- awesome wm
-                                            "awesome",
-                                            "client",
-                                            "root",
-                                        },
-                                    },
-                                    hint = {
-                                        enable = true,
-                                        arrayIndex = "Disable",
-                                        paramName = "All",
-                                        paramType = true,
-                                    },
-                                    telemetry = {
-                                        enable = false,
-                                    },
-                                    workspace = {
-                                        checkThirdParty = false,
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                    clangd = function()
-                        lspconfig.clangd.setup({
-                            capabilities = {
-                                offsetEncoding = { "utf-16" },
-                                clangdInlayHintsProvider = true,
-                            },
-                            setting = {
-                                InlayHints = {
-                                    Enabled = true,
-                                    ParameterNames = true,
-                                    DeducedTypes = true,
-                                },
-                            },
-                            cmd = {
-                                "clangd",
-                                "--suggest-missing-includes",
-                                "--header-insertion-decorators",
-                                "--all-scopes-completion",
-                                "--cross-file-rename",
-                                "--log=info",
-                                "--completion-style=detailed",
-                                -- "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
-                                -- "--offset-encoding=utf-16",
-                                "--header-insertion=never",
-                            },
-                        })
-                    end,
-                    ts_ls = function()
-                        lspconfig.ts_ls.setup({
-                            settings = {
-                                typescript = {
-                                    inlayHints = {
-                                        includeInlayParameterNameHints = "all",
-                                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                        includeInlayFunctionParameterTypeHints = true,
-                                        includeInlayVariableTypeHints = false,
-                                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                                        includeInlayPropertyDeclarationTypeHints = true,
-                                        includeInlayFunctionLikeReturnTypeHints = true,
-                                        includeInlayEnumMemberValueHints = true,
-                                    },
-                                },
-                                javascript = {
-                                    inlayHints = {
-                                        includeInlayParameterNameHints = "all",
-                                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                        includeInlayFunctionParameterTypeHints = true,
-                                        includeInlayVariableTypeHints = false,
-                                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                                        includeInlayPropertyDeclarationTypeHints = true,
-                                        includeInlayFunctionLikeReturnTypeHints = true,
-                                        includeInlayEnumMemberValueHints = true,
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                    html = function()
-                        lspconfig.html.setup({
-                            filetypes = { "html", "ejs", "templ" },
-                        })
-                    end,
-                    basedpyright = function()
-                        lspconfig.basedpyright.setup({
-                            filetypes = { "python" },
-                        })
-                    end,
-                    ruff = function()
-                        lspconfig.ruff.setup({
-                            settings = {
-                                organizeImports = false,
-                            },
-                            -- disable ruff as hover provider to avoid conflicts with basedpyright
-                            on_attach = function(client)
-                                client.server_capabilities.hoverProvider = false
-                            end,
-                        })
-                    end,
-                    harper_ls = function()
-                        lspconfig.harper_ls.setup({
-                            autostart = false,
-                        })
-                    end,
-                },
             })
 
             -- add some of the missing filetypes, that I need to work with (for university)

@@ -111,5 +111,21 @@ vim.opt.startofline = true
 -- per project configuration
 vim.opt.exrc = true
 
+-- tabline
 vim.opt.showtabline = 2
 vim.opt.tabline = "%!v:lua.require('my_config.util.tabline').tabline()"
+
+-- lsp
+-- configs are in `/lsp/[server_name].lua` files
+
+-- default config for all lsp clients
+vim.lsp.config("*", {
+    on_attach = function(client)
+        -- disable semantic highlights
+        -- client.server_capabilities.semanticTokensProvider = nil
+
+        -- disable formatting capabilities (formatting is done by conform.nvim)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentFormattingRangeProvider = false
+    end,
+})
