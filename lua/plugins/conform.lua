@@ -30,6 +30,7 @@ return {
 
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*",
+            group = vim.api.nvim_create_augroup("ConformAutoFormat", {}),
             callback = function(args)
                 -- Disable autoformat on certain filetypes
                 local ignore_filetypes = { "c", "python", "markdown", "html", "go" }

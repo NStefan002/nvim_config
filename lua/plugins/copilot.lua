@@ -1,19 +1,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        keys = {
-            {
-                "<leader>ec",
-                "<cmd>Copilot enable<CR>",
-                desc = "[E]nable [C]opilot",
-            },
-            {
-                "<leader>dc",
-                "<cmd>Copilot disable<CR>",
-                desc = "[D]isable [C]opilot",
-            },
-        },
+        event = "VeryLazy",
         config = function()
             require("copilot").setup({
                 panel = {
@@ -46,6 +34,20 @@ return {
                 copilot_node_command = "node", -- Node.js version must be > 18.x
                 server_opts_overrides = {},
             })
+
+            vim.keymap.set(
+                "n",
+                "<leader>ec",
+                "<cmd>Copilot enable<CR>",
+                { desc = "[E]nable [C]opilot" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>dc",
+                "<cmd>Copilot disable<CR>",
+                { desc = "[D]isable [C]opilot" }
+            )
+            vim.cmd("Copilot enable")
         end,
     },
     {

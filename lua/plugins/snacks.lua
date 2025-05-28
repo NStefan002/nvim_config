@@ -240,6 +240,7 @@ return {
                 if not item then
                     return
                 end
+                vim.cmd("tabnew")
                 snacks.terminal.open(item)
             end)
         end, {

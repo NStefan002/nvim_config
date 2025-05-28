@@ -93,26 +93,23 @@ autocmd("FileType", {
         "snacks_terminal",
     },
     callback = function(ev)
-        -- NOTE: we need to wait a little bit for lazygit to open up
+        -- NOTE: we need to wait a little bit for program to open up
         vim.defer_fn(function()
-            local start, _, _ = vim.api.nvim_buf_get_name(ev.buf):find("lazygit")
-            local is_lazygit = start ~= nil
-            if is_lazygit then
-                vim.keymap.set(
-                    "t",
-                    "TN",
-                    "<cmd>tabnext<cr>",
-                    { buffer = ev.buf, desc = "[lazygit] move to next tab" }
-                )
-                vim.keymap.set(
-                    "t",
-                    "TP",
-                    "<cmd>tabprevious<cr>",
-                    { buffer = ev.buf, desc = "[lazygit] move to previous tab" }
-                )
-            end
+            vim.keymap.set(
+                "t",
+                "TN",
+                "<cmd>tabnext<cr>",
+                { buffer = ev.buf, desc = "[snacks terminal] move to next tab" }
+            )
+            vim.keymap.set(
+                "t",
+                "TP",
+                "<cmd>tabprevious<cr>",
+                { buffer = ev.buf, desc = "[snacks terminal] move to previous tab" }
+            )
         end, 1000)
     end,
+    desc = "set specific keymaps for snacks terminal",
 })
 
 autocmd("WinClosed", {
