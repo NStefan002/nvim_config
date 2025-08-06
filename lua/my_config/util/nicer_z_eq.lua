@@ -11,7 +11,7 @@ local function get_results()
     local bad = vim.fn.spellbadword(cursor_word)
     local word = bad[1] == "" and cursor_word or bad[1]
 
-    return vim.fn.spellsuggest(word, 30, bad[2] == "caps" and 1 or 0)
+    return vim.fn.spellsuggest(word, 30, bad[2] == "caps")
 end
 
 return function()

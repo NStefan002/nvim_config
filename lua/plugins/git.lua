@@ -64,4 +64,5 @@ return {
             })
         end,
     },
+    { "sindrets/diffview.nvim", event = "VeryLazy" },
 }

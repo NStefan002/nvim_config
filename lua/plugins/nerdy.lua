@@ -4,5 +4,10 @@ return {
     dependencies = {
         "folke/snacks.nvim",
     },
+    opts = {
+        use_new_command = true,
+        add_default_keybindings = false,
+        copy_to_clipboard = true,
+    },
     cmd = "Nerdy",
 }
