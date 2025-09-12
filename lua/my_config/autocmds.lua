@@ -107,7 +107,7 @@ autocmd("FileType", {
                 "<cmd>tabprevious<cr>",
                 { buffer = ev.buf, desc = "[snacks terminal] move to previous tab" }
             )
-        end, 1000)
+        end, 500)
     end,
     desc = "set specific keymaps for snacks terminal",
 })

@@ -24,6 +24,10 @@ return {
             },
         })
 
+        conform.formatters.injected = {
+            ignore_errors = true,
+        }
+
         vim.keymap.set({ "n", "v" }, "<leader>f", function()
             conform.format({ async = true, lsp_fallback = true })
         end, { desc = "[F]ormat File" })
@@ -33,7 +37,7 @@ return {
             group = vim.api.nvim_create_augroup("ConformAutoFormat", {}),
             callback = function(args)
                 -- Disable autoformat on certain filetypes
-                local ignore_filetypes = { "c", "python", "markdown", "html", "go" }
+                local ignore_filetypes = { "python", "markdown", "go" }
                 if vim.tbl_contains(ignore_filetypes, vim.bo[args.buf].filetype) then
                     return
                 end

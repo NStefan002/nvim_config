@@ -46,14 +46,56 @@ return {
         dev = true,
         "NStefan002/screenkey.nvim",
         lazy = false,
-        version = "*",
         ---@module "screenkey"
         ---@type screenkey.config
         opts = {
+            hl_groups = {
+                ["screenkey.hl.key"] = { link = "DiffAdd" },
+                ["screenkey.hl.map"] = { link = "DiffDelete" },
+                -- ["screenkey.hl.sep"] = { link = "DiffChange" },
+            },
+            separator = " | ",
+            winhighlight = "Normal:DiagnosticInfo,FloatBorder:DiagnosticWarn",
+            win_opts = {
+                zindex = 1000,
+                width = 30,
+                row = vim.o.lines - vim.o.cmdheight - 1,
+                col = math.floor(vim.o.columns - 30),
+                title = {
+                    { " ", "" },
+                    { "Sc", "DiagnosticOk" },
+                    { "re", "DiagnosticWarn" },
+                    { "en", "DiagnosticInfo" },
+                    { "key", "DiagnosticError" },
+                    { " ", "" },
+                },
+                anchor = "SW",
+                border = "double",
+            },
             group_mappings = true,
             disable = {
-                buftypes = { "terminal" },
+                modes = { "t" },
             },
+            display_infront = { "snacks_terminal" },
+            -- colorize = function(keys)
+            --     for i, pair in ipairs(keys) do
+            --         if pair[2] == "screenkey.hl.key" then
+            --             keys[i][2] = "DiagnosticDeprecated"
+            --         end
+            --     end
+            --     return keys
+            -- end,
+            notify_method = "echo",
+            log = {},
+            filter = function(keys)
+                local screenkey = require("screenkey")
+                for i, k in ipairs(keys) do
+                    if screenkey.statusline_component_is_active() and k.key == "%" then
+                        keys[i].key = "%%"
+                    end
+                end
+                return keys
+            end,
         },
     },
     {
@@ -99,4 +141,13 @@ return {
         lazy = false,
     },
     { dev = true, "JesperLundberg/svartafanan.nvim", event = "VeryLazy" },
+    {
+        dev = true,
+        "NStefan002/liveserver.nvim",
+        lazy = false,
+        opts = {},
+        build = function()
+            -- require("liveserver.tool").install()
+        end,
+    },
 }

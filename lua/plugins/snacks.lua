@@ -65,7 +65,7 @@ return {
                 win = { style = "terminal", border = "single" },
             },
 
-            image = { enabled = true },
+            image = { enabled = false },
 
             input = {
                 enabled = true,

@@ -51,7 +51,6 @@
 - [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-- [oil-git.nvim](https://github.com/benomahony/oil-git.nvim)
 - [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [quicker.nvim](https://github.com/stevearc/quicker.nvim)

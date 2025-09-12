@@ -3,7 +3,6 @@ return {
     lazy = false,
     dependencies = {
         { "echasnovski/mini.icons", opts = {} },
-        { "benomahony/oil-git.nvim", opts = {} },
     },
     config = function()
         vim.keymap.set("n", "<C-b>", "<cmd>Oil<CR>", { desc = "Open Oil" })
