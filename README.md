@@ -1,3 +1,5 @@
+# Neovim Config Repo
+
 ## 💤 Plugin manager
 
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
@@ -18,6 +20,7 @@
 - [donut.nvim](https://github.com/NStefan002/donut.nvim)
 - [donutlify.nvim](https://github.com/NStefan002/donutlify.nvim)
 - [ecolog.nvim](https://github.com/philosofonusus/ecolog.nvim)
+- [fff.nvim](https://github.com/dmtrKovalenko/fff.nvim)
 - [fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua)
@@ -29,7 +32,7 @@
 - [killersheep.nvim](https://github.com/seandewar/killersheep.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [lazydev.nvim](https://github.com/folke/lazydev.nvim)
-- [live-server.nvim](https://github.com/aurum77/live-server.nvim)
+- [liveserver.nvim](https://github.com/NStefan002/liveserver.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [luassert-types](https://github.com/LuaCATS/luassert)
 - [luvit-meta](https://github.com/Bilal2453/luvit-meta)
@@ -41,7 +44,6 @@
 - [neogen](https://github.com/danymat/neogen)
 - [nerdy.nvim](https://github.com/2kabhishek/nerdy.nvim)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-- [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [nvim-dap-view](https://github.com/igorlfs/nvim-dap-view)
 - [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
@@ -54,6 +56,7 @@
 - [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [quicker.nvim](https://github.com/stevearc/quicker.nvim)
+- [R.nvim](https://github.com/R-nvim/R.nvim)
 - [rose-pine](https://github.com/rose-pine/neovim)
 - [screenkey.nvim](https://github.com/NStefan002/screenkey.nvim)
 - [snacks.nvim](https://github.com/folke/snacks.nvim)
@@ -67,6 +70,7 @@
 - [vim-matchup](https://github.com/andymass/vim-matchup)
 - [visual-surround.nvim](https://github.com/NStefan002/visual-surround.nvim)
 - [wezterm-types](https://github.com/gonstoll/wezterm-types)
+- [windsurf.nvim](https://github.com/Exafunction/windsurf.nvim)
 - [wormhole.nvim](https://github.com/NStefan002/wormhole.nvim)
 
 ## 🗃️ Version manager
