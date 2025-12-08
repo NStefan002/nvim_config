@@ -19,6 +19,13 @@ vim.keymap.set(
     { buffer = true, desc = "Toggle markdown checkboxes" }
 )
 
+vim.keymap.set(
+    "n",
+    "<leader>mt",
+    "<cmd>Markview Toggle<cr>",
+    { buffer = true, desc = "Toggle Markview" }
+)
+
 local surroundings = { i = "*", b = "**", a = "***" } -- italic, bold, bold&italic
 local prefix = "s"
 for k, v in pairs(surroundings) do
