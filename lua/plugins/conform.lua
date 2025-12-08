@@ -20,6 +20,7 @@ return {
                 sh = { "beautysh" },
                 sql = { "sqlfmt" },
                 templ = { "templ" },
+                yaml = { "prettierd", "prettier" },
                 zsh = { "beautysh" },
             },
         })
