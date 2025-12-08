@@ -1,7 +1,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         config = function()
             require("copilot").setup({
                 panel = {
@@ -58,5 +58,31 @@ return {
             { "nvim-lua/plenary.nvim", brach = "master" },
             "nvim-treesitter/nvim-treesitter",
         },
+    },
+    {
+        "Exafunction/windsurf.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        event = "VeryLazy",
+        config = function()
+            require("codeium").setup({
+                enable_cmp_source = false,
+                virtual_text = {
+                    enabled = true,
+                    manual = false,
+                    idle_delay = 50,
+                    map_keys = true,
+                    key_bindings = {
+                        accept = "<c-a>",
+                        accept_word = false,
+                        accept_line = false,
+                        clear = "<c-e>",
+                        next = "<c-;>",
+                        prev = "<c-'>",
+                    },
+                },
+            })
+        end,
     },
 }
