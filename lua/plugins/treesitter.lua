@@ -1,81 +1,73 @@
 return {
-    -- Syntax highlithing and many more features
     {
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
         build = ":TSUpdate",
-        event = "VeryLazy",
+        branch = "main",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash",
-                    "c",
-                    "cmake",
-                    "cpp",
-                    "css",
-                    "diff",
-                    "gitcommit",
-                    "gitignore",
-                    "go",
-                    "haskell",
-                    "html",
-                    "java",
-                    "javascript",
-                    "jsdoc",
-                    "json",
-                    "lua",
-                    "make",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
-                    "regex",
-                    "sql",
-                    "toml",
-                    "vim",
-                    "vimdoc",
-                    "yaml",
-                },
+            require("nvim-treesitter").setup({})
 
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
-
-                -- Automatically install missing parsers when entering buffer
-                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = true,
-
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                    -- disable for larger files and for checkhealth buffers
-                    disable = function(lang, buf)
-                        local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
-                        if filetype == "checkhealth" then
-                            return true
-                        end
-                        local max_filesize = 50 * 1024 -- 50 KB
-                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-                        if ok and stats and stats.size > max_filesize then
-                            return true
-                        end
-                    end,
-                },
-                indent = { enable = true, disable = { "python", "markdown" } },
-                incremental_selection = {
-                    enable = false,
-                },
-
-                -- autoclose and autorename html tag
-                autotag = {
-                    enable = true,
-                },
-
-                -- see https://github.com/andymass/vim-matchup?tab=readme-ov-file#tree-sitter-integration
-                matchup = {
-                    enable = true,
-                },
+            require("nvim-treesitter").install({
+                "bash",
+                "c",
+                "cmake",
+                "cpp",
+                "css",
+                "diff",
+                "gitcommit",
+                "gitignore",
+                "go",
+                "haskell",
+                "html",
+                "java",
+                "javascript",
+                "jsdoc",
+                "json",
+                "lua",
+                "make",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "regex",
+                "sql",
+                "toml",
+                "vim",
+                "vimdoc",
+                "yaml",
             })
 
-            -- temporary fix for school projects
+            -- on main branch, treesitter isn't started automatically
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("TSAutoInstall", {}),
+                pattern = "*",
+                callback = function(event)
+                    -- make sure nvim-treesitter is loaded
+                    local ok, nvim_treesitter = pcall(require, "nvim-treesitter")
+                    if not ok then
+                        return
+                    end
+
+                    local parsers = require("nvim-treesitter.parsers")
+
+                    local ft = vim.bo[event.buf].ft
+                    local lang = vim.treesitter.language.get_lang(ft)
+                    if not parsers[lang] or not nvim_treesitter.install then
+                        return
+                    end
+
+                    -- auto install missing parser
+                    nvim_treesitter.install({ lang }):wait()
+
+                    -- start treesitter for the buffer
+                    pcall(vim.treesitter.start, event.buf)
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                    vim.wo[0][0].foldmethod = "expr"
+                end,
+                desc = "Auto install treesitter parsers",
+            })
+
+            -- NOTE: temporary fix for school projects
             vim.treesitter.language.register("html", "ejs")
             vim.treesitter.language.register("javascript", "ejs")
             vim.treesitter.language.register("cpp", "conf")
@@ -106,34 +98,39 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "VeryLazy",
+        branch = "main",
+        init = function()
+            vim.g.no_plugin_maps = true
+        end,
         config = function()
-            require("nvim-treesitter.configs").setup({
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            ["af"] = {
-                                query = "@function.outer",
-                                desc = "[a]round [f]unction textobject",
-                            },
-                            ["if"] = {
-                                query = "@function.inner",
-                                desc = "[i]nside [f]unction textobject",
-                            },
-                        },
+            require("nvim-treesitter-textobjects").setup({
+                select = {
+                    lookahead = true,
+                    selection_modes = {
+                        ["@function.outer"] = "V",
                     },
-                    swap = {
-                        enable = true,
-                        swap_next = {
-                            ["<leader>]"] = "@parameter.inner",
-                        },
-                        swap_previous = {
-                            ["<leader>["] = "@parameter.inner",
-                        },
-                    },
+                    include_surrounding_whitespace = false,
                 },
             })
+
+            vim.keymap.set({ "x", "o" }, "if", function()
+                require("nvim-treesitter-textobjects.select").select_textobject(
+                    "@function.inner",
+                    "textobjects"
+                )
+            end, { desc = "select [i]nside [f]unction" })
+            vim.keymap.set({ "x", "o" }, "af", function()
+                require("nvim-treesitter-textobjects.select").select_textobject(
+                    "@function.outer",
+                    "textobjects"
+                )
+            end, { desc = "select [a]round [f]unction" })
+            vim.keymap.set("n", "<leader>]", function()
+                require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+            end, { desc = "swap next parameter" })
+            vim.keymap.set("n", "<leader>[", function()
+                require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+            end, { desc = "swap previous parameter" })
         end,
     },
 }
