@@ -144,3 +144,12 @@ autocmd("VimEnter", {
     end,
     desc = "remove '~' when dashboard is active",
 })
+
+autocmd("FileType", {
+    group = aucmdsStarterPack,
+    pattern = "gitcommit",
+    callback = function()
+        vim.opt_local.colorcolumn = "72"
+    end,
+    desc = "set colorcolumn at 72 for gitcommit files",
+})
