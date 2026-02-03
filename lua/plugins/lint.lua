@@ -4,10 +4,12 @@ return {
     config = function()
         local lint = require("lint")
         lint.linters_by_ft = {
+            go = { "golangcilint" },
+            javascript = { "eslint_d" },
             lua = { "luacheck" },
             markdown = { "markdownlint" },
-            go = { "golangcilint" },
             text = { "cspell" },
+            typescript = { "eslint_d" },
         }
         -- change the severity of all diagnostics produced by cspell
         lint.linters.cspell = require("lint.util").wrap(lint.linters.cspell, function(diagnostic)

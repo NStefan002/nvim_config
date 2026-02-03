@@ -271,7 +271,6 @@ return {
                     nmap("K", function()
                         vim.lsp.buf.hover({ border = "single" })
                     end, "Hover Documentation")
-                    -- nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                     nmap("gr", vim.lsp.buf.references, "[G]oto [R]eference")
                     nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
                     nmap("<leader>ws", vim.lsp.buf.workspace_symbol, "[G]oto [D]efinition")
@@ -445,5 +444,11 @@ return {
             end
             require("r").setup(opts)
         end,
+    },
+    {
+        "pmizio/typescript-tools.nvim",
+        lazy = false,
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
     },
 }

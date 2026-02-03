@@ -20,6 +20,7 @@ return {
                 sh = { "beautysh" },
                 sql = { "sqlfmt" },
                 templ = { "templ" },
+                typescript = { "prettierd", "prettier" },
                 yaml = { "prettierd", "prettier" },
                 zsh = { "beautysh" },
             },
@@ -38,7 +39,7 @@ return {
             group = vim.api.nvim_create_augroup("ConformAutoFormat", {}),
             callback = function(args)
                 -- Disable autoformat on certain filetypes
-                local ignore_filetypes = { "python", "markdown", "go" }
+                local ignore_filetypes = { "python", "markdown", "go", "javascript" }
                 if vim.tbl_contains(ignore_filetypes, vim.bo[args.buf].filetype) then
                     return
                 end
