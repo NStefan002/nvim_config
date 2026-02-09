@@ -131,3 +131,8 @@ vim.lsp.config("*", {
         client.server_capabilities.documentFormattingRangeProvider = false
     end,
 })
+
+local ok, coreui = pcall(require, "vim._core.ui2")
+if ok then
+    coreui.enable({})
+end
