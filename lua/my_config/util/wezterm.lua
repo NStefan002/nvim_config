@@ -67,4 +67,10 @@ function M.change_font_size(delta)
     vim.cmd([[redraw]])
 end
 
+function M.spawn_tab()
+    local obj = vim.system({ "wezterm", "cli", "spawn", "--cwd", vim.fn.getcwd() }, { text = true })
+        :wait()
+    return (obj.stdout:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 return M
