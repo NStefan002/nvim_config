@@ -13,12 +13,21 @@ local function generate_tab_label(tab_id, tab_label)
     return tab_name
 end
 
+local function get_filename()
+    if vim.g.qraz_tabline_display_path then
+        -- return the path relative to the current working directory
+        return vim.fn.expand("%:~:.")
+    else
+        return vim.fn.expand("%:t")
+    end
+end
+
 ---custom tabline
 ---@return string
 function M.tabline()
     -- `nvim_list_tabpages` returns a list of tab IDs in order they appear visually
     local tab_ids = vim.api.nvim_list_tabpages()
-    local current_file = vim.fn.expand("%:t")
+    local current_file = get_filename()
     local current_filetype = vim.bo.filetype
     current_file = (current_file == "" and current_filetype ~= "") and current_filetype
         or current_file

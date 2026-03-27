@@ -145,3 +145,7 @@ vim.keymap.set({ "n", "x", "o" }, "<leader>c", "gc", { remap = true, desc = "com
 
 -- custom functionalities
 vim.keymap.set("n", "z=", require("my_config.util.nicer_z_eq"), { desc = "nicer z=" })
+vim.keymap.set("n", "<leader>tp", function()
+    vim.g.qraz_tabline_display_path = not vim.g.qraz_tabline_display_path
+    vim.cmd("redrawtabline")
+end, { desc = "Toggle showing the file path in the tabline" })
