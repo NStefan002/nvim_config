@@ -30,6 +30,8 @@ return {
 
             gitbrowse = { enabled = true },
 
+            gh = { enabled = true },
+
             notifier = {
                 enabled = true,
                 timeout = 7000,
@@ -210,6 +212,21 @@ return {
         vim.keymap.set({ "n", "v" }, "<leader>gb", function()
             snacks.gitbrowse()
         end, { desc = "Git Browse" })
+
+        -- gh
+
+        vim.keymap.set("n", "<leader>gi", function()
+            snacks.picker.gh_issue()
+        end, { desc = "GitHub Issues (open)" })
+        vim.keymap.set("n", "<leader>gI", function()
+            snacks.picker.gh_issue({ state = "all" })
+        end, { desc = "GitHub Issues (all)" })
+        vim.keymap.set("n", "<leader>gp", function()
+            snacks.picker.gh_pr()
+        end, { desc = "GitHub Pull Requests (open)" })
+        vim.keymap.set("n", "<leader>gP", function()
+            snacks.picker.gh_pr({ state = "all" })
+        end, { desc = "GitHub Pull Requests (all)" })
 
         -- scratch
 
