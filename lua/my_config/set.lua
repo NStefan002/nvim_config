@@ -117,6 +117,9 @@ vim.opt.exrc = true
 vim.opt.showtabline = 2
 vim.opt.tabline = "%!v:lua.require('my_config.util.tabline').tabline()"
 
+-- https://www.youtube.com/watch?v=zMpn9ICagdE
+vim.opt.modeline = false
+
 -- lsp
 -- configs are in `/lsp/[server_name].lua` files
 
